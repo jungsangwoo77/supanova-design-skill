@@ -227,6 +227,66 @@ Premium by Default · Korean-Native · Conversion-Focused · Mobile-First (한�
 
 ---
 
+## 9.5 BRAND TOKEN SYSTEM (클라이언트별 브랜드 주입)
+상업용은 "예쁜 페이지"가 아니라 **특정 브랜드의 페이지**여야 한다. 사용자가 브랜드 요소(로고 컬러,
+분위기, 폰트, 톤)를 주면 그것을 최우선으로 반영하고, 없으면 Vibe 아키타입에서 일관된 토큰을 생성한다.
+
+### A. 토큰을 CSS 변수로 중앙화
+페이지 상단 `<style>`에 `:root` 토큰을 선언하고 전체가 이를 참조하게 한다. 하드코딩 색상 산발 금지.
+```html
+<style>
+  :root {
+    --brand: #10b981;            /* 액센트 1개, 채도<80% */
+    --brand-ink: #052e22;        /* 액센트 위 텍스트 */
+    --bg: #050505;               /* 베이스 배경 (순수 검정 금지) */
+    --surface: #0e0e10;          /* 카드/서피스 */
+    --text: #f4f4f5;             /* 본문 */
+    --muted: #a1a1aa;            /* 보조 텍스트 (대비 4.5:1 유지) */
+    --radius: 2rem;              /* Double-Bezel 외곽 반경 */
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+</style>
+```
+Tailwind와 함께 쓸 때는 `tailwind.config`의 `theme.extend.colors`에 `brand: 'var(--brand)'`로 연결한다.
+
+### B. 토큰 세트 구성 요소 (한 벌로 결정)
+* **컬러:** 베이스 / 서피스 / 텍스트 / 보조텍스트 / 액센트 1개 (+ 성공·경고·위험은 상태 UI에만).
+* **폰트:** 한국어 Pretendard 고정 + 영문 디스플레이 1개(Geist/Outfit/Cabinet Grotesk/Satoshi 중).
+* **라디우스 스케일:** 카드 `--radius`, 버튼 `rounded-full`, 입력 `rounded-xl` — 페이지 전체 일관.
+* **간격 리듬:** 섹션 `py-24 md:py-32 lg:py-40` 고정.
+* **모션 시그니처:** `--ease` 단일 값.
+* **보이스:** 톤(신뢰형/친근형/럭셔리형) 1개 선택 후 전 카피에 일관 적용.
+
+### C. 브랜드 입력 규칙
+* 사용자가 HEX/로고/기존 사이트를 주면 → 거기서 팔레트·폰트·톤을 추출해 토큰에 매핑.
+* 브랜드가 없으면 → 제품 카테고리에 맞는 Vibe 아키타입으로 **일관된 한 벌**을 생성(즉흥 혼용 금지).
+* 어떤 경우든 "액센트 1개, 하나의 팔레트" 원칙과 THE LILA BAN을 지킨다.
+
+---
+
+## 9.6 COMMERCIAL COMPONENT LIBRARY (Tailwind CDN, standalone)
+랜딩 섹션 라이브러리(섹션 9)를 넘어, 상업용에서 반복 요구되는 **인터랙티브 컴포넌트**를 순수
+Tailwind CDN + 최소 JS/네이티브 요소로 구현한다. 외부 컴포넌트 라이브러리(daisyui 등) 로드는
+standalone 제약상 금지 — 아래 패턴을 직접 인라인으로 작성한다.
+
+* **가격표(Pricing):** 3열, 추천 티어는 `scale-105` + `ring-2 ring-brand` + "인기" 뱃지로 강조.
+  월/연 토글은 `<button>` + JS 클래스 스왑. 각 CTA에 `data-cta="pricing-{tier}"`.
+* **FAQ 아코디언:** 네이티브 `<details><summary>` 사용(키보드·스크린리더 기본 지원). JS 불필요.
+  질문 문항은 JSON-LD `FAQPage`와 1:1 일치시킨다.
+* **탭(Tabs):** `role="tablist"`/`role="tab"`/`aria-selected` + JS 토글. 기능 비교·플랜 비교에 사용.
+* **모달/시트:** `<dialog>` 네이티브 요소 + `showModal()`. `Esc` 닫힘·포커스 트랩 기본 제공.
+  백드롭 `backdrop:bg-black/60`, 콘텐츠 Double-Bezel.
+* **토스트/뱃지:** 상태 색은 토큰의 성공/경고/위험만. 뱃지는 Eyebrow 스타일 필/`text-[11px] tracking-[0.15em]`.
+* **폼 & 입력:** 모든 입력에 연결된 `<label>`, `focus-visible:ring-2 ring-brand`, 에러 `aria-live="polite"`.
+  이메일 캡처 폼은 인라인 검증 + 제출 로딩 상태 + 동의 체크박스(처리방침 링크).
+* **비교 테이블(Us vs Them):** 체크/대시 아이콘(Solar), 자사 열 `bg-brand/5`로 강조.
+* **스텝/타임라인:** How-it-works용 번호 스텝. 지그재그 또는 세로 커넥터 라인.
+
+각 컴포넌트는 (1) 키보드 조작, (2) 포커스 가시성, (3) 모바일 붕괴(`w-full`), (4) `--ease` 모션,
+(5) Double-Bezel 표면 규칙을 모두 만족해야 한다.
+
+---
+
 ## 10. REDESIGN 모드 (기존 페이지 업그레이드)
 
 ### 작동 방식
@@ -375,4 +435,6 @@ Premium by Default · Korean-Native · Conversion-Focused · Mobile-First (한�
 - [ ] **[상업용] 페이지 성격에 맞는 JSON-LD 구조화 데이터가 있는가?**
 - [ ] **[상업용] 대비 4.5:1, 포커스 링, `alt`, `prefers-reduced-motion`, `aria-label`이 갖춰졌는가?**
 - [ ] **[상업용] 푸터에 개인정보처리방침·이용약관 링크와 저작권 표기가 있는가?**
+- [ ] **[브랜드] 컬러/폰트/라디우스가 `:root` 토큰으로 중앙화되고 하드코딩 색상이 산발하지 않는가?**
+- [ ] **[컴포넌트] 가격표/FAQ/모달 등이 접근성(키보드·포커스·aria)을 갖춘 네이티브 패턴으로 구현됐는가?**
 - [ ] 페이지가 "$150k 한국 에이전시 빌드"로 읽히는가, "AI 템플릿"이 아니라?
