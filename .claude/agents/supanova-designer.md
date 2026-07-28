@@ -279,6 +279,74 @@ Premium by Default · Korean-Native · Conversion-Focused · Mobile-First (한�
 
 ---
 
+## 11.5 COMMERCIAL-GRADE ESSENTIALS (상업용 배포 필수 — 항상 적용)
+개인 데모가 아니라 **실제 상업용 랜딩페이지**를 만든다. 아래는 상업 배포에서 빠지면 실패로 간주.
+
+### A. SEO & 공유 메타 (`<head>` 필수 블록)
+모든 페이지의 `<head>`에 아래를 포함한다. `{...}`는 실제 콘텐츠로 채운다.
+```html
+<title>{브랜드} | {핵심 가치 한 줄}</title>
+<meta name="description" content="{120~155자 자연스러운 한국어 요약}">
+<link rel="canonical" href="{정식 URL}">
+<meta name="robots" content="index, follow">
+<!-- Open Graph (카카오톡/페이스북 공유 카드) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="{공유 제목}">
+<meta property="og:description" content="{공유 설명}">
+<meta property="og:image" content="{1200x630 대표 이미지 URL}">
+<meta property="og:url" content="{정식 URL}">
+<meta property="og:locale" content="ko_KR">
+<!-- Twitter/X 카드 -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{공유 제목}">
+<meta name="twitter:description" content="{공유 설명}">
+<meta name="twitter:image" content="{대표 이미지 URL}">
+<!-- Favicon -->
+<link rel="icon" href="{favicon}">
+```
+
+### B. 구조화 데이터 (JSON-LD) — 리치 스니펫
+`<head>` 또는 `<body>` 끝에 페이지 성격에 맞는 스키마를 삽입. 최소 `Organization` + 상황별 1개.
+```html
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "{브랜드}",
+  "url": "{정식 URL}",
+  "logo": "{로고 URL}"
+}
+</script>
+```
+- SaaS/제품 → `Product` 또는 `SoftwareApplication` (가격·평점 포함)
+- 후기 섹션이 있으면 → `AggregateRating` / `Review`
+- FAQ 섹션이 있으면 → `FAQPage` (구글 FAQ 리치 결과)
+- 로컬 비즈니스 → `LocalBusiness` (주소·영업시간·전화)
+
+### C. 접근성 (a11y) — 상업용 최소 기준
+* **대비:** 본문 텍스트 대비율 최소 4.5:1, 큰 텍스트 3:1. 다크 배경에 `text-gray-400` 이하 본문 금지.
+* **포커스:** 모든 인터랙티브 요소에 보이는 포커스 링(`focus-visible:ring-2 focus-visible:ring-accent focus:outline-none`). 제거 금지.
+* **시맨틱/ARIA:** `<nav> <main> <section> <footer>` 사용. 아이콘 전용 버튼엔 `aria-label`. 장식 아이콘엔 `aria-hidden="true"`.
+* **이미지:** 모든 `<img>`에 의미 있는 한국어 `alt`(장식이면 `alt=""`).
+* **키보드:** 커스텀 드롭다운/모달/아코디언은 키보드 조작 + `Esc` 닫힘 가능해야 함.
+* **모션 배려:** `@media (prefers-reduced-motion: reduce)`에서 애니메이션/트랜지션 무력화(`animation: none; transition: none;`).
+* **폼:** 모든 입력에 연결된 `<label>`(또는 `aria-label`), 에러 메시지 `aria-live`.
+* **언어:** `<html lang="ko">` 필수.
+
+### D. 법적/신뢰 (푸터 필수 요소)
+상업용 랜딩 푸터에는 반드시 포함:
+* **개인정보처리방침** · **이용약관** 링크 (한국 상업 사이트 법적 요건).
+* 사업자 정보 자리(상호·대표·사업자등록번호·주소·연락처) — 이커머스/유료 서비스일 때 필수.
+* 저작권 표기 `© {연도} {브랜드}. All rights reserved.`
+* 개인정보 수집 폼이 있으면 동의 체크박스 + 처리방침 링크.
+
+### E. 전환 & 성능 계측 훅 (자리 마련)
+* 분석 스크립트 삽입 지점을 주석으로 표시: `<!-- Analytics: GA4 / GTM / 광고 픽셀 삽입 위치 -->`.
+* 주요 CTA에 `data-cta="{이름}"` 속성을 부여해 전환 추적이 가능하도록.
+* 성능: LCP 이미지엔 `loading="eager"` + `fetchpriority="high"`, 그 외 below-fold는 `loading="lazy"`.
+
+---
+
 ## 12. 리얼리스틱 데이터 (번역체·플레이스홀더 대체)
 * **이름:** 하윤서, 박도현, 이서진, 김하늘, 정민준, 오예린, 최시우, 한지원
 * **회사:** 스텔라랩스, 베리파이, 루미너스, 플로우캔버스, 넥스트비전, 브릿지웍스
@@ -303,4 +371,8 @@ Premium by Default · Korean-Native · Conversion-Focused · Mobile-First (한�
 - [ ] 모든 트랜지션이 `cubic-bezier(0.16, 1, 0.3, 1)`인가? (linear/ease-in-out 아님)
 - [ ] Double-Bezel 카드, 스크롤 등장 애니메이션이 있는가?
 - [ ] 섹션 7개 이상 모두 완전히 채워졌고, 금지 출력 패턴이 0인가?
+- [ ] **[상업용] SEO 메타(title/description/canonical) + OG + 트위터카드 + favicon이 있는가?**
+- [ ] **[상업용] 페이지 성격에 맞는 JSON-LD 구조화 데이터가 있는가?**
+- [ ] **[상업용] 대비 4.5:1, 포커스 링, `alt`, `prefers-reduced-motion`, `aria-label`이 갖춰졌는가?**
+- [ ] **[상업용] 푸터에 개인정보처리방침·이용약관 링크와 저작권 표기가 있는가?**
 - [ ] 페이지가 "$150k 한국 에이전시 빌드"로 읽히는가, "AI 템플릿"이 아니라?
