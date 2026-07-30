@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="ko">
+<!--
+  ═══════════════════════════════════════════════════════════════════
+  ART DIRECTION — 온유 ONYU (craft build)
+
+  컨셉        이 페이지는 브랜드 웹사이트가 아니라 "한 로트의 시험성적서와
+              발효 원장을 그대로 펼쳐 놓은 서식"처럼 느껴져야 한다.
+              브랜드는 자기 자랑을 하지 않고, 기록을 제출한다.
+
+  지배 요소   데이터(수치·표 조판). 조연: 여백 / 타이포.
+              → 페이지에서 가장 큰 것은 헤드라인이 아니라 숫자다.
+                (1,080 시간 / 320항목 중 0)
+
+  의도적 제약 ① 카드 컴포넌트 0개 — 구획은 1px 헤어라인·괘선·배경 전환·여백으로만.
+              ② border-radius 0 — 인쇄 서식에 둥근 모서리는 없다.
+              ③ 그림자 0개 · 블러 0개 · 그라디언트 0개.
+              ④ 이미지 3장, 전부 흑백(성적서 첨부 사진).
+              ⑤ 등장 애니메이션은 페이지 전체에 2개만.
+              ⑥ 장식 아이콘 0개(방향 지시 아이콘 3개만 허용).
+
+  참조 장르   잔류농약 시험성적서(COA)와 유기농 인증 서식, 그리고 양조장의
+              수기 발효 원장(帳). 웹사이트는 참조하지 않았다.
+
+  감정 목표   신뢰. "이 사람들은 숨길 게 없다."
+  ═══════════════════════════════════════════════════════════════════
+
+  시스템 고정값
+  간격  4 · 8 · 12 · 16 · 24 · 32 · 48 · 64 · 96 · 128 (tailwind 1 2 3 4 6 8 12 16 24 32)
+  타입  12 · 16 · 20 · 36 · 72  (5종. text-xs / base / xl / 4xl / 7xl)
+  웨이트 400 본문 · 500 라벨·표 · 700 판정·숫자
+  명도 위계 #121211(ink) → #4B4A47(body) → #6B6964(muted)
+  액센트 인주색 #A32A17 — 판정 표시(검인 도장·출고 중·폐기) 3곳에만.
+-->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>온유 ONYU | 로트 25-B-047 발효 원장 및 시험성적서</title>
+  <meta name="description" content="옹기 발효 1,080시간, 잔류농약 320항목 전량 불검출. 온유는 보성·하동 재래종 찻잎을 로트 단위로 만들고, 폐기한 로트까지 원장에 공개합니다. 2주·4주 정기 배송, 첫 회 30% 할인.">
+  <link rel="canonical" href="https://onyu.kr">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="온유 ONYU | 로트 25-B-047 발효 원장 및 시험성적서">
+  <meta property="og:description" content="옹기 1,080시간, 평균 24.6°C. 잔류농약 320항목 전량 불검출. 관능 4.5 미달 로트는 출고하지 않습니다.">
+  <meta property="og:image" content="https://picsum.photos/seed/onyu-coa-share/1200/630">
+  <meta property="og:url" content="https://onyu.kr">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="온유 ONYU">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="온유 ONYU | 로트 25-B-047 발효 원장 및 시험성적서">
+  <meta name="twitter:description" content="옹기 1,080시간, 평균 24.6°C. 잔류농약 320항목 전량 불검출.">
+  <meta name="twitter:image" content="https://picsum.photos/seed/onyu-coa-share/1200/630">
+
+  <!-- favicon: 인주색 검인 사각 -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23A32A17'/%3E%3Ctext x='16' y='23' font-size='19' text-anchor='middle' fill='%23EFEEEB' font-family='sans-serif'%3E%EC%98%A8%3C/text%3E%3C/svg%3E">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Pretendard', 'system-ui', 'sans-serif'],
+            mono: ['"Geist Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+          },
+          colors: {
+            paper: 'var(--paper)',
+            band: 'var(--paper-2)',
+            ink: 'var(--ink)',
+            body: 'var(--body)',
+            muted: 'var(--muted)',
+            seal: 'var(--seal)',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    :root {
+      --paper:   #EFEEEB;              /* 서식 용지 */
+      --paper-2: #E4E3DE;             /* 기입란 배경 전환 */
+      --ink:     #121211;             /* 인쇄 잉크 (순수 검정 아님) */
+      --body:    #4B4A47;             /* 본문 (7.2:1) */
+      --muted:   #6B6964;             /* 라벨 (4.7:1) */
+      --rule:        rgba(18,18,17,0.16);  /* 괘선 */
+      --rule-strong: rgba(18,18,17,0.42);  /* 표 상단 굵은 괘선 */
+      --seal:    #A32A17;             /* 인주색 — 판정 표시 전용 */
+      --ease:    cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      background: var(--paper);
+      color: var(--body);
+      -webkit-font-smoothing: antialiased;
+    }
+    * { border-radius: 0; }          /* 제약 ②: 둥근 모서리 전면 금지 */
+
+    section { scroll-margin-top: 96px; }
+
+    /* 숫자는 전부 고정폭. 표의 자릿수가 흔들리면 원장이 아니다. */
+    .mono { font-family: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1; }
+    .caps { font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; }  /* 대문자 광학 보정 */
+    .balance { text-wrap: balance; }
+    .pretty  { text-wrap: pretty; }
+    .keep    { word-break: keep-all; }
+
+    /* 괘선 */
+    .rule-t { border-top: 1px solid var(--rule); }
+    .rule-b { border-bottom: 1px solid var(--rule); }
+    .rule-l { border-left: 1px solid var(--rule); }
+    .rule-heavy { border-top: 2px solid var(--rule-strong); }
+    /* 모바일에서는 가로 괘선, 768px 이상에서는 세로 괘선으로 전환 */
+    .rule-turn { border-top: 1px solid var(--rule); }
+    @media (min-width: 768px) { .rule-turn { border-top: 0; border-left: 1px solid var(--rule); } }
+
+    /* 마이크로 인터랙션: 180ms — 카드도 스케일도 없다. 밑줄과 명도만 */
+    a, button, summary, input { transition: color 180ms var(--ease), background-color 180ms var(--ease), border-color 180ms var(--ease); }
+
+    .lnk { color: var(--ink); text-decoration: underline; text-decoration-color: var(--rule);
+           text-underline-offset: 4px; text-decoration-thickness: 1px; }
+    .lnk:hover { text-decoration-color: var(--ink); }
+
+    .btn { display: inline-flex; align-items: center; gap: 12px; padding: 16px 32px;
+           background: var(--ink); color: var(--paper); font-weight: 500; font-size: 16px; }
+    .btn:hover { background: #2B2A28; }
+    .btn:active { background: #000; }
+
+    :where(a, button, summary, input, [tabindex]):focus-visible {
+      outline: 2px solid var(--ink); outline-offset: 3px;
+    }
+    .on-ink :where(a, button, summary, input, [tabindex]):focus-visible { outline-color: var(--paper); }
+
+    /* 검인 도장 — 손으로 찍어 살짝 기울어진 유일한 비직각 요소 */
+    .seal-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px; padding: 4px;
+      border: 2px solid var(--seal); color: var(--seal);
+      font-size: 12px; font-weight: 700; line-height: 1.15;
+      transform: rotate(-7deg); text-align: center;
+    }
+
+    /* 표 조판 */
+    table.ledger { width: 100%; border-collapse: collapse; }
+    table.ledger th, table.ledger td { padding: 12px 16px; text-align: left; vertical-align: baseline;
+      border-bottom: 1px solid var(--rule); white-space: nowrap; }
+    table.ledger thead th { border-bottom: 1px solid var(--rule-strong); color: var(--muted);
+      font-weight: 500; font-size: 12px; letter-spacing: 0.06em; }
+    table.ledger tbody tr:hover { background: var(--paper-2); }
+    table.ledger td.n, table.ledger th.n { text-align: right; }
+
+    /* 신청 서식 */
+    .row-plan:has(input:checked) { background: #DCDBD5; }
+    .row-plan:has(input:checked) .plan-code { font-weight: 700; color: var(--ink); }
+    input[type="radio"], input[type="checkbox"] { accent-color: var(--ink); width: 16px; height: 16px; }
+    input[type="email"] { background: var(--paper); border: 1px solid var(--rule-strong); padding: 16px; }
+    input[type="email"]:focus { border-color: var(--ink); }
+
+    details > summary { cursor: pointer; list-style: none; }
+    details > summary::-webkit-details-marker { display: none; }
+    details[open] .qmark::after { content: "−"; }
+    .qmark::after { content: "+"; }
+
+    /* ── 모션 1 : 발효 시간 카운트업(로드 시 1회) — 스크립트에서 제어 */
+    /* ── 모션 2 : 발효 공정 눈금선 그리기(1회) */
+    .draw { transform: scaleX(0); transform-origin: left center;
+            transition: transform 600ms var(--ease); }
+    .draw.drawn { transform: scaleX(1); }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .draw { transform: scaleX(1); }
+    }
+  </style>
+</head>
+
+<body class="font-sans antialiased">
+<!-- Analytics: GA4 / GTM / 광고 픽셀 삽입 위치 -->
+
+  <a href="#doc" class="sr-only focus:not-sr-only focus:fixed focus:z-[70] focus:top-0 focus:left-0 focus:bg-ink focus:text-paper focus:px-6 focus:py-4">본문 바로가기</a>
+
+  <!-- ══════════ 서식 머리글 (고정) ══════════ -->
+  <header class="fixed top-0 inset-x-0 z-40 bg-paper rule-b">
+    <div class="mx-auto max-w-7xl px-4 md:px-8 py-2 flex items-center justify-between gap-4">
+      <a href="#doc" class="flex items-baseline gap-3" aria-label="온유 홈">
+        <span class="text-xl font-bold text-ink tracking-tight">온유</span>
+        <span class="mono caps text-muted">ONYU</span>
+      </a>
+      <nav aria-label="주요 메뉴" class="hidden md:flex items-center gap-8 mono text-xs text-muted">
+        <a href="#ledger" class="hover:text-ink">로트 원장</a>
+        <a href="#assay" class="hover:text-ink">시험성적</a>
+        <a href="#process" class="hover:text-ink">발효 공정</a>
+      </nav>
+      <a href="#form" data-cta="header-subscribe" class="btn">
+        정기 배송 신청
+      </a>
+    </div>
+  </header>
+
+  <main id="doc" class="pt-16">
+
+    <!-- ══════════ 1. 제1면 — 서식 표제 + 지배 수치 ══════════ -->
+    <section aria-labelledby="h1" class="mx-auto max-w-7xl px-4 md:px-8 md:min-h-[calc(100dvh-4rem)] flex flex-col">
+
+      <!-- 표제란 -->
+      <div class="rule-b py-4 flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 mono text-xs text-muted">
+        <span>온유 발효차 · 보성 / 하동</span>
+        <span class="text-ink">로트 원장 및 시험성적 요약</span>
+        <span>제25-11824호 · 2026.07.29 발행</span>
+      </div>
+
+      <!-- 본문 + 첨부 사진 1 -->
+      <div class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-12 py-16 md:py-24">
+
+        <div class="lg:col-span-6 flex flex-col justify-center">
+          <p class="mono caps text-muted">기준 로트 25-B-047</p>
+          <h1 id="h1" class="mt-4 text-4xl font-bold text-ink leading-snug tracking-tight keep balance">
+            차를 소개하는 대신,<br>이번 로트의 성적서를 펼칩니다.
+          </h1>
+          <p class="mt-8 text-base leading-relaxed max-w-[62ch] keep pretty">
+            2025년 5월 12일부터 19일까지 보성 봉강리 산47-2에서 손으로 딴 재래종 세작을
+            옹기 34개에 나눠 담고, 45일간 하루 두 번 온도를 적었습니다.
+            아래는 그 기록의 전문입니다. 광고 문구는 그다음입니다.
+          </p>
+          <div class="mt-12 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <a href="#form" data-cta="hero-subscribe" class="btn">
+              정기 배송 신청
+              <iconify-icon icon="solar:arrow-right-linear" width="20" aria-hidden="true"></iconify-icon>
+            </a>
+            <a href="#assay" data-cta="hero-coa-download" class="mono text-xs lnk inline-flex items-center gap-2">
+              <iconify-icon icon="solar:download-minimalistic-linear" width="16" aria-hidden="true"></iconify-icon>
+              시험성적서 원문 (PDF · 2.4MB)
+            </a>
+          </div>
+        </div>
+
+        <!-- 그리드 이탈 1회: 첨부 사진이 우측 여백을 넘어 판면 밖으로 나간다 -->
+        <figure class="lg:col-span-6 -mr-4 md:-mr-8">
+          <img src="https://picsum.photos/seed/onyu-onggi-open/1200/900"
+               alt="개옹 직후 옹기 안에 담긴 발효 찻잎을 위에서 촬영한 흑백 사진"
+               class="w-full h-64 md:h-96 object-cover ring-1 ring-black/10"
+               style="filter: grayscale(1) contrast(1.06);"
+               width="1200" height="900" loading="eager" fetchpriority="high" decoding="async">
+          <figcaption class="mt-4 mono text-xs text-muted">
+            사진 1. 개옹 직후 25-B-047 · 2025.06.28 11:20 · 촬영 보성 제2발효장
+          </figcaption>
+        </figure>
+      </div>
+
+      <!-- 하단 수치대 — 이 페이지의 주인공 -->
+      <div class="rule-heavy py-8 grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-8 items-end">
+        <div class="md:col-span-5">
+          <p class="mono caps text-muted">옹기 1차 발효</p>
+          <p class="mt-4 flex items-baseline gap-4">
+            <span id="ferm" class="mono text-7xl font-medium text-ink leading-none">1,080</span>
+            <span class="text-xl text-body">시간</span>
+          </p>
+        </div>
+        <dl class="md:col-span-7 grid grid-cols-3 gap-x-4 mono">
+          <div class="rule-l pl-4">
+            <dt class="text-xs text-muted">평균 온도</dt>
+            <dd class="mt-2 text-xl text-ink">24.6<span class="text-xs text-muted"> °C</span></dd>
+          </div>
+          <div class="rule-l pl-4">
+            <dt class="text-xs text-muted">총 숙성</dt>
+            <dd class="mt-2 text-xl text-ink">177<span class="text-xs text-muted"> 일</span></dd>
+          </div>
+          <div class="rule-l pl-4">
+            <dt class="text-xs text-muted">사용 옹기</dt>
+            <dd class="mt-2 text-xl text-ink">34<span class="text-xs text-muted"> 개</span></dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ══════════ 2. 로트 원장 — 최고 밀도 ══════════ -->
+    <section id="ledger" aria-labelledby="h-ledger" class="mx-auto max-w-7xl px-4 md:px-8 py-12">
+      <div class="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
+        <h2 id="h-ledger" class="text-xl font-bold text-ink tracking-tight keep">로트 원장</h2>
+        <p class="mono text-xs text-muted">표 1. 2024–2025 생산 전량 7로트 · 폐기 로트 포함</p>
+      </div>
+
+      <div class="mt-8 overflow-x-auto" tabindex="0" role="region" aria-label="로트 원장 표 · 좌우로 스크롤할 수 있습니다">
+        <table class="ledger mono text-xs min-w-[880px]">
+          <caption class="sr-only">온유 발효차 2024–2025년 생산 로트별 산지, 수확일, 발효 시간, 관능 점수 및 상태</caption>
+          <thead>
+            <tr>
+              <th scope="col">로트</th>
+              <th scope="col">산지 지번</th>
+              <th scope="col">품종 / 등급</th>
+              <th scope="col">수확일</th>
+              <th scope="col">입옹일</th>
+              <th scope="col" class="n">발효 h</th>
+              <th scope="col" class="n">평균 °C</th>
+              <th scope="col" class="n">관능 / 5.0</th>
+              <th scope="col">상태</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" class="font-medium text-ink">25-B-047</th>
+              <td>보성 봉강리 산47-2</td><td>재래종 세작</td>
+              <td>2025.05.12</td><td>2025.05.14</td>
+              <td class="n text-ink">1,080</td><td class="n">24.6</td><td class="n text-ink">4.7</td>
+              <td class="font-medium text-seal">출고 중</td>
+            </tr>
+            <tr>
+              <th scope="row" class="font-medium text-ink">25-B-046</th>
+              <td>보성 봉강리 산47-2</td><td>재래종 세작</td>
+              <td>2025.05.19</td><td>2025.05.21</td>
+              <td class="n text-ink">1,080</td><td class="n">24.1</td><td class="n text-ink">4.6</td>
+              <td>숙성 132일차</td>
+            </tr>
+            <tr>
+              <th scope="row" class="font-medium text-ink">25-H-031</th>
+              <td>하동 정금리 412</td><td>재래종 중작</td>
+              <td>2025.05.28</td><td>2025.05.30</td>
+              <td class="n text-ink">1,152</td><td class="n">25.3</td><td class="n text-ink">4.5</td>
+              <td>숙성 118일차</td>
+            </tr>
+            <tr>
+              <th scope="row" class="font-medium text-ink">25-H-030</th>
+              <td>하동 정금리 412</td><td>재래종 중작</td>
+              <td>2025.06.03</td><td>2025.06.05</td>
+              <td class="n text-ink">1,152</td><td class="n">25.8</td><td class="n text-ink">4.5</td>
+              <td>숙성 112일차</td>
+            </tr>
+            <tr>
+              <th scope="row" class="font-medium text-ink">25-B-045</th>
+              <td>보성 봉강리 산47-2</td><td>재래종 세작</td>
+              <td>2025.05.06</td><td>2025.05.08</td>
+              <td class="n text-ink">1,008</td><td class="n">23.9</td><td class="n text-ink">4.6</td>
+              <td>출고 완료</td>
+            </tr>
+            <tr>
+              <th scope="row" class="font-medium text-ink">24-B-039</th>
+              <td>보성 봉강리 산47-2</td><td>재래종 세작</td>
+              <td>2024.05.14</td><td>2024.05.16</td>
+              <td class="n text-ink">1,080</td><td class="n">24.4</td><td class="n text-ink">4.8</td>
+              <td>출고 완료</td>
+            </tr>
+            <tr>
+              <th scope="row" class="font-medium text-ink">24-H-022</th>
+              <td>하동 정금리 412</td><td>재래종 중작</td>
+              <td>2024.05.30</td><td>2024.06.01</td>
+              <td class="n text-ink">1,152</td><td class="n">26.9</td><td class="n text-ink">4.1</td>
+              <td class="font-medium text-seal">폐기 · 향 이상</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="mt-8 text-base leading-relaxed max-w-[62ch] keep pretty">
+        관능 4.5 미달 로트는 출고하지 않습니다. 2024년 이후 폐기 3로트, 생산량의 4.1%입니다.
+        24-H-022는 6월 하순 옹기 내부 온도가 26.9°C까지 올라 향이 무너졌고, 전량 폐기했습니다.
+      </p>
+      <p class="mt-4 mono text-xs text-muted keep">
+        원장 기입: 발효장 관리자 최시우 · 검수: 정민준 · 관능 패널 9인(사내 5 / 외부 4)
+      </p>
+    </section>
+
+    <!-- ══════════ 3. 시험성적 — 최저 밀도(텅 빔) ══════════ -->
+    <section id="assay" aria-labelledby="h-assay" class="rule-t">
+      <div class="mx-auto max-w-7xl px-4 md:px-8 py-32">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-16 items-start">
+
+          <div class="lg:col-span-7">
+            <h2 id="h-assay" class="mono caps text-muted">시험성적 · 잔류농약</h2>
+            <p class="mt-8 mono text-xl text-muted">320항목 중</p>
+            <p class="mono text-7xl font-medium text-ink leading-none">0</p>
+            <p class="mt-8 text-base leading-relaxed max-w-[54ch] keep pretty">
+              다종농약다성분 분석법(GC-MS/MS · LC-MS/MS) 320항목 전량이
+              정량한계 0.01&nbsp;mg/kg 미만이었습니다. 매 로트를 출고 전에 의뢰합니다.
+            </p>
+          </div>
+
+          <dl class="lg:col-span-5 mono text-xs">
+            <div class="rule-t py-4 flex justify-between gap-8">
+              <dt class="text-muted">시험기관</dt><dd class="text-ink text-right">서남권농식품분석센터</dd>
+            </div>
+            <div class="rule-t py-4 flex justify-between gap-8">
+              <dt class="text-muted">성적서 번호</dt><dd class="text-ink text-right">제25-11824호</dd>
+            </div>
+            <div class="rule-t py-4 flex justify-between gap-8">
+              <dt class="text-muted">시험일</dt><dd class="text-ink text-right">2025.11.06</dd>
+            </div>
+            <div class="rule-t py-4 flex justify-between gap-8">
+              <dt class="text-muted">유기 인증</dt><dd class="text-ink text-right">제2019-125-3-7호</dd>
+            </div>
+            <div class="rule-t rule-b py-4 flex items-center justify-between gap-8">
+              <dt class="text-muted">판정</dt>
+              <dd><span class="seal-mark" role="img" aria-label="판정: 적합">적합</span></dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <!-- 성분 3항목: 텅 빈 위쪽과 대비되는 촘촘한 띠 -->
+      <div class="rule-t bg-band">
+        <dl class="mx-auto max-w-7xl px-4 md:px-8 grid grid-cols-1 md:grid-cols-3">
+          <div class="py-8 md:pr-8">
+            <dt class="mono text-xs text-muted">카페인 · 1잔 200mL</dt>
+            <dd class="mt-2 mono text-xl text-ink">11.6<span class="text-xs text-muted"> mg</span></dd>
+            <p class="mt-2 text-xs text-muted keep">드립커피 1잔 96mg의 12% 수준. HPLC 정량.</p>
+          </div>
+          <div class="rule-turn py-8 md:px-8">
+            <dt class="mono text-xs text-muted">총 폴리페놀</dt>
+            <dd class="mt-2 mono text-xl text-ink">12.4<span class="text-xs text-muted"> g/100g</span></dd>
+            <p class="mt-2 text-xs text-muted keep">폴린-치오칼토법. 발효 전 대비 1.9배.</p>
+          </div>
+          <div class="rule-turn py-8 md:pl-8">
+            <dt class="mono text-xs text-muted">수분</dt>
+            <dd class="mt-2 mono text-xl text-ink">4.2<span class="text-xs text-muted"> %</span></dd>
+            <p class="mt-2 text-xs text-muted keep">상압가열건조법. 사내 기준 5.0% 이하.</p>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ══════════ 4. 발효 공정 기록 ══════════ -->
+    <section id="process" aria-labelledby="h-process" class="mx-auto max-w-7xl px-4 md:px-8 py-24">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-16">
+
+        <figure class="lg:col-span-4">
+          <img src="https://picsum.photos/seed/onyu-ledger-book/900/1100"
+               alt="발효장에서 손으로 기입한 온도 기록 원장을 펼쳐 놓은 흑백 사진"
+               class="w-full h-80 object-cover ring-1 ring-black/10"
+               style="filter: grayscale(1) contrast(1.06);"
+               width="900" height="1100" loading="lazy" decoding="async">
+          <figcaption class="mt-4 mono text-xs text-muted keep">
+            사진 2. 25-B-047 온도 기입장 · 6월 3일자. 로거 2대와 수기 기록을 함께 남깁니다.
+          </figcaption>
+        </figure>
+
+        <div class="lg:col-span-8">
+          <h2 id="h-process" class="text-xl font-bold text-ink tracking-tight keep">옹기 안에서 일어난 일</h2>
+          <p class="mt-4 text-base leading-relaxed max-w-[62ch] keep pretty">
+            찻잎을 덖어 옹기에 넣고 봉하면, 그다음부터 사람이 할 일은 온도를 적는 것뿐입니다.
+            45일 동안 24.6°C를 유지하는 데 필요한 건 기술이 아니라 위치입니다. 발효장은 반지하입니다.
+          </p>
+
+          <!-- 눈금선: 페이지의 두 번째(마지막) 등장 모션 -->
+          <div class="mt-16">
+            <div id="axis" class="draw h-px" style="background: var(--rule-strong)"></div>
+            <ol class="grid grid-cols-3 md:grid-cols-6 mono text-xs">
+              <li class="pt-4 pr-4">
+                <p class="text-ink">0 h</p>
+                <p class="mt-2 text-muted">24.0 °C</p>
+                <p class="mt-2 text-muted keep">입옹·봉함</p>
+              </li>
+              <li class="pt-4 pr-4">
+                <p class="text-ink">240 h</p>
+                <p class="mt-2 text-muted">24.3 °C</p>
+                <p class="mt-2 text-muted keep">1차 교반</p>
+              </li>
+              <li class="pt-4 pr-4">
+                <p class="text-ink">480 h</p>
+                <p class="mt-2 text-muted">24.8 °C</p>
+                <p class="mt-2 text-muted keep">단맛 발현</p>
+              </li>
+              <li class="pt-4 pr-4">
+                <p class="text-ink">720 h</p>
+                <p class="mt-2 text-muted">25.1 °C</p>
+                <p class="mt-2 text-muted keep">2차 교반</p>
+              </li>
+              <li class="pt-4 pr-4">
+                <p class="text-ink">960 h</p>
+                <p class="mt-2 text-muted">24.4 °C</p>
+                <p class="mt-2 text-muted keep">관능 1회차</p>
+              </li>
+              <li class="pt-4">
+                <p class="text-ink">1,080 h</p>
+                <p class="mt-2 text-muted">23.8 °C</p>
+                <p class="mt-2 text-muted keep">개옹</p>
+              </li>
+            </ol>
+          </div>
+
+          <p class="mt-16 text-base leading-relaxed max-w-[62ch] keep pretty">
+            개옹 뒤에는 지하 저장고에서 132일을 더 둡니다. 평균 18.2°C.
+            떫은맛이 가라앉고 구수한 끝맛이 자리를 잡는 구간이며, 여기서 서두르면
+            앞의 45일이 의미를 잃습니다. 주문이 들어오면 그때 소분하고,
+            72시간 안에 발송합니다.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ 5. 정기 배송 신청 서식 ══════════ -->
+    <section id="form" aria-labelledby="h-form" class="rule-t bg-band">
+      <div class="mx-auto max-w-7xl px-4 md:px-8 py-16">
+        <div class="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
+          <h2 id="h-form" class="text-xl font-bold text-ink tracking-tight keep">정기 배송 신청</h2>
+          <p class="mono text-xs text-muted">표 2. 구성별 단가 · 2026.07 기준 · 부가세 포함</p>
+        </div>
+
+        <form id="orderForm" class="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-16" novalidate>
+
+          <!-- 구성 선택 -->
+          <fieldset class="lg:col-span-8">
+            <legend class="sr-only">구독 구성 선택</legend>
+            <div class="overflow-x-auto" tabindex="0" role="region" aria-label="구성별 단가 표 · 좌우로 스크롤할 수 있습니다">
+              <table class="ledger mono text-xs min-w-[640px]">
+                <thead>
+                  <tr>
+                    <th scope="col">선택</th>
+                    <th scope="col">구성</th>
+                    <th scope="col">내용</th>
+                    <th scope="col" class="n">1팩</th>
+                    <th scope="col" class="n">1회 결제</th>
+                    <th scope="col" class="n">첫 회</th>
+                    <th scope="col" class="n">선택 비율</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="row-plan">
+                    <td><input type="radio" name="plan" id="planA" value="A" data-price="19900" data-packs="30" data-first="13930" data-unit="663" aria-label="구성 A · 30팩 · 1회 19,900원"></td>
+                    <th scope="row" class="plan-code"><label for="planA">A</label></th>
+                    <td>발효 홍차 30팩</td>
+                    <td class="n">663원</td><td class="n text-ink">19,900원</td><td class="n">13,930원</td><td class="n">18.4%</td>
+                  </tr>
+                  <tr class="row-plan">
+                    <td><input type="radio" name="plan" id="planB" value="B" data-price="32900" data-packs="60" data-first="23030" data-unit="548" checked aria-label="구성 B · 60팩 · 1회 32,900원"></td>
+                    <th scope="row" class="plan-code"><label for="planB">B</label></th>
+                    <td>홍차 40팩 · 청차 20팩</td>
+                    <td class="n">548원</td><td class="n text-ink">32,900원</td><td class="n">23,030원</td><td class="n">61.2%</td>
+                  </tr>
+                  <tr class="row-plan">
+                    <td><input type="radio" name="plan" id="planC" value="C" data-price="52900" data-packs="120" data-first="37030" data-unit="441" aria-label="구성 C · 120팩 · 1회 52,900원"></td>
+                    <th scope="row" class="plan-code"><label for="planC">C</label></th>
+                    <td>4종 120팩 · 유리 티포트 포함</td>
+                    <td class="n">441원</td><td class="n text-ink">52,900원</td><td class="n">37,030원</td><td class="n">20.4%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <fieldset class="mt-16">
+              <legend class="mono caps text-muted">발송 주기</legend>
+              <div class="mt-4 flex flex-wrap gap-x-8 gap-y-4 mono text-xs">
+                <label class="inline-flex items-center gap-3 text-ink">
+                  <input type="radio" name="cycle" value="2" data-mult="2" checked> 2주마다
+                </label>
+                <label class="inline-flex items-center gap-3 text-ink">
+                  <input type="radio" name="cycle" value="4" data-mult="1"> 4주마다
+                </label>
+                <span class="text-muted keep">주기는 단가에 영향을 주지 않습니다. 다음 발송일 하루 전까지 변경·건너뛰기 가능.</span>
+              </div>
+            </fieldset>
+          </fieldset>
+
+          <!-- 산출 -->
+          <div class="lg:col-span-4">
+            <p class="mono caps text-muted">산출</p>
+            <dl class="mt-4 mono text-xs">
+              <div class="rule-t py-4 flex items-baseline justify-between gap-8">
+                <dt class="text-muted">1회 결제</dt>
+                <dd class="text-xl text-ink"><span id="sumOnce">32,900</span>원</dd>
+              </div>
+              <div class="rule-t py-4 flex items-baseline justify-between gap-8">
+                <dt class="text-muted">첫 회 결제 (−30%)</dt>
+                <dd class="text-xl text-ink"><span id="sumFirst">23,030</span>원</dd>
+              </div>
+              <div class="rule-t py-4 flex items-baseline justify-between gap-8">
+                <dt class="text-muted">월 환산</dt>
+                <dd class="text-ink"><span id="sumMonth">65,800</span>원</dd>
+              </div>
+              <div class="rule-t rule-b py-4 flex items-baseline justify-between gap-8">
+                <dt class="text-muted">1팩 단가</dt>
+                <dd class="text-ink"><span id="sumUnit">548</span>원</dd>
+              </div>
+            </dl>
+
+            <div class="mt-8">
+              <label for="email" class="mono text-xs text-muted">이메일 주소</label>
+              <input id="email" name="email" type="email" required autocomplete="email"
+                     placeholder="care@onyu.kr" class="mt-2 w-full text-base text-ink">
+            </div>
+
+            <label class="mt-4 flex items-start gap-3 text-xs text-muted keep">
+              <input type="checkbox" id="agree" required class="mt-1">
+              <span><a href="#privacy" class="lnk">개인정보처리방침</a>에 동의하며, 발송 알림 수신에 동의합니다.</span>
+            </label>
+
+            <button type="submit" data-cta="form-submit" class="btn mt-8 w-full justify-center">
+              신청 확인
+              <iconify-icon icon="solar:arrow-right-linear" width="20" aria-hidden="true"></iconify-icon>
+            </button>
+            <p id="formMsg" role="status" aria-live="polite" class="mt-4 mono text-xs text-seal keep"></p>
+            <p class="mt-4 text-xs text-muted keep pretty">
+              개봉 후에도 수령 14일 이내 전액 환불하며 반송비를 받지 않습니다.
+              2025년 환불 요청은 전체 주문의 1.9%였습니다.
+            </p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ══════════ 6. 관능 기록 · 구독자 회신 ══════════ -->
+    <section id="notes" aria-labelledby="h-notes" class="rule-t">
+      <div class="mx-auto max-w-7xl px-4 md:px-8 py-32">
+      <div class="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
+        <h2 id="h-notes" class="mono caps text-muted">구독자 회신 · 발췌</h2>
+        <p class="mono text-xs text-muted">
+          4.87 / 5.0 · 12,847건 · 6개월 재구독 78.4%
+        </p>
+      </div>
+
+      <div class="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-16">
+        <figure class="lg:col-span-7">
+          <blockquote class="-ml-2 text-xl text-ink leading-snug keep balance">
+            “로트마다 성적서가 바뀌는 걸 보고 구독했어요. 25-B-046이 제 취향입니다.
+            하동 로트보다 단맛이 오래 남아서, 원장 보고 보성 로트가 오는 주에 맞춰
+            배송일을 옮겨 둡니다.”
+          </blockquote>
+          <figcaption class="mt-8 mono text-xs text-muted">
+            하윤서 · 프로덕트 디자이너 · 구독 14개월 · 구성 B
+          </figcaption>
+        </figure>
+
+        <figure class="lg:col-span-5">
+          <blockquote class="-ml-2 text-base text-ink leading-relaxed keep pretty">
+            “위가 예민해서 녹차를 못 마셨는데 아침 공복에도 괜찮았습니다.
+            카페인 11.6mg이라는 숫자를 확인하고 저녁에도 마시기 시작했어요.”
+          </blockquote>
+          <figcaption class="mt-8 mono text-xs text-muted">
+            박도현 · 스타트업 대표 · 구독 9개월 · 구성 C
+          </figcaption>
+        </figure>
+
+        <figure class="lg:col-span-12 rule-t pt-16">
+          <blockquote class="-ml-2 text-xl text-ink leading-snug keep balance">
+            “폐기한 로트를 표에 그대로 남겨 두는 브랜드는 처음 봤습니다.”
+          </blockquote>
+          <figcaption class="mt-8 mono text-xs text-muted">
+            이서진 · 브랜드 디렉터 · 구독 3개월 · 구성 A
+          </figcaption>
+        </figure>
+      </div>
+      </div>
+    </section>
+
+    <!-- ══════════ 7. 문답 ══════════ -->
+    <section id="qa" aria-labelledby="h-qa" class="rule-t">
+      <div class="mx-auto max-w-7xl px-4 md:px-8 py-12">
+        <h2 id="h-qa" class="mono caps text-muted">문답</h2>
+
+        <div class="mt-8">
+          <details class="rule-t">
+            <summary class="py-4 grid grid-cols-[32px_1fr_24px] items-baseline gap-4">
+              <span class="mono text-xs text-muted">01</span>
+              <span class="text-base font-medium text-ink keep">성적서 원문은 어디서 확인할 수 있나요?</span>
+              <span class="qmark mono text-xl text-muted text-right" aria-hidden="true"></span>
+            </summary>
+            <p class="pb-8 pl-0 md:pl-12 text-base leading-relaxed max-w-[62ch] keep pretty">
+              포장 측면의 로트번호를 온유 홈페이지 조회란에 입력하면 해당 로트의
+              시험성적서 PDF와 온도 기입장 스캔이 함께 나옵니다. 2024년 로트부터 전량 공개합니다.
+            </p>
+          </details>
+
+          <details class="rule-t">
+            <summary class="py-4 grid grid-cols-[32px_1fr_24px] items-baseline gap-4">
+              <span class="mono text-xs text-muted">02</span>
+              <span class="text-base font-medium text-ink keep">발효 1,080시간은 어떻게 측정하나요?</span>
+              <span class="qmark mono text-xl text-muted text-right" aria-hidden="true"></span>
+            </summary>
+            <p class="pb-8 pl-0 md:pl-12 text-base leading-relaxed max-w-[62ch] keep pretty">
+              옹기를 봉한 시각부터 개옹 시각까지를 분 단위로 기록합니다.
+              옹기 34개 중 5개에 온도 로거를 넣어 10분 간격으로 자동 기록하고,
+              관리자가 하루 두 번 수기로 겹쳐 적습니다. 두 기록이 0.5°C 이상 벌어지면 로거를 교체합니다.
+            </p>
+          </details>
+
+          <details class="rule-t">
+            <summary class="py-4 grid grid-cols-[32px_1fr_24px] items-baseline gap-4">
+              <span class="mono text-xs text-muted">03</span>
+              <span class="text-base font-medium text-ink keep">카페인이 얼마나 들어 있나요?</span>
+              <span class="qmark mono text-xl text-muted text-right" aria-hidden="true"></span>
+            </summary>
+            <p class="pb-8 pl-0 md:pl-12 text-base leading-relaxed max-w-[62ch] keep pretty">
+              200mL 한 잔에 11.6mg입니다. 드립커피 한 잔(96mg)의 12% 수준으로, 저녁에 마셔도
+              부담이 적은 양이지만 0은 아닙니다. 카페인에 매우 민감하시면 오후 6시 이전을 권합니다.
+            </p>
+          </details>
+
+          <details class="rule-t">
+            <summary class="py-4 grid grid-cols-[32px_1fr_24px] items-baseline gap-4">
+              <span class="mono text-xs text-muted">04</span>
+              <span class="text-base font-medium text-ink keep">해지에 위약금이 있나요?</span>
+              <span class="qmark mono text-xl text-muted text-right" aria-hidden="true"></span>
+            </summary>
+            <p class="pb-8 pl-0 md:pl-12 text-base leading-relaxed max-w-[62ch] keep pretty">
+              없습니다. 최소 구독 횟수도 없습니다. 다음 발송일 하루 전까지 해지·일시정지·건너뛰기를
+              직접 처리할 수 있고, 첫 회 할인분을 나중에 청구하지 않습니다.
+            </p>
+          </details>
+
+          <details class="rule-t rule-b">
+            <summary class="py-4 grid grid-cols-[32px_1fr_24px] items-baseline gap-4">
+              <span class="mono text-xs text-muted">05</span>
+              <span class="text-base font-medium text-ink keep">맛이 맞지 않으면 환불되나요?</span>
+              <span class="qmark mono text-xl text-muted text-right" aria-hidden="true"></span>
+            </summary>
+            <p class="pb-8 pl-0 md:pl-12 text-base leading-relaxed max-w-[62ch] keep pretty">
+              개봉하셨더라도 수령 후 14일 이내면 전액 환불하고 반송비를 받지 않습니다.
+              사진이나 사유 설명도 요구하지 않습니다. 2025년 환불 요청은 전체 주문의 1.9%였습니다.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ 8. 검인 · 최종 신청 ══════════ -->
+    <section aria-labelledby="h-cta" class="on-ink bg-ink text-paper">
+      <div class="mx-auto max-w-7xl px-4 md:px-8 py-24 grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-16 items-end">
+        <div class="lg:col-span-7">
+          <p class="mono caps" style="color: rgba(239,238,235,0.66)">발행 확인</p>
+          <h2 id="h-cta" class="mt-8 text-4xl font-bold leading-snug tracking-tight keep balance">
+            25-B-047은 34옹기 중<br>11옹기가 남았습니다.
+          </h2>
+          <p class="mt-8 text-base leading-relaxed max-w-[54ch] keep pretty" style="color: rgba(239,238,235,0.78)">
+            이 로트가 끝나면 25-B-046으로 넘어갑니다. 같은 산지, 이레 늦게 딴 잎이라
+            단맛이 조금 더 깁니다. 어느 쪽이든 성적서는 상자 안에 같이 들어갑니다.
+          </p>
+          <a href="#form" data-cta="closing-subscribe"
+             class="mt-12 inline-flex items-center gap-3 bg-paper text-ink px-8 py-4 text-base font-medium hover:bg-white">
+            정기 배송 신청
+            <iconify-icon icon="solar:arrow-right-linear" width="20" aria-hidden="true"></iconify-icon>
+          </a>
+        </div>
+
+        <figure class="lg:col-span-5">
+          <img src="https://picsum.photos/seed/onyu-pack-lot/1000/700"
+               alt="로트번호가 인쇄된 온유 크래프트 포장 흑백 사진"
+               class="w-full h-64 object-cover ring-1 ring-white/10"
+               style="filter: grayscale(1) contrast(1.06);"
+               width="1000" height="700" loading="lazy" decoding="async">
+          <figcaption class="mt-4 mono text-xs" style="color: rgba(239,238,235,0.66)">
+            사진 3. 소분 직후 포장. 로트번호·개옹일·유통기한을 한 줄에 인쇄합니다.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════ 판권면 ══════════ -->
+  <footer class="rule-t">
+    <div class="mx-auto max-w-7xl px-4 md:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-8">
+        <div class="md:col-span-5">
+          <div class="flex items-baseline gap-3">
+            <span class="text-xl font-bold text-ink tracking-tight">온유</span>
+            <span class="mono caps text-muted">ONYU</span>
+          </div>
+          <p class="mt-4 mono text-xs text-muted keep pretty">
+            보성 봉강리·하동 정금리 재래종 발효차. 로트 단위 생산, 주문 후 소분.
+          </p>
+        </div>
+
+        <nav aria-label="주요 링크" class="md:col-span-7 mono text-xs">
+          <ul class="flex flex-wrap gap-x-8 gap-y-4 md:justify-end">
+            <li><a href="#form" class="lnk">정기 배송 신청</a></li>
+            <li><a href="#assay" class="lnk">시험성적서 조회</a></li>
+            <li><a href="#ledger" class="lnk">로트 원장</a></li>
+            <li><a href="#qa" class="lnk">문답</a></li>
+            <li><a href="mailto:care@onyu.kr" class="lnk">care@onyu.kr</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="mt-16 rule-t pt-8 mono text-xs text-muted leading-relaxed keep">
+        <ul class="flex flex-wrap gap-x-8 gap-y-4">
+          <li><a href="#privacy" id="privacy" class="lnk">개인정보처리방침</a></li>
+          <li><a href="#terms" id="terms" class="lnk">이용약관</a></li>
+          <li><a href="#refund" id="refund" class="lnk">환불·교환 정책</a></li>
+          <li><a href="#business" id="business" class="lnk">사업자정보 확인</a></li>
+        </ul>
+        <p class="mt-8">상호 주식회사 온유 · 대표 정민준 · 사업자등록번호 214-88-04720 · 통신판매업신고 2024-서울강남-04821</p>
+        <p class="mt-2">서울특별시 강남구 도산대로 152, 4층 · 고객센터 1670-8820 (평일 10:00–18:00) · care@onyu.kr</p>
+        <p class="mt-8">© 2026 주식회사 온유(ONYU). All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════════ 구조화 데이터 ══════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "온유 ONYU",
+    "url": "https://onyu.kr",
+    "logo": "https://onyu.kr/logo.png",
+    "description": "보성·하동 재래종 찻잎을 옹기에서 발효한 로트 단위 생산 발효차 브랜드. 로트별 시험성적서를 공개합니다.",
+    "email": "care@onyu.kr",
+    "telephone": "+82-1670-8820",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "도산대로 152, 4층",
+      "addressLocality": "강남구",
+      "addressRegion": "서울특별시",
+      "addressCountry": "KR"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "온유 발효차 정기 배송 · 구성 B",
+    "sku": "ONYU-B-60",
+    "image": "https://picsum.photos/seed/onyu-pack-lot/1000/700",
+    "description": "보성 봉강리 재래종 세작을 옹기에서 1,080시간(평균 24.6°C) 발효하고 132일 숙성한 발효차 60팩. 잔류농약 320항목 불검출.",
+    "brand": { "@type": "Brand", "name": "온유 ONYU" },
+    "offers": {
+      "@type": "Offer",
+      "url": "https://onyu.kr/#form",
+      "priceCurrency": "KRW",
+      "price": "32900",
+      "availability": "https://schema.org/InStock",
+      "priceValidUntil": "2026-12-31",
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": { "@type": "MonetaryAmount", "value": "0", "currency": "KRW" }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "KR",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 14,
+        "returnMethod": "https://schema.org/ReturnByMail",
+        "returnFees": "https://schema.org/FreeReturn"
+      }
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.87",
+      "reviewCount": "12847",
+      "bestRating": "5"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "하윤서" },
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "reviewBody": "로트마다 성적서가 바뀌는 걸 보고 구독했어요. 25-B-046이 제 취향입니다. 하동 로트보다 단맛이 오래 남아서, 원장 보고 보성 로트가 오는 주에 맞춰 배송일을 옮겨 둡니다."
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "박도현" },
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "reviewBody": "위가 예민해서 녹차를 못 마셨는데 아침 공복에도 괜찮았습니다. 카페인 11.6mg이라는 숫자를 확인하고 저녁에도 마시기 시작했어요."
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "성적서 원문은 어디서 확인할 수 있나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "포장 측면의 로트번호를 온유 홈페이지 조회란에 입력하면 해당 로트의 시험성적서 PDF와 온도 기입장 스캔이 함께 나옵니다. 2024년 로트부터 전량 공개합니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "발효 1,080시간은 어떻게 측정하나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "옹기를 봉한 시각부터 개옹 시각까지를 분 단위로 기록합니다. 옹기 34개 중 5개에 온도 로거를 넣어 10분 간격으로 자동 기록하고, 관리자가 하루 두 번 수기로 겹쳐 적습니다. 두 기록이 0.5°C 이상 벌어지면 로거를 교체합니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "카페인이 얼마나 들어 있나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "200mL 한 잔에 11.6mg입니다. 드립커피 한 잔(96mg)의 12% 수준으로, 저녁에 마셔도 부담이 적은 양이지만 0은 아닙니다. 카페인에 매우 민감하시면 오후 6시 이전을 권합니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "해지에 위약금이 있나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "없습니다. 최소 구독 횟수도 없습니다. 다음 발송일 하루 전까지 해지·일시정지·건너뛰기를 직접 처리할 수 있고, 첫 회 할인분을 나중에 청구하지 않습니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "맛이 맞지 않으면 환불되나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "개봉하셨더라도 수령 후 14일 이내면 전액 환불하고 반송비를 받지 않습니다. 사진이나 사유 설명도 요구하지 않습니다. 2025년 환불 요청은 전체 주문의 1.9%였습니다." }
+      }
+    ]
+  }
+  </script>
+
+  <script>
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const fmt = n => n.toLocaleString('ko-KR');
+
+    /* ── 모션 1 / 2개 중 : 발효 시간 카운트업. 이 페이지에서 유일하게 "숫자가 움직인다". */
+    (function () {
+      const el = document.getElementById('ferm');
+      if (!el || reduce) return;
+      const target = 1080, dur = 900, t0 = performance.now();
+      el.textContent = '0';
+      const tick = now => {
+        const p = Math.min((now - t0) / dur, 1);
+        const eased = 1 - Math.pow(2, -10 * p);          // easeOutExpo
+        el.textContent = fmt(Math.round(target * eased));
+        if (p < 1) requestAnimationFrame(tick); else el.textContent = fmt(target);
+      };
+      requestAnimationFrame(tick);
+    })();
+
+    /* ── 모션 2 / 2개 중 : 발효 공정 눈금선이 좌→우로 한 번 그려진다. */
+    (function () {
+      const axis = document.getElementById('axis');
+      if (!axis) return;
+      if (reduce) { axis.classList.add('drawn'); return; }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('drawn'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.6 });
+      io.observe(axis);
+    })();
+
+    /* ── 신청 서식 산출 (모션 아님 — 값만 갱신) */
+    (function () {
+      const form = document.getElementById('orderForm');
+      if (!form) return;
+      const out = {
+        once:  document.getElementById('sumOnce'),
+        first: document.getElementById('sumFirst'),
+        month: document.getElementById('sumMonth'),
+        unit:  document.getElementById('sumUnit'),
+      };
+      const recalc = () => {
+        const plan = form.querySelector('input[name="plan"]:checked');
+        const cycle = form.querySelector('input[name="cycle"]:checked');
+        if (!plan || !cycle) return;
+        const price = Number(plan.dataset.price);
+        const mult  = Number(cycle.dataset.mult);
+        out.once.textContent  = fmt(price);
+        out.first.textContent = fmt(Number(plan.dataset.first));
+        out.month.textContent = fmt(price * mult);
+        out.unit.textContent  = fmt(Number(plan.dataset.unit));
+      };
+      form.addEventListener('change', recalc);
+      recalc();
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const msg = document.getElementById('formMsg');
+        const email = document.getElementById('email');
+        const agree = document.getElementById('agree');
+        if (!email.value || !email.checkValidity()) {
+          msg.textContent = '이메일 주소를 확인해 주세요.'; email.focus(); return;
+        }
+        if (!agree.checked) {
+          msg.textContent = '개인정보처리방침 동의가 필요합니다.'; agree.focus(); return;
+        }
+        const plan = form.querySelector('input[name="plan"]:checked').value;
+        const cycle = form.querySelector('input[name="cycle"]:checked').value;
+        msg.textContent = '구성 ' + plan + ' · ' + cycle + '주 주기로 접수했습니다. 확인 메일과 25-B-047 성적서를 보냈습니다.';
+        form.reset(); recalc();
+      });
+    })();
+  </script>
+</body>
+</html>
