@@ -29,7 +29,7 @@
   간격  4 · 8 · 12 · 16 · 24 · 32 · 48 · 64 · 96 · 128 (tailwind 1 2 3 4 6 8 12 16 24 32)
   타입  12 · 16 · 20 · 36 · 72  (5종. text-xs / base / xl / 4xl / 7xl)
   웨이트 400 본문 · 500 라벨·표 · 700 판정·숫자
-  명도 위계 #121211(ink) → #4B4A47(body) → #6B6964(muted)
+  명도 위계 #121211(ink) → #4B4A47(body) → #63615C(muted) — 위계는 크기가 아니라 명도로
   액센트 인주색 #A32A17 — 판정 표시(검인 도장·출고 중·폐기) 3곳에만.
 -->
 <head>
@@ -91,7 +91,7 @@
       --paper-2: #E4E3DE;             /* 기입란 배경 전환 */
       --ink:     #121211;             /* 인쇄 잉크 (순수 검정 아님) */
       --body:    #4B4A47;             /* 본문 (7.2:1) */
-      --muted:   #6B6964;             /* 라벨 (4.7:1) */
+      --muted:   #63615C;             /* 라벨 (용지 5.3:1 / 기입란 4.8:1) */
       --rule:        rgba(18,18,17,0.16);  /* 괘선 */
       --rule-strong: rgba(18,18,17,0.42);  /* 표 상단 굵은 괘선 */
       --seal:    #A32A17;             /* 인주색 — 판정 표시 전용 */
@@ -212,7 +212,7 @@
   <main id="doc" class="pt-16">
 
     <!-- ══════════ 1. 제1면 — 서식 표제 + 지배 수치 ══════════ -->
-    <section aria-labelledby="h1" class="mx-auto max-w-7xl px-4 md:px-8 md:min-h-[calc(100dvh-4rem)] flex flex-col">
+    <section aria-labelledby="h1" class="mx-auto max-w-7xl px-4 md:px-8 md:min-h-[calc(100dvh_-_4rem)] flex flex-col">
 
       <!-- 표제란 -->
       <div class="rule-b py-4 flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 mono text-xs text-muted">
@@ -239,8 +239,7 @@
               정기 배송 신청
               <iconify-icon icon="solar:arrow-right-linear" width="20" aria-hidden="true"></iconify-icon>
             </a>
-            <a href="#assay" data-cta="hero-coa-download" class="mono text-xs lnk inline-flex items-center gap-2">
-              <iconify-icon icon="solar:download-minimalistic-linear" width="16" aria-hidden="true"></iconify-icon>
+            <a href="#assay" data-cta="hero-coa-download" class="mono text-xs lnk">
               시험성적서 원문 (PDF · 2.4MB)
             </a>
           </div>
@@ -598,7 +597,7 @@
               신청 확인
               <iconify-icon icon="solar:arrow-right-linear" width="20" aria-hidden="true"></iconify-icon>
             </button>
-            <p id="formMsg" role="status" aria-live="polite" class="mt-4 mono text-xs text-seal keep"></p>
+            <p id="formMsg" role="status" aria-live="polite" class="mt-4 mono text-xs text-ink keep"></p>
             <p class="mt-4 text-xs text-muted keep pretty">
               개봉 후에도 수령 14일 이내 전액 환불하며 반송비를 받지 않습니다.
               2025년 환불 요청은 전체 주문의 1.9%였습니다.
@@ -691,7 +690,7 @@
             </summary>
             <p class="pb-8 pl-0 md:pl-12 text-base leading-relaxed max-w-[62ch] keep pretty">
               200mL 한 잔에 11.6mg입니다. 드립커피 한 잔(96mg)의 12% 수준으로, 저녁에 마셔도
-              부담이 적은 양이지만 0은 아닙니다. 카페인에 매우 민감하시면 오후 6시 이전을 권합니다.
+              부담이 적은 양이지만 0은 아닙니다. 카페인에 민감하시면 오후 6시 이전을 권합니다.
             </p>
           </details>
 
@@ -884,7 +883,7 @@
       {
         "@type": "Question",
         "name": "카페인이 얼마나 들어 있나요?",
-        "acceptedAnswer": { "@type": "Answer", "text": "200mL 한 잔에 11.6mg입니다. 드립커피 한 잔(96mg)의 12% 수준으로, 저녁에 마셔도 부담이 적은 양이지만 0은 아닙니다. 카페인에 매우 민감하시면 오후 6시 이전을 권합니다." }
+        "acceptedAnswer": { "@type": "Answer", "text": "200mL 한 잔에 11.6mg입니다. 드립커피 한 잔(96mg)의 12% 수준으로, 저녁에 마셔도 부담이 적은 양이지만 0은 아닙니다. 카페인에 민감하시면 오후 6시 이전을 권합니다." }
       },
       {
         "@type": "Question",
