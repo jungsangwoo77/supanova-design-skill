@@ -75,6 +75,18 @@ Claude Code에서 이 저장소를 열면 에이전트가 자동으로 인식됩
 | AI 티를 빼고 싶을 때 | `craft-skill` (다른 스킬 위에 얹기) |
 | 최고 퀄리티가 필요할 때 | `taste-skill` + `soft-skill` + `craft-skill` + `output-skill` |
 
+### 외부 스킬과 함께 쓸 때 (`ui-ux-pro-max`)
+
+[ui-ux-pro-max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill)는 스타일·팔레트·폰트를 **카탈로그에서 검색해 고르는** 방식이라, 카탈로그 밖에서 방향을 만드는 `craft-skill`과 작동 원리가 충돌합니다. 용도를 나눠 쓰세요.
+
+| 작업 | 우선 스킬 | 이유 |
+|------|-----------|------|
+| 랜딩 · 브랜드 사이트 | **craft-skill** | 차별화가 목적. 카탈로그 선택은 평균값으로 수렴 |
+| 대시보드 · 관리자 · 앱 UI | **ui-ux-pro-max** | 표준 준수와 예측 가능성이 미덕인 영역 |
+| 접근성 · 터치 · 모션 규칙 | 양쪽 모두 참조 가능 | 평균값 위험 없는 검증된 기준 |
+
+랜딩 작업에서는 ui-ux-pro-max의 **스타일·컬러·폰트 추천을 채택하지 않습니다.** 접근성(대비 4.5:1, 포커스 링), 터치 타겟 44×44px, 모션 150~300ms, `prefers-reduced-motion`, 모바일 safe area, 폼 UX는 참조해도 좋습니다.
+
 ## 설정 (taste-skill)
 
 taste-skill 상단의 4개 설정값을 조정할 수 있습니다:
