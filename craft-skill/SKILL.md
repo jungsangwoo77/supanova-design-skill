@@ -112,6 +112,51 @@ description: >
   (명도만 조절하면 색이 탁하고 죽은 회색으로 보인다.)
 - 액센트는 **페이지의 5% 이하** 면적에만. 그 이상이면 액센트가 아니라 배경색이다.
 
+### D-2. 토큰을 DESIGN.md로 기록하고 검증한다
+> 형식 출처: [google-labs-code/design.md](https://github.com/google-labs-code/design.md) (Apache-2.0)
+
+토큰을 CSS 변수로만 두면 **세션이 끝나면 근거가 사라진다.** 다음 작업자(사람이든 에이전트든)는
+왜 그 값인지 모른 채 다시 평균값으로 돌아간다. 결정을 **파일로 남긴다.**
+
+* **언제 쓰나:** 브랜드가 여러 페이지·여러 세션에 걸쳐 유지돼야 할 때. 일회성 단일 페이지엔 불필요.
+* **형식:** YAML 프론트매터(기계가 읽는 토큰) + 마크다운 본문(사람이 읽는 **근거**).
+  근거가 핵심이다 — 값만 있으면 다시 카탈로그 선택이 된다.
+
+```md
+---
+name: <브랜드명>
+colors:      { primary: "#1A1C1E", accent: "#B8422E", neutral: "#F7F5F2" }
+typography:  { h1: { fontFamily: Pretendard, fontSize: 72px, fontWeight: 600 } }
+rounded:     { none: 0px }
+spacing:     { sm: 8px, md: 16px, lg: 32px }
+components:
+  button-primary:
+    backgroundColor: "{colors.accent}"
+    textColor: "{colors.on-accent}"     # 토큰 참조 = 하드코딩 방지
+---
+
+## Overview
+(섹션 2의 "한 문장 컨셉"과 참조 장르를 여기에 적는다)
+
+## Colors
+- **accent (#B8422E):** CTA·포커스에만. 지면의 1% 미만.   ← 왜 그런지까지 적는다
+
+## Do's and Don'ts
+- 그라디언트·그림자·카드 컴포넌트 금지. 구획은 1px 규칙선과 여백으로만.
+```
+
+* **섹션 순서(고정):** Overview → Colors → Typography → Layout → Elevation → Shapes →
+  Components → Do's and Don'ts. 생략은 가능하나 순서는 바꾸지 않는다.
+* **검증 (권장):** 대비 미달을 눈으로 잡기 어렵다. 린터에 맡긴다.
+  ```bash
+  npx @google/design.md lint DESIGN.md      # WCAG 대비·깨진 토큰 참조·구조 검사
+  npx @google/design.md diff A.md B.md      # 개정 시 회귀 탐지
+  ```
+  실측 예: `#c9c5bc on #e9e6de → 1.38:1` 을 경고로 잡아낸다(AA 기준 4.5:1 미달).
+  `components`에 `backgroundColor`+`textColor` 쌍을 정의해야 대비 검사가 돈다.
+* **주의:** 린터는 **접근성과 일관성만** 검사한다. "이 디자인이 평균값인가"는 판단하지 못한다.
+  통과했다고 좋은 디자인이 아니다 — 섹션 8·9의 검수는 그대로 수행한다.
+
 ### E. 섀도 시스템 (고도 = 의미)
 - 섀도 레벨은 **3단계까지만** 정의하고 그 안에서만 사용.
 - **전부 떠 있으면 아무것도 떠 있지 않다.** 페이지에서 실제로 떠야 하는 건 보통 1~2종류(nav, 모달).
@@ -237,6 +282,7 @@ description: >
 - [ ] 그레이스케일로 봤을 때도 위계가 유지되는가? (컬러를 빼고 스크린샷을 상상해보라)
 - [ ] 액센트 컬러 면적이 5% 이하인가?
 - [ ] 섀도 레벨이 3단계 이내이고, 배경 hue로 tint되었는가?
+- [ ] (다중 페이지·재사용 브랜드일 때) 토큰과 **근거**를 DESIGN.md로 남기고 lint를 통과했는가?
 
 ### 카피 층위
 - [ ] 브랜드명을 지워도 **다른 회사에 못 쓰는** 문장인가?

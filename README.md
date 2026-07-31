@@ -32,7 +32,7 @@ AI의 출력 생략을 방지합니다. 플레이스홀더, 스켈레톤, 미완
 - **마이크로 크래프트** — 광학 정렬, `tabular-nums`, 중첩 라디우스 공식, 모션 지속시간 규칙
 - **빼기 검수** — 출력 직전 장식·그림자·모션·형용사를 실제로 덜어냄
 
-> 참고 원칙: Refactoring UI (제약된 스케일, 그레이스케일 우선, 크기 아닌 웨이트·컬러 위계), 디자인 엔지니어링 craft 디테일(광학 정렬·tabular nums·이미지 아웃라인), Awwwards 심사 기준(시각적 소음이 아닌 커뮤니케이션).
+> 참고 원칙: Refactoring UI (제약된 스케일, 그레이스케일 우선, 크기 아닌 웨이트·컬러 위계), 디자인 엔지니어링 craft 디테일(광학 정렬·tabular nums·이미지 아웃라인), Awwwards 심사 기준(시각적 소음이 아닌 커뮤니케이션), [DESIGN.md](https://github.com/google-labs-code/design.md) (토큰 기록 형식 + WCAG 린트).
 
 ## Supanova 특화 포인트
 
@@ -86,6 +86,19 @@ Claude Code에서 이 저장소를 열면 에이전트가 자동으로 인식됩
 | 접근성 · 터치 · 모션 규칙 | 양쪽 모두 참조 가능 | 평균값 위험 없는 검증된 기준 |
 
 랜딩 작업에서는 ui-ux-pro-max의 **스타일·컬러·폰트 추천을 채택하지 않습니다.** 접근성(대비 4.5:1, 포커스 링), 터치 타겟 44×44px, 모션 150~300ms, `prefers-reduced-motion`, 모바일 safe area, 폼 UX는 참조해도 좋습니다.
+
+### DESIGN.md (Google, Apache-2.0)
+
+[google-labs-code/design.md](https://github.com/google-labs-code/design.md)는 **경쟁이 아니라 보완**입니다. 스타일을 고르는 도구가 아니라, **내가 내린 결정을 기록하는 형식 + 검증 린터**이기 때문입니다.
+
+여러 페이지·여러 세션에 걸쳐 유지될 브랜드라면 토큰과 **근거**를 `DESIGN.md`로 남기세요. 값만 남기면 다음 작업자가 이유를 몰라 평균값으로 되돌아갑니다.
+
+```bash
+npx @google/design.md lint DESIGN.md      # WCAG 대비 · 깨진 토큰 참조 · 구조 검사
+npx @google/design.md diff A.md B.md      # 개정 시 회귀 탐지
+```
+
+린터는 눈으로 잡기 어려운 대비 미달을 잡아냅니다 (실측: `#c9c5bc on #e9e6de → 1.38:1` 경고). 다만 **접근성·일관성만** 검사하므로, "이 디자인이 평균값인가"는 여전히 craft-skill의 검수 항목입니다.
 
 ## 설정 (taste-skill)
 
