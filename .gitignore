@@ -5,3 +5,6 @@ node_modules/
 *.pdf
 slide-*.jpg
 thumbnails*.jpg
+
+# 전달용 묶음 파일 — examples/ 내용의 중복 사본이라 커밋하지 않는다
+*.zip
