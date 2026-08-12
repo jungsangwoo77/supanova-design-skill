@@ -1,0 +1,7 @@
+# 문서 샘플(.pptx/.docx) 생성용 빌드 의존성 — 산출물만 커밋한다
+node_modules/
+
+# 렌더링·QA 중간 산출물
+*.pdf
+slide-*.jpg
+thumbnails*.jpg
