@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ============ SEO / SHARE META ============ -->
+  <title>(주)테크온 TECH-ON | 산업용 제어 시스템 제조 · 한국-베트남 듀얼 생산</title>
+  <meta name="description" content="(주)테크온은 산업용 제어반, 전자 어셈블리, PCB, 커스텀 자동화 설비를 OEM·ODM으로 공급하는 전기·전자·제어 시스템 제조 전문 기업입니다. 한국 본사와 베트남 100% 생산법인 TECH-ON VINA의 듀얼 생산 체계로 안정적인 품질과 납기를 보장합니다.">
+  <link rel="canonical" href="https://www.tech-on.kr">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#f5f7fa">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="(주)테크온 TECH-ON | 산업용 제어 시스템 제조 전문">
+  <meta property="og:description" content="산업용 제어반·전자 어셈블리·PCB·자동화 설비 OEM/ODM. 한국-베트남 듀얼 생산 체계로 품질과 납기를 함께 보장합니다.">
+  <meta property="og:image" content="https://picsum.photos/seed/techon-og/1200/630">
+  <meta property="og:url" content="https://www.tech-on.kr">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="TECH-ON">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="(주)테크온 TECH-ON | 산업용 제어 시스템 제조 전문">
+  <meta name="twitter:description" content="산업용 제어반·전자 어셈블리·PCB·자동화 설비 OEM/ODM. 한국-베트남 듀얼 생산 체계.">
+  <meta name="twitter:image" content="https://picsum.photos/seed/techon-og/1200/630">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231d4ed8'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='bold' fill='white' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+
+  <!-- ============ ASSETS ============ -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Pretendard', 'system-ui', 'sans-serif'],
+            display: ['Outfit', 'Pretendard', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            brand: 'var(--brand)',
+            'brand-dark': 'var(--brand-dark)',
+            surface: 'var(--surface)',
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- ============ BRAND TOKENS (:root 중앙화) ============ -->
+  <style>
+    :root {
+      --brand:      #1d4ed8;   /* 산업용 신뢰형 일렉트릭 블루 (채도 71%) */
+      --brand-dark: #16307c;   /* 딥 스틸 블루 */
+      --brand-ink:  #ffffff;   /* 액센트 위 텍스트 */
+      --bg:         #f5f7fa;   /* 실버 오프화이트 베이스 */
+      --surface:    #ffffff;   /* 카드 서피스 */
+      --surface-2:  #eef1f6;   /* 보조 서피스 */
+      --text:       #0e1526;   /* 본문 (딥 슬레이트) */
+      --muted:      #51607a;   /* 보조 텍스트 (대비 4.5:1+) */
+      --line:       #dbe1ec;   /* 경계선 */
+      --ok:         #0f8a5f;   /* 상태: 성공 */
+      --warn:       #b8791a;   /* 상태: 경고 */
+      --radius:     2rem;      /* Double-Bezel 외곽 반경 */
+      --ease:       cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    .kr { word-break: keep-all; }
+    .font-display { font-family: 'Outfit', 'Pretendard', system-ui, sans-serif; }
+
+    /* 초확산 앰비언트 섀도 (Clean Structural) */
+    .amb   { box-shadow: 0 24px 70px -30px rgba(20,38,90,0.28); }
+    .amb-sm{ box-shadow: 0 14px 40px -22px rgba(20,38,90,0.22); }
+    .amb-brand { box-shadow: 0 20px 55px -20px rgba(29,78,216,0.35); }
+
+    /* Double-Bezel */
+    .bezel {
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.9);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 24px 70px -34px rgba(20,38,90,0.30);
+    }
+
+    /* 노이즈 오버레이 */
+    .noise {
+      position: fixed; inset: 0; z-index: 60; pointer-events: none;
+      opacity: 0.025; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* Supanova 모션 시그니처 */
+    a, button, .tw { transition: all 0.5s var(--ease); }
+
+    /* Scroll entry */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(2rem); filter: blur(4px); }
+      to   { opacity: 1; transform: translateY(0);    filter: blur(0);  }
+    }
+    .reveal { opacity: 0; }
+    .reveal.in { animation: fadeInUp 0.9s var(--ease) forwards; animation-delay: calc(var(--i, 0) * 90ms); }
+
+    /* Perpetual micro-motion */
+    @keyframes floaty { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-14px) } }
+    @keyframes drift  { 0%,100%{ transform: translate(0,0) scale(1) } 50%{ transform: translate(20px,-16px) scale(1.06) } }
+    @keyframes marquee{ from{ transform: translateX(0) } to{ transform: translateX(-50%) } }
+    .float { animation: floaty 7s var(--ease) infinite; }
+    .drift { animation: drift 16s ease-in-out infinite; }
+    .marquee-track { animation: marquee 32s linear infinite; }
+
+    /* 프리미엄 CTA */
+    .cta-primary {
+      background: var(--brand); color: var(--brand-ink);
+      box-shadow: 0 14px 40px -14px rgba(29,78,216,0.55);
+    }
+    .cta-primary:hover { transform: scale(1.02); box-shadow: 0 18px 50px -12px rgba(29,78,216,0.65); }
+    .cta-primary:active { transform: scale(0.98); }
+
+    /* focus */
+    a:focus-visible, button:focus-visible, summary:focus-visible,
+    input:focus-visible, textarea:focus-visible, select:focus-visible, [tabindex]:focus-visible {
+      outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,1), 0 0 0 5px var(--brand);
+      border-radius: 0.5rem;
+    }
+
+    /* details */
+    details > summary { list-style: none; cursor: pointer; }
+    details > summary::-webkit-details-marker { display: none; }
+    details[open] .faq-chevron { transform: rotate(180deg); }
+    details[open] .faq-body { animation: fadeInUp 0.5s var(--ease); }
+
+    /* dialog */
+    dialog::backdrop { background: rgba(14,21,38,0.55); backdrop-filter: blur(6px); }
+    dialog[open] { animation: fadeInUp 0.4s var(--ease); }
+
+    .tnum { font-variant-numeric: tabular-nums; }
+    .grid-bg {
+      background-image:
+        linear-gradient(to right, rgba(29,78,216,0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(29,78,216,0.06) 1px, transparent 1px);
+      background-size: 44px 44px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+      .reveal { opacity: 1 !important; }
+    }
+  </style>
+</head>
+
+<body class="font-sans antialiased overflow-x-hidden">
+  <div class="noise" aria-hidden="true"></div>
+
+  <!-- Analytics: GA4 / GTM / 광고 픽셀 삽입 위치 -->
+
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[70] focus:bg-white focus:px-4 focus:py-2 focus:rounded-full focus:amb">본문 바로가기</a>
+
+  <!-- ============================================================ -->
+  <!-- 1. NAVIGATION — 플로팅 글래스 필                              -->
+  <!-- ============================================================ -->
+  <header class="fixed top-0 inset-x-0 z-40">
+    <nav aria-label="주요 메뉴" class="mt-4 mx-auto w-[min(1180px,94vw)]">
+      <div class="flex items-center justify-between rounded-full pl-5 pr-2 py-2 backdrop-blur-xl bg-white/70 border border-white/80 amb-sm">
+        <a href="#top" class="flex items-center gap-2.5 group" aria-label="테크온 홈">
+          <span class="grid place-items-center w-9 h-9 rounded-xl text-white font-display font-extrabold text-lg amb-brand" style="background:var(--brand)">T</span>
+          <span class="flex flex-col leading-none">
+            <span class="font-display font-extrabold tracking-tight text-[17px]">TECH-ON</span>
+            <span class="text-[10px] tracking-[0.18em] text-[color:var(--muted)] font-medium">(주)테크온</span>
+          </span>
+        </a>
+
+        <div class="hidden lg:flex items-center gap-1 text-[15px] font-medium text-[color:var(--muted)]">
+          <a href="#capabilities" class="px-3.5 py-2 rounded-full hover:text-[color:var(--text)] hover:bg-black/5">제조 역량</a>
+          <a href="#global" class="px-3.5 py-2 rounded-full hover:text-[color:var(--text)] hover:bg-black/5">글로벌 생산</a>
+          <a href="#process" class="px-3.5 py-2 rounded-full hover:text-[color:var(--text)] hover:bg-black/5">품질 공정</a>
+          <a href="#trust" class="px-3.5 py-2 rounded-full hover:text-[color:var(--text)] hover:bg-black/5">인증·연혁</a>
+          <a href="#faq" class="px-3.5 py-2 rounded-full hover:text-[color:var(--text)] hover:bg-black/5">자주 묻는 질문</a>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <a href="#contact" data-cta="nav-quote" class="hidden sm:inline-flex items-center gap-2 cta-primary rounded-full pl-5 pr-2 py-2 text-[15px] font-semibold">
+            견적 요청
+            <span class="grid place-items-center w-7 h-7 rounded-full bg-white/20">
+              <iconify-icon icon="solar:arrow-right-linear" class="text-[18px]" aria-hidden="true"></iconify-icon>
+            </span>
+          </a>
+          <button id="menuBtn" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileMenu"
+                  class="lg:hidden grid place-items-center w-11 h-11 rounded-full bg-black/5 hover:bg-black/10">
+            <iconify-icon icon="solar:hamburger-menu-linear" class="text-[24px]" aria-hidden="true"></iconify-icon>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- 모바일 풀스크린 메뉴 -->
+  <div id="mobileMenu" class="fixed inset-0 z-50 hidden backdrop-blur-3xl bg-white/85" role="dialog" aria-modal="true" aria-label="모바일 메뉴">
+    <div class="flex flex-col min-h-[100dvh] px-6 pt-6">
+      <div class="flex items-center justify-between">
+        <span class="font-display font-extrabold tracking-tight text-xl">TECH-ON</span>
+        <button id="menuClose" type="button" aria-label="메뉴 닫기" class="grid place-items-center w-11 h-11 rounded-full bg-black/5">
+          <iconify-icon icon="solar:close-circle-linear" class="text-[26px]" aria-hidden="true"></iconify-icon>
+        </button>
+      </div>
+      <nav aria-label="모바일 주요 메뉴" class="flex flex-col gap-1 mt-12 text-3xl font-display font-bold tracking-tight">
+        <a href="#capabilities" class="mob-link py-3 border-b border-[color:var(--line)]">제조 역량</a>
+        <a href="#global" class="mob-link py-3 border-b border-[color:var(--line)]">글로벌 생산</a>
+        <a href="#process" class="mob-link py-3 border-b border-[color:var(--line)]">품질 공정</a>
+        <a href="#trust" class="mob-link py-3 border-b border-[color:var(--line)]">인증·연혁</a>
+        <a href="#faq" class="mob-link py-3 border-b border-[color:var(--line)]">자주 묻는 질문</a>
+      </nav>
+      <a href="#contact" data-cta="mobile-quote" class="mt-auto mb-10 cta-primary rounded-full px-6 py-4 text-center text-lg font-semibold">견적·기술문의 하기</a>
+    </div>
+  </div>
+
+  <main id="main">
+    <span id="top"></span>
+
+    <!-- ============================================================ -->
+    <!-- 2. HERO — Editorial Split (좌 매시브 타이포 / 우 비주얼)       -->
+    <!-- ============================================================ -->
+    <section class="relative pt-36 pb-20 md:pt-44 md:pb-28 overflow-hidden">
+      <!-- ambient orbs + grid -->
+      <div class="absolute inset-0 grid-bg opacity-60" aria-hidden="true"></div>
+      <div class="absolute -top-24 -right-20 w-[36rem] h-[36rem] rounded-full drift" aria-hidden="true"
+           style="background:radial-gradient(circle at 30% 30%, rgba(29,78,216,0.16), transparent 62%)"></div>
+      <div class="absolute top-40 -left-32 w-[30rem] h-[30rem] rounded-full drift" style="animation-delay:-6s;background:radial-gradient(circle at 50% 50%, rgba(15,138,95,0.10), transparent 60%)" aria-hidden="true"></div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          <!-- 좌: 카피 -->
+          <div class="lg:col-span-7">
+            <span class="reveal inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] uppercase tracking-[0.15em] font-semibold bg-[color:var(--brand)]/10 text-[color:var(--brand)]">
+              <span class="w-1.5 h-1.5 rounded-full float" style="background:var(--brand)"></span>
+              Electronics · Control · Automation
+            </span>
+
+            <h1 class="reveal kr mt-6 font-display text-[2.6rem] sm:text-6xl lg:text-[4.6rem] font-extrabold tracking-tight leading-[1.05]" style="--i:1">
+              생각한 대로 작동하는
+              <span class="block mt-1">
+                <span class="relative inline-block">
+                  <span class="relative z-10" style="color:var(--brand)">산업용 제어 시스템</span>
+                  <span class="absolute left-0 bottom-1 h-3 w-full rounded-sm -z-0" style="background:rgba(29,78,216,0.14)" aria-hidden="true"></span>
+                </span>
+              </span>
+              을 만듭니다
+            </h1>
+
+            <p class="reveal kr mt-6 text-lg md:text-xl text-[color:var(--muted)] leading-relaxed max-w-[52ch]" style="--i:2">
+              (주)테크온은 산업용 제어반, 전자 어셈블리, PCB, 커스텀 자동화 설비를
+              <strong class="text-[color:var(--text)] font-semibold">OEM·ODM</strong>으로 공급하는 전기·전자·제어 시스템 제조 전문 기업입니다.
+              한국 본사와 베트남 생산법인의 듀얼 체계로 품질과 납기를 함께 지킵니다.
+            </p>
+
+            <div class="reveal mt-9 flex flex-col sm:flex-row gap-3" style="--i:3">
+              <a href="#contact" data-cta="hero-quote" class="inline-flex items-center justify-center gap-2 cta-primary rounded-full pl-7 pr-2.5 py-4 text-lg font-semibold">
+                무료 견적 요청하기
+                <span class="grid place-items-center w-9 h-9 rounded-full bg-white/20">
+                  <iconify-icon icon="solar:arrow-right-linear" class="text-[20px] tw group-hover:translate-x-1" aria-hidden="true"></iconify-icon>
+                </span>
+              </a>
+              <a href="#capabilities" data-cta="hero-capabilities" class="inline-flex items-center justify-center gap-2 rounded-full px-7 py-4 text-lg font-semibold bg-white border border-[color:var(--line)] hover:bg-[color:var(--surface-2)] amb-sm">
+                <iconify-icon icon="solar:widget-5-linear" class="text-[20px]" aria-hidden="true"></iconify-icon>
+                제조 역량 살펴보기
+              </a>
+            </div>
+
+            <!-- 미니 신뢰 스트립 -->
+            <dl class="reveal mt-12 grid grid-cols-3 gap-4 max-w-lg" style="--i:4">
+              <div>
+                <dt class="sr-only">업력</dt>
+                <dd class="font-display text-3xl font-extrabold tnum">21<span class="text-[color:var(--brand)]">년</span></dd>
+                <p class="text-sm text-[color:var(--muted)] kr mt-1">제조 노하우</p>
+              </div>
+              <div>
+                <dt class="sr-only">연간 생산</dt>
+                <dd class="font-display text-3xl font-extrabold tnum">1.2M<span class="text-[color:var(--brand)]">+</span></dd>
+                <p class="text-sm text-[color:var(--muted)] kr mt-1">연간 어셈블리</p>
+              </div>
+              <div>
+                <dt class="sr-only">불량률</dt>
+                <dd class="font-display text-3xl font-extrabold tnum">99.6<span class="text-[color:var(--brand)]">%</span></dd>
+                <p class="text-sm text-[color:var(--muted)] kr mt-1">출하 양품률</p>
+              </div>
+            </dl>
+          </div>
+
+          <!-- 우: 비주얼 (LCP) -->
+          <div class="lg:col-span-5">
+            <div class="relative">
+              <div class="bezel rounded-[2rem] p-2 float">
+                <img src="https://picsum.photos/seed/techon-hero-line/900/1080"
+                     alt="테크온 생산 라인에서 산업용 제어반을 조립하는 현장"
+                     width="900" height="1080" loading="eager" fetchpriority="high" decoding="async"
+                     class="w-full h-[420px] lg:h-[540px] object-cover rounded-[calc(2rem-0.5rem)]">
+              </div>
+              <!-- 플로팅 인증 카드 -->
+              <div class="absolute -left-4 bottom-8 bezel rounded-2xl px-4 py-3 flex items-center gap-3 float" style="animation-delay:-2s">
+                <span class="grid place-items-center w-11 h-11 rounded-xl text-white amb-brand" style="background:var(--brand)">
+                  <iconify-icon icon="solar:verified-check-bold" class="text-[24px]" aria-hidden="true"></iconify-icon>
+                </span>
+                <div class="leading-tight">
+                  <p class="font-semibold text-sm">ISO 9001 · 14001</p>
+                  <p class="text-xs text-[color:var(--muted)] kr">품질·환경 경영 인증</p>
+                </div>
+              </div>
+              <!-- 플로팅 납기 카드 -->
+              <div class="absolute -right-3 top-8 bezel rounded-2xl px-4 py-3 float" style="animation-delay:-4s">
+                <p class="text-xs text-[color:var(--muted)] kr">평균 견적 회신</p>
+                <p class="font-display text-2xl font-extrabold tnum kr" style="color:var(--brand)">24<span class="text-base">시간 이내</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 3. SOCIAL PROOF — 메트릭 바 + 로고 마퀴                        -->
+    <!-- ============================================================ -->
+    <section aria-label="생산 실적과 파트너" class="py-14 border-y border-[color:var(--line)] bg-white/60">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4">
+          <div class="reveal text-center md:text-left" style="--i:0">
+            <p class="font-display text-4xl md:text-5xl font-extrabold tnum">37,400<span style="color:var(--brand)">+</span></p>
+            <p class="mt-1 text-sm text-[color:var(--muted)] kr">누적 제어반 납품 (대)</p>
+          </div>
+          <div class="reveal text-center md:text-left" style="--i:1">
+            <p class="font-display text-4xl md:text-5xl font-extrabold tnum">180<span style="color:var(--brand)">+</span></p>
+            <p class="mt-1 text-sm text-[color:var(--muted)] kr">국내외 협력 고객사</p>
+          </div>
+          <div class="reveal text-center md:text-left" style="--i:2">
+            <p class="font-display text-4xl md:text-5xl font-extrabold tnum">12,847<span style="color:var(--brand)"></span></p>
+            <p class="mt-1 text-sm text-[color:var(--muted)] kr">㎡ 듀얼 생산 면적</p>
+          </div>
+          <div class="reveal text-center md:text-left" style="--i:3">
+            <p class="font-display text-4xl md:text-5xl font-extrabold tnum">4.87<span class="text-2xl text-[color:var(--muted)]">/5.0</span></p>
+            <p class="mt-1 text-sm text-[color:var(--muted)] kr">고객사 품질 만족도</p>
+          </div>
+        </div>
+
+        <p class="mt-12 text-center text-xs uppercase tracking-[0.2em] text-[color:var(--muted)] font-semibold kr">함께해온 산업 파트너</p>
+        <div class="relative mt-6 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
+          <div class="flex w-max marquee-track gap-10 md:gap-16 items-center opacity-70">
+            <!-- 2회 반복(무한 마퀴) -->
+            <div class="flex gap-10 md:gap-16 items-center shrink-0">
+              <span class="font-display text-2xl font-bold tracking-tight">스텔라랩스</span>
+              <span class="font-display text-2xl font-bold tracking-tight">베리파이</span>
+              <span class="font-display text-2xl font-bold tracking-tight">루미너스</span>
+              <span class="font-display text-2xl font-bold tracking-tight">플로우캔버스</span>
+              <span class="font-display text-2xl font-bold tracking-tight">넥스트비전</span>
+              <span class="font-display text-2xl font-bold tracking-tight">브릿지웍스</span>
+            </div>
+            <div class="flex gap-10 md:gap-16 items-center shrink-0" aria-hidden="true">
+              <span class="font-display text-2xl font-bold tracking-tight">스텔라랩스</span>
+              <span class="font-display text-2xl font-bold tracking-tight">베리파이</span>
+              <span class="font-display text-2xl font-bold tracking-tight">루미너스</span>
+              <span class="font-display text-2xl font-bold tracking-tight">플로우캔버스</span>
+              <span class="font-display text-2xl font-bold tracking-tight">넥스트비전</span>
+              <span class="font-display text-2xl font-bold tracking-tight">브릿지웍스</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 4. CAPABILITIES — 비대칭 Bento 그리드                          -->
+    <!-- ============================================================ -->
+    <section id="capabilities" class="py-24 md:py-32 lg:py-40 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <span class="reveal inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] uppercase tracking-[0.15em] font-semibold bg-[color:var(--brand)]/10 text-[color:var(--brand)]">
+            Manufacturing Capabilities
+          </span>
+          <h2 class="reveal kr mt-5 font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1]" style="--i:1">
+            하나의 라인에서<br>설계부터 완제품까지
+          </h2>
+          <p class="reveal kr mt-5 text-lg text-[color:var(--muted)] leading-relaxed max-w-[58ch]" style="--i:2">
+            제어반, 전자 어셈블리, PCB, 커스텀 자동화 설비까지. 흩어진 협력사를 거치지 않고
+            테크온 한 곳에서 통합 생산해 리드타임과 품질 편차를 동시에 줄입니다.
+          </p>
+        </div>
+
+        <!-- Bento -->
+        <div class="mt-14 grid grid-cols-1 md:grid-cols-6 gap-4 md:gap-5 auto-rows-[minmax(0,1fr)]">
+          <!-- 제어반 (큰 카드) -->
+          <article class="reveal group tw md:col-span-4 md:row-span-2 bezel rounded-[2rem] p-2 hover:-translate-y-1" style="--i:0">
+            <div class="relative h-full rounded-[calc(2rem-0.5rem)] overflow-hidden bg-[color:var(--surface)] p-7 md:p-9 flex flex-col">
+              <div class="flex items-start justify-between">
+                <div>
+                  <span class="grid place-items-center w-12 h-12 rounded-2xl text-white amb-brand" style="background:var(--brand)">
+                    <iconify-icon icon="solar:server-square-linear" class="text-[26px]" aria-hidden="true"></iconify-icon>
+                  </span>
+                  <h3 class="kr mt-5 font-display text-2xl md:text-3xl font-extrabold">산업용 제어반</h3>
+                  <p class="text-sm font-medium tracking-wide text-[color:var(--brand)] mt-1">Control Panel · Switchgear</p>
+                </div>
+                <span class="text-xs font-semibold rounded-full px-3 py-1 bg-[color:var(--surface-2)] text-[color:var(--muted)]">주력</span>
+              </div>
+              <p class="kr mt-4 text-[color:var(--muted)] leading-relaxed max-w-[46ch]">
+                저압 배전반, PLC 제어반, MCC, 특수 목적 제어반을 도면 설계·판금·배선·시험까지
+                일관 생산합니다. KS·IEC 규격 시험 성적서를 함께 제공합니다.
+              </p>
+              <div class="mt-auto pt-6">
+                <img src="https://picsum.photos/seed/techon-panel/1000/520" alt="테크온이 제작한 산업용 제어반 내부 배선 모습"
+                     width="1000" height="520" loading="lazy" decoding="async"
+                     class="w-full h-44 md:h-56 object-cover rounded-2xl amb-sm">
+              </div>
+            </div>
+          </article>
+
+          <!-- 전자 어셈블리 -->
+          <article class="reveal group tw md:col-span-2 bezel rounded-[2rem] p-2 hover:-translate-y-1" style="--i:1">
+            <div class="h-full rounded-[calc(2rem-0.5rem)] bg-[color:var(--surface)] p-7 flex flex-col">
+              <span class="grid place-items-center w-12 h-12 rounded-2xl bg-[color:var(--surface-2)] text-[color:var(--brand)]">
+                <iconify-icon icon="solar:cpu-bolt-linear" class="text-[26px]" aria-hidden="true"></iconify-icon>
+              </span>
+              <h3 class="kr mt-5 font-display text-xl font-extrabold">전자 어셈블리</h3>
+              <p class="text-xs font-medium tracking-wide text-[color:var(--brand)] mt-1">SMT · Box-build</p>
+              <p class="kr mt-3 text-sm text-[color:var(--muted)] leading-relaxed">
+                SMT 실장부터 케이블·박스빌드까지. AOI 전수 검사로 안정적인 양산 품질을 유지합니다.
+              </p>
+            </div>
+          </article>
+
+          <!-- PCB -->
+          <article class="reveal group tw md:col-span-2 bezel rounded-[2rem] p-2 hover:-translate-y-1" style="--i:2">
+            <div class="h-full rounded-[calc(2rem-0.5rem)] bg-[color:var(--surface)] p-7 flex flex-col">
+              <span class="grid place-items-center w-12 h-12 rounded-2xl bg-[color:var(--surface-2)] text-[color:var(--brand)]">
+                <iconify-icon icon="solar:chip-linear" class="text-[26px]" aria-hidden="true"></iconify-icon>
+              </span>
+              <h3 class="kr mt-5 font-display text-xl font-extrabold">PCB 설계·제작</h3>
+              <p class="text-xs font-medium tracking-wide text-[color:var(--brand)] mt-1">PCB Design · Fab</p>
+              <p class="kr mt-3 text-sm text-[color:var(--muted)] leading-relaxed">
+                양면·다층 기판 설계와 시제품 대응. 회로 설계 검토부터 양산 이관까지 함께합니다.
+              </p>
+            </div>
+          </article>
+
+          <!-- 자동화 설비 (와이드) -->
+          <article class="reveal group tw md:col-span-4 bezel rounded-[2rem] p-2 hover:-translate-y-1" style="--i:3">
+            <div class="h-full rounded-[calc(2rem-0.5rem)] bg-gradient-to-br from-[color:var(--brand)] to-[color:var(--brand-dark)] text-white p-7 md:p-8 flex flex-col md:flex-row md:items-center gap-6 overflow-hidden relative">
+              <div class="absolute -right-10 -bottom-10 w-52 h-52 rounded-full bg-white/10 drift" aria-hidden="true"></div>
+              <div class="relative flex-1">
+                <span class="grid place-items-center w-12 h-12 rounded-2xl bg-white/15">
+                  <iconify-icon icon="solar:settings-minimalistic-linear" class="text-[26px]" aria-hidden="true"></iconify-icon>
+                </span>
+                <h3 class="kr mt-5 font-display text-2xl font-extrabold">커스텀 자동화 설비</h3>
+                <p class="text-xs font-medium tracking-wide text-white/70 mt-1">Custom Automation Machinery</p>
+                <p class="kr mt-3 text-sm text-white/85 leading-relaxed max-w-[42ch]">
+                  검사·조립·이송 공정을 고객 라인에 맞춰 턴키로 설계·제작합니다. 요구 사양 협의부터
+                  현장 셋업, 시운전까지 책임집니다.
+                </p>
+              </div>
+              <a href="#contact" data-cta="capability-automation" class="relative shrink-0 inline-flex items-center gap-2 rounded-full bg-white/15 hover:bg-white/25 px-5 py-3 text-sm font-semibold self-start">
+                맞춤 설비 문의
+                <iconify-icon icon="solar:arrow-right-up-linear" class="text-[18px]" aria-hidden="true"></iconify-icon>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 5. GLOBAL PRODUCTION — 한국+베트남 듀얼 (스플릿 스토리)         -->
+    <!-- ============================================================ -->
+    <section id="global" class="py-24 md:py-32 lg:py-40 bg-white relative overflow-hidden">
+      <div class="absolute inset-0 grid-bg opacity-40" aria-hidden="true"></div>
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+          <!-- 좌: 스토리 -->
+          <div>
+            <span class="reveal inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] uppercase tracking-[0.15em] font-semibold bg-[color:var(--brand)]/10 text-[color:var(--brand)]">
+              Korea × Vietnam Dual Production
+            </span>
+            <h2 class="reveal kr mt-5 font-display text-4xl md:text-5xl lg:text-[3.4rem] font-extrabold tracking-tight leading-[1.1]" style="--i:1">
+              두 개의 생산 거점,<br>하나의 품질 기준
+            </h2>
+            <p class="reveal kr mt-5 text-lg text-[color:var(--muted)] leading-relaxed max-w-[54ch]" style="--i:2">
+              한국 본사가 설계·시제품·초도 양산과 품질 관리를 담당하고, 베트남 100% 생산법인
+              <strong class="text-[color:var(--text)] font-semibold">TECH-ON VINA</strong>가 대량 양산을 맡습니다.
+              같은 공정 표준과 검사 기준을 공유해, 어느 거점에서 만들어도 품질은 동일합니다.
+            </p>
+
+            <div class="reveal mt-9 grid sm:grid-cols-2 gap-4" style="--i:3">
+              <!-- 한국 -->
+              <div class="bezel rounded-2xl p-2">
+                <div class="rounded-[calc(1rem-0.1rem)] bg-[color:var(--surface)] p-5">
+                  <div class="flex items-center gap-2">
+                    <iconify-icon icon="solar:map-point-wave-bold" class="text-[22px]" style="color:var(--brand)" aria-hidden="true"></iconify-icon>
+                    <h3 class="font-display font-extrabold text-lg kr">대한민국 본사</h3>
+                  </div>
+                  <p class="text-xs text-[color:var(--muted)] mt-1">Headquarters · R&D · QC</p>
+                  <ul class="mt-4 space-y-2 text-sm kr">
+                    <li class="flex gap-2"><iconify-icon icon="solar:check-circle-bold" class="text-[18px] shrink-0" style="color:var(--ok)" aria-hidden="true"></iconify-icon>설계·시제품·초도 양산</li>
+                    <li class="flex gap-2"><iconify-icon icon="solar:check-circle-bold" class="text-[18px] shrink-0" style="color:var(--ok)" aria-hidden="true"></iconify-icon>통합 품질 관리(QC)</li>
+                    <li class="flex gap-2"><iconify-icon icon="solar:check-circle-bold" class="text-[18px] shrink-0" style="color:var(--ok)" aria-hidden="true"></iconify-icon>고객 기술 지원 창구</li>
+                  </ul>
+                </div>
+              </div>
+              <!-- 베트남 -->
+              <div class="bezel rounded-2xl p-2">
+                <div class="rounded-[calc(1rem-0.1rem)] bg-[color:var(--surface)] p-5">
+                  <div class="flex items-center gap-2">
+                    <iconify-icon icon="solar:global-linear" class="text-[22px]" style="color:var(--brand)" aria-hidden="true"></iconify-icon>
+                    <h3 class="font-display font-extrabold text-lg">TECH-ON VINA</h3>
+                  </div>
+                  <p class="text-xs text-[color:var(--muted)] mt-1">Vietnam · Mass Production</p>
+                  <ul class="mt-4 space-y-2 text-sm kr">
+                    <li class="flex gap-2"><iconify-icon icon="solar:check-circle-bold" class="text-[18px] shrink-0" style="color:var(--ok)" aria-hidden="true"></iconify-icon>100% 자회사 직접 운영</li>
+                    <li class="flex gap-2"><iconify-icon icon="solar:check-circle-bold" class="text-[18px] shrink-0" style="color:var(--ok)" aria-hidden="true"></iconify-icon>대량 양산·원가 경쟁력</li>
+                    <li class="flex gap-2"><iconify-icon icon="solar:check-circle-bold" class="text-[18px] shrink-0" style="color:var(--ok)" aria-hidden="true"></iconify-icon>본사 표준 공정 동일 적용</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 우: 비주얼 스택 -->
+          <div class="relative">
+            <div class="bezel rounded-[2rem] p-2 float">
+              <img src="https://picsum.photos/seed/techon-vina/1000/760" alt="베트남 TECH-ON VINA 생산 법인 조립 라인 전경"
+                   width="1000" height="760" loading="lazy" decoding="async"
+                   class="w-full h-[380px] lg:h-[460px] object-cover rounded-[calc(2rem-0.5rem)]">
+            </div>
+            <div class="absolute -bottom-6 left-6 right-6 md:left-10 md:right-10 bezel rounded-2xl px-6 py-5 grid grid-cols-3 gap-3 text-center">
+              <div>
+                <p class="font-display text-2xl font-extrabold tnum" style="color:var(--brand)">2</p>
+                <p class="text-xs text-[color:var(--muted)] kr mt-0.5">생산 거점</p>
+              </div>
+              <div class="border-x border-[color:var(--line)]">
+                <p class="font-display text-2xl font-extrabold tnum" style="color:var(--brand)">380<span class="text-sm">명</span></p>
+                <p class="text-xs text-[color:var(--muted)] kr mt-0.5">임직원</p>
+              </div>
+              <div>
+                <p class="font-display text-2xl font-extrabold tnum" style="color:var(--brand)">24h</p>
+                <p class="text-xs text-[color:var(--muted)] kr mt-0.5">양산 대응</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 6. PROCESS — 품질·공정 (세로 스텝 타임라인)                    -->
+    <!-- ============================================================ -->
+    <section id="process" class="py-24 md:py-32 lg:py-40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div class="lg:col-span-4">
+            <span class="reveal inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] uppercase tracking-[0.15em] font-semibold bg-[color:var(--brand)]/10 text-[color:var(--brand)]">
+              Quality Process
+            </span>
+            <h2 class="reveal kr mt-5 font-display text-4xl md:text-5xl font-extrabold tracking-tight leading-[1.1]" style="--i:1">
+              문의부터 납품까지<br>흐트러짐 없는 6단계
+            </h2>
+            <p class="reveal kr mt-5 text-lg text-[color:var(--muted)] leading-relaxed" style="--i:2">
+              모든 프로젝트는 동일한 공정 표준을 따릅니다. 각 단계마다 검사 기준과 담당자를 명확히 해
+              품질 편차와 소통 비용을 줄입니다.
+            </p>
+            <a href="#contact" data-cta="process-cta" class="reveal mt-8 inline-flex items-center gap-2 cta-primary rounded-full pl-6 pr-2 py-3.5 font-semibold" style="--i:3">
+              공정 자료 요청하기
+              <span class="grid place-items-center w-8 h-8 rounded-full bg-white/20">
+                <iconify-icon icon="solar:arrow-right-linear" class="text-[18px]" aria-hidden="true"></iconify-icon>
+              </span>
+            </a>
+          </div>
+
+          <ol class="lg:col-span-8 relative pl-8 space-y-6">
+            <span class="absolute left-[10px] top-3 bottom-3 w-px bg-[color:var(--line)]" aria-hidden="true"></span>
+            <!-- step -->
+            <li class="reveal relative" style="--i:0">
+              <span class="absolute -left-8 top-1.5 grid place-items-center w-5 h-5 rounded-full bg-white border-2" style="border-color:var(--brand)" aria-hidden="true"><span class="w-2 h-2 rounded-full" style="background:var(--brand)"></span></span>
+              <div class="bezel rounded-2xl p-2 tw hover:-translate-y-0.5">
+                <div class="rounded-[calc(1rem-0.1rem)] bg-[color:var(--surface)] p-5 flex items-start gap-4">
+                  <span class="font-display text-3xl font-extrabold tnum opacity-25">01</span>
+                  <div><h3 class="kr font-display font-extrabold text-lg">요구 사양 협의</h3><p class="kr text-sm text-[color:var(--muted)] mt-1 leading-relaxed">도면·규격·수량·납기를 함께 검토하고 최적 사양을 제안합니다.</p></div>
+                </div>
+              </div>
+            </li>
+            <li class="reveal relative" style="--i:1">
+              <span class="absolute -left-8 top-1.5 grid place-items-center w-5 h-5 rounded-full bg-white border-2" style="border-color:var(--brand)" aria-hidden="true"><span class="w-2 h-2 rounded-full" style="background:var(--brand)"></span></span>
+              <div class="bezel rounded-2xl p-2 tw hover:-translate-y-0.5">
+                <div class="rounded-[calc(1rem-0.1rem)] bg-[color:var(--surface)] p-5 flex items-start gap-4">
+                  <span class="font-display text-3xl font-extrabold tnum opacity-25">02</span>
+                  <div><h3 class="kr font-display font-extrabold text-lg">설계·시제품 검증</h3><p class="kr text-sm text-[color:var(--muted)] mt-1 leading-relaxed">회로·기구 설계 후 시제품으로 기능과 품질을 사전 검증합니다.</p></div>
+                </div>
+              </div>
+            </li>
+            <li class="reveal relative" style="--i:2">
+              <span class="absolute -left-8 top-1.5 grid place-items-center w-5 h-5 rounded-full bg-white border-2" style="border-color:var(--brand)" aria-hidden="true"><span class="w-2 h-2 rounded-full" style="background:var(--brand)"></span></span>
+              <div class="bezel rounded-2xl p-2 tw hover:-translate-y-0.5">
+                <div class="rounded-[calc(1rem-0.1rem)] bg-[color:var(--surface)] p-5 flex items-start gap-4">
+                  <span class="font-display text-3xl font-extrabold tnum opacity-25">03</span>
+                  <div><h3 class="kr font-display font-extrabold text-lg">자재 수급·IQC</h3><p class="kr text-sm text-[color:var(--muted)] mt-1 leading-relaxed">신뢰성 있는 협력사에서 자재를 수급하고 입고 검사(IQC)를 진행합니다.</p></div>
+                </div>
+              </div>
+            </li>
+            <li class="reveal relative" style="--i:3">
+              <span class="absolute -left-8 top-1.5 grid place-items-center w-5 h-5 rounded-full bg-white border-2" style="border-color:var(--brand)" aria-hidden="true"><span class="w-2 h-2 rounded-full" style="background:var(--brand)"></span></span>
+              <div class="bezel rounded-2xl p-2 tw hover:-translate-y-0.5">
+                <div class="rounded-[calc(1rem-0.1rem)] bg-[color:var(--surface)] p-5 flex items-start gap-4">
+                  <span class="font-display text-3xl font-extrabold tnum opacity-25">04</span>
+                  <div><h3 class="kr font-display font-extrabold text-lg">양산·공정 검사</h3><p class="kr text-sm text-[color:var(--muted)] mt-1 leading-relaxed">SMT·배선·조립 각 공정에서 AOI 및 인라인 검사를 수행합니다.</p></div>
+                </div>
+              </div>
+            </li>
+            <li class="reveal relative" style="--i:4">
+              <span class="absolute -left-8 top-1.5 grid place-items-center w-5 h-5 rounded-full bg-white border-2" style="border-color:var(--brand)" aria-hidden="true"><span class="w-2 h-2 rounded-full" style="background:var(--brand)"></span></span>
+              <div class="bezel rounded-2xl p-2 tw hover:-translate-y-0.5">
+                <div class="rounded-[calc(1rem-0.1rem)] bg-[color:var(--surface)] p-5 flex items-start gap-4">
+                  <span class="font-display text-3xl font-extrabold tnum opacity-25">05</span>
+                  <div><h3 class="kr font-display font-extrabold text-lg">최종 시험·OQC</h3><p class="kr text-sm text-[color:var(--muted)] mt-1 leading-relaxed">기능·내압·절연 시험 후 출하 검사(OQC)로 양품만 선별합니다.</p></div>
+                </div>
+              </div>
+            </li>
+            <li class="reveal relative" style="--i:5">
+              <span class="absolute -left-8 top-1.5 grid place-items-center w-5 h-5 rounded-full text-white" style="background:var(--brand)" aria-hidden="true"><iconify-icon icon="solar:check-read-linear" class="text-[13px]"></iconify-icon></span>
+              <div class="bezel rounded-2xl p-2 tw hover:-translate-y-0.5">
+                <div class="rounded-[calc(1rem-0.1rem)] bg-[color:var(--surface)] p-5 flex items-start gap-4">
+                  <span class="font-display text-3xl font-extrabold tnum opacity-25">06</span>
+                  <div><h3 class="kr font-display font-extrabold text-lg">포장·납품·사후 관리</h3><p class="kr text-sm text-[color:var(--muted)] mt-1 leading-relaxed">성적서와 함께 납품하고, 필드 이슈에 신속히 대응합니다.</p></div>
+                </div>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 7. TRUST — 인증 뱃지 + 연혁 타임라인                           -->
+    <!-- ============================================================ -->
+    <section id="trust" class="py-24 md:py-32 lg:py-40 bg-white relative overflow-hidden">
+      <div class="absolute -top-20 right-0 w-[28rem] h-[28rem] rounded-full drift" aria-hidden="true" style="background:radial-gradient(circle,rgba(29,78,216,0.08),transparent 65%)"></div>
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto">
+          <span class="reveal inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] uppercase tracking-[0.15em] font-semibold bg-[color:var(--brand)]/10 text-[color:var(--brand)]">
+            Certifications & History
+          </span>
+          <h2 class="reveal kr mt-5 font-display text-4xl md:text-5xl font-extrabold tracking-tight leading-[1.1]" style="--i:1">
+            검증된 시스템 위에<br>쌓아온 21년
+          </h2>
+        </div>
+
+        <!-- 인증 뱃지 -->
+        <ul class="reveal mt-14 grid grid-cols-2 md:grid-cols-4 gap-4" style="--i:2">
+          <li class="bezel rounded-2xl p-2 tw hover:-translate-y-1">
+            <div class="rounded-[calc(1rem-0.1rem)] bg-[color:var(--surface)] p-5 text-center">
+              <iconify-icon icon="solar:medal-ribbons-star-bold" class="text-[38px]" style="color:var(--brand)" aria-hidden="true"></iconify-icon>
+              <p class="font-display font-extrabold mt-2">ISO 9001</p>
+              <p class="text-xs text-[color:var(--muted)] kr mt-0.5">품질경영시스템</p>
+            </div>
+          </li>
+          <li class="bezel rounded-2xl p-2 tw hover:-translate-y-1">
+            <div class="rounded-[calc(1rem-0.1rem)] bg-[color:var(--surface)] p-5 text-center">
+              <iconify-icon icon="solar:leaf-bold" class="text-[38px]" style="color:var(--ok)" aria-hidden="true"></iconify-icon>
+              <p class="font-display font-extrabold mt-2">ISO 14001</p>
+              <p class="text-xs text-[color:var(--muted)] kr mt-0.5">환경경영시스템</p>
+            </div>
+          </li>
+          <li class="bezel rounded-2xl p-2 tw hover:-translate-y-1">
+            <div class="rounded-[calc(1rem-0.1rem)] bg-[color:var(--surface)] p-5 text-center">
+              <iconify-icon icon="solar:shield-check-bold" class="text-[38px]" style="color:var(--brand)" aria-hidden="true"></iconify-icon>
+              <p class="font-display font-extrabold mt-2">KS · IEC</p>
+              <p class="text-xs text-[color:var(--muted)] kr mt-0.5">제어반 규격 시험</p>
+            </div>
+          </li>
+          <li class="bezel rounded-2xl p-2 tw hover:-translate-y-1">
+            <div class="rounded-[calc(1rem-0.1rem)] bg-[color:var(--surface)] p-5 text-center">
+              <iconify-icon icon="solar:cup-star-bold" class="text-[38px]" style="color:var(--warn)" aria-hidden="true"></iconify-icon>
+              <p class="font-display font-extrabold mt-2 kr">이노비즈</p>
+              <p class="text-xs text-[color:var(--muted)] kr mt-0.5">기술혁신형 중소기업</p>
+            </div>
+          </li>
+        </ul>
+
+        <!-- 연혁 타임라인 (가로) -->
+        <div class="mt-16 relative overflow-x-auto pb-4">
+          <div class="min-w-[720px] md:min-w-0 grid grid-cols-5 gap-4">
+            <div class="reveal" style="--i:0">
+              <p class="font-display text-2xl font-extrabold" style="color:var(--brand)">2004</p>
+              <span class="block my-3 h-px bg-[color:var(--line)]"></span>
+              <p class="kr text-sm text-[color:var(--muted)] leading-relaxed">(주)테크온 설립, 제어반 제작 사업 시작</p>
+            </div>
+            <div class="reveal" style="--i:1">
+              <p class="font-display text-2xl font-extrabold" style="color:var(--brand)">2009</p>
+              <span class="block my-3 h-px bg-[color:var(--line)]"></span>
+              <p class="kr text-sm text-[color:var(--muted)] leading-relaxed">ISO 9001·14001 인증 획득, 전자 어셈블리 라인 증설</p>
+            </div>
+            <div class="reveal" style="--i:2">
+              <p class="font-display text-2xl font-extrabold" style="color:var(--brand)">2014</p>
+              <span class="block my-3 h-px bg-[color:var(--line)]"></span>
+              <p class="kr text-sm text-[color:var(--muted)] leading-relaxed">베트남 생산법인 TECH-ON VINA 준공, 듀얼 생산 체계 구축</p>
+            </div>
+            <div class="reveal" style="--i:3">
+              <p class="font-display text-2xl font-extrabold" style="color:var(--brand)">2019</p>
+              <span class="block my-3 h-px bg-[color:var(--line)]"></span>
+              <p class="kr text-sm text-[color:var(--muted)] leading-relaxed">커스텀 자동화 설비 사업부 신설, 이노비즈 인증</p>
+            </div>
+            <div class="reveal" style="--i:4">
+              <p class="font-display text-2xl font-extrabold" style="color:var(--brand)">2025</p>
+              <span class="block my-3 h-px" style="background:var(--brand)"></span>
+              <p class="kr text-sm text-[color:var(--text)] font-medium leading-relaxed">누적 제어반 37,400대 납품, 협력 고객사 180곳 돌파</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 8. COMPARISON — 역량 비교 테이블 (Us vs 일반 협력사)            -->
+    <!-- ============================================================ -->
+    <section aria-label="테크온 역량 비교" class="py-24 md:py-32 lg:py-40">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl">
+          <span class="reveal inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] uppercase tracking-[0.15em] font-semibold bg-[color:var(--brand)]/10 text-[color:var(--brand)]">
+            Why TECH-ON
+          </span>
+          <h2 class="reveal kr mt-5 font-display text-4xl md:text-5xl font-extrabold tracking-tight leading-[1.1]" style="--i:1">
+            협력사를 나눠 맡길 때와<br>무엇이 다른가
+          </h2>
+        </div>
+
+        <div class="reveal mt-12 bezel rounded-[2rem] p-2 overflow-hidden" style="--i:2">
+          <div class="rounded-[calc(2rem-0.5rem)] bg-[color:var(--surface)] overflow-x-auto">
+            <table class="w-full min-w-[560px] text-left border-collapse">
+              <caption class="sr-only">테크온 통합 생산과 일반 개별 협력사 방식의 항목별 비교</caption>
+              <thead>
+                <tr class="border-b border-[color:var(--line)]">
+                  <th scope="col" class="p-5 md:p-6 text-sm font-semibold text-[color:var(--muted)] kr">비교 항목</th>
+                  <th scope="col" class="p-5 md:p-6 text-center" style="background:rgba(29,78,216,0.05)">
+                    <span class="font-display font-extrabold text-lg" style="color:var(--brand)">테크온 통합 생산</span>
+                  </th>
+                  <th scope="col" class="p-5 md:p-6 text-center text-sm font-semibold text-[color:var(--muted)] kr">개별 협력사 분산</th>
+                </tr>
+              </thead>
+              <tbody class="text-sm">
+                <tr class="border-b border-[color:var(--line)]">
+                  <th scope="row" class="p-5 md:p-6 font-medium kr text-left">설계~완제품 일관 생산</th>
+                  <td class="p-5 md:p-6 text-center" style="background:rgba(29,78,216,0.05)"><iconify-icon icon="solar:check-circle-bold" class="text-[24px]" style="color:var(--ok)" aria-label="가능"></iconify-icon></td>
+                  <td class="p-5 md:p-6 text-center"><iconify-icon icon="solar:minus-circle-linear" class="text-[24px] text-[color:var(--muted)]" aria-label="분산 필요"></iconify-icon></td>
+                </tr>
+                <tr class="border-b border-[color:var(--line)]">
+                  <th scope="row" class="p-5 md:p-6 font-medium kr text-left">품질 책임 단일 창구</th>
+                  <td class="p-5 md:p-6 text-center" style="background:rgba(29,78,216,0.05)"><iconify-icon icon="solar:check-circle-bold" class="text-[24px]" style="color:var(--ok)" aria-label="가능"></iconify-icon></td>
+                  <td class="p-5 md:p-6 text-center"><iconify-icon icon="solar:close-circle-linear" class="text-[24px] text-[color:var(--muted)]" aria-label="불가"></iconify-icon></td>
+                </tr>
+                <tr class="border-b border-[color:var(--line)]">
+                  <th scope="row" class="p-5 md:p-6 font-medium kr text-left">한국·베트남 원가 최적화</th>
+                  <td class="p-5 md:p-6 text-center" style="background:rgba(29,78,216,0.05)"><iconify-icon icon="solar:check-circle-bold" class="text-[24px]" style="color:var(--ok)" aria-label="가능"></iconify-icon></td>
+                  <td class="p-5 md:p-6 text-center"><iconify-icon icon="solar:minus-circle-linear" class="text-[24px] text-[color:var(--muted)]" aria-label="제한적"></iconify-icon></td>
+                </tr>
+                <tr class="border-b border-[color:var(--line)]">
+                  <th scope="row" class="p-5 md:p-6 font-medium kr text-left">규격 시험 성적서 제공</th>
+                  <td class="p-5 md:p-6 text-center" style="background:rgba(29,78,216,0.05)"><iconify-icon icon="solar:check-circle-bold" class="text-[24px]" style="color:var(--ok)" aria-label="가능"></iconify-icon></td>
+                  <td class="p-5 md:p-6 text-center"><iconify-icon icon="solar:minus-circle-linear" class="text-[24px] text-[color:var(--muted)]" aria-label="협력사별 상이"></iconify-icon></td>
+                </tr>
+                <tr>
+                  <th scope="row" class="p-5 md:p-6 font-medium kr text-left">평균 견적 회신 속도</th>
+                  <td class="p-5 md:p-6 text-center font-display font-extrabold" style="background:rgba(29,78,216,0.05);color:var(--brand)">24시간 이내</td>
+                  <td class="p-5 md:p-6 text-center text-[color:var(--muted)] kr">수일 소요</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 9. TESTIMONIALS — 고객사 후기                                  -->
+    <!-- ============================================================ -->
+    <section aria-label="고객사 후기" class="py-24 md:py-32 lg:py-40 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <div class="max-w-2xl">
+            <span class="reveal inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] uppercase tracking-[0.15em] font-semibold bg-[color:var(--brand)]/10 text-[color:var(--brand)]">
+              Client Voices
+            </span>
+            <h2 class="reveal kr mt-5 font-display text-4xl md:text-5xl font-extrabold tracking-tight leading-[1.1]" style="--i:1">
+              함께 만든 팀의 이야기
+            </h2>
+          </div>
+          <div class="reveal flex items-center gap-2" style="--i:2">
+            <span class="font-display text-4xl font-extrabold tnum" style="color:var(--brand)">4.87</span>
+            <div class="leading-tight">
+              <div class="flex text-[color:var(--warn)]" aria-hidden="true">
+                <iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon><iconify-icon icon="solar:star-bold"></iconify-icon>
+              </div>
+              <p class="text-xs text-[color:var(--muted)] kr">180개 고객사 평균 만족도</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-14 grid grid-cols-1 md:grid-cols-3 gap-5">
+          <!-- 1 -->
+          <figure class="reveal bezel rounded-[2rem] p-2 tw hover:-translate-y-1" style="--i:0">
+            <div class="h-full rounded-[calc(2rem-0.5rem)] bg-[color:var(--surface)] p-7 flex flex-col">
+              <iconify-icon icon="solar:quote-up-square-bold" class="text-[34px]" style="color:var(--brand)" aria-hidden="true"></iconify-icon>
+              <blockquote class="kr mt-4 text-[15px] leading-relaxed flex-1">
+                제어반부터 자동화 설비까지 한 곳에서 맡길 수 있어 커뮤니케이션 비용이 크게 줄었습니다.
+                납기 약속을 지켜주는 파트너라 안심하고 라인을 확장했습니다.
+              </blockquote>
+              <figcaption class="mt-6 flex items-center gap-3">
+                <img src="https://i.pravatar.cc/150?u=techon-hayoonseo" alt="박도현 생산기술 팀장 프로필" width="48" height="48" loading="lazy" class="w-12 h-12 rounded-full object-cover">
+                <div><p class="font-semibold text-sm">박도현</p><p class="text-xs text-[color:var(--muted)] kr">넥스트비전 · 생산기술 팀장</p></div>
+              </figcaption>
+            </div>
+          </figure>
+          <!-- 2 -->
+          <figure class="reveal bezel rounded-[2rem] p-2 tw hover:-translate-y-1" style="--i:1">
+            <div class="h-full rounded-[calc(2rem-0.5rem)] bg-gradient-to-br from-[color:var(--brand)] to-[color:var(--brand-dark)] text-white p-7 flex flex-col">
+              <iconify-icon icon="solar:quote-up-square-bold" class="text-[34px] text-white/80" aria-hidden="true"></iconify-icon>
+              <blockquote class="kr mt-4 text-[15px] leading-relaxed flex-1 text-white/95">
+                초도 양산은 한국에서, 대량 양산은 베트남에서 진행했는데 품질 편차가 거의 없었습니다.
+                같은 기준으로 관리된다는 게 데이터로 확인됐습니다.
+              </blockquote>
+              <figcaption class="mt-6 flex items-center gap-3">
+                <img src="https://i.pravatar.cc/150?u=techon-leeseojin" alt="이서진 구매 담당 프로필" width="48" height="48" loading="lazy" class="w-12 h-12 rounded-full object-cover ring-2 ring-white/40">
+                <div><p class="font-semibold text-sm">이서진</p><p class="text-xs text-white/70 kr">루미너스 · 구매 리드</p></div>
+              </figcaption>
+            </div>
+          </figure>
+          <!-- 3 -->
+          <figure class="reveal bezel rounded-[2rem] p-2 tw hover:-translate-y-1" style="--i:2">
+            <div class="h-full rounded-[calc(2rem-0.5rem)] bg-[color:var(--surface)] p-7 flex flex-col">
+              <iconify-icon icon="solar:quote-up-square-bold" class="text-[34px]" style="color:var(--brand)" aria-hidden="true"></iconify-icon>
+              <blockquote class="kr mt-4 text-[15px] leading-relaxed flex-1">
+                요구 사양이 까다로운 검사 설비였는데, 협의 단계부터 현장 시운전까지 꼼꼼하게 챙겨주셨습니다.
+                기술 문의 회신이 빠른 점이 특히 좋았습니다.
+              </blockquote>
+              <figcaption class="mt-6 flex items-center gap-3">
+                <img src="https://i.pravatar.cc/150?u=techon-jeongminjun" alt="정민준 설비기술 이사 프로필" width="48" height="48" loading="lazy" class="w-12 h-12 rounded-full object-cover">
+                <div><p class="font-semibold text-sm">정민준</p><p class="text-xs text-[color:var(--muted)] kr">브릿지웍스 · 설비기술 이사</p></div>
+              </figcaption>
+            </div>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 10. FAQ — 네이티브 details 아코디언                            -->
+    <!-- ============================================================ -->
+    <section id="faq" class="py-24 md:py-32 lg:py-40">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto">
+          <span class="reveal inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] uppercase tracking-[0.15em] font-semibold bg-[color:var(--brand)]/10 text-[color:var(--brand)]">
+            FAQ
+          </span>
+          <h2 class="reveal kr mt-5 font-display text-4xl md:text-5xl font-extrabold tracking-tight leading-[1.1]" style="--i:1">
+            자주 묻는 질문
+          </h2>
+        </div>
+
+        <div class="mt-12 space-y-3">
+          <details class="reveal bezel rounded-2xl p-2 group" style="--i:0">
+            <summary class="flex items-center justify-between gap-4 rounded-[calc(1rem-0.1rem)] bg-[color:var(--surface)] px-6 py-5">
+              <span class="kr font-semibold text-lg">최소 발주 수량(MOQ)이 어떻게 되나요?</span>
+              <iconify-icon icon="solar:alt-arrow-down-linear" class="faq-chevron text-[22px] shrink-0 tw" style="color:var(--brand)" aria-hidden="true"></iconify-icon>
+            </summary>
+            <div class="faq-body kr px-6 pb-5 pt-1 text-[color:var(--muted)] leading-relaxed">
+              제품 유형에 따라 다릅니다. 제어반과 커스텀 자동화 설비는 단품 소량 제작이 가능하며,
+              전자 어셈블리·PCB 양산은 사양 협의 후 최적 MOQ를 제안해 드립니다. 시제품 대응도 별도로 지원합니다.
+            </div>
+          </details>
+
+          <details class="reveal bezel rounded-2xl p-2 group" style="--i:1">
+            <summary class="flex items-center justify-between gap-4 rounded-[calc(1rem-0.1rem)] bg-[color:var(--surface)] px-6 py-5">
+              <span class="kr font-semibold text-lg">견적은 얼마나 빨리 받을 수 있나요?</span>
+              <iconify-icon icon="solar:alt-arrow-down-linear" class="faq-chevron text-[22px] shrink-0 tw" style="color:var(--brand)" aria-hidden="true"></iconify-icon>
+            </summary>
+            <div class="faq-body kr px-6 pb-5 pt-1 text-[color:var(--muted)] leading-relaxed">
+              도면·사양이 명확한 표준 제어반은 영업일 기준 24시간 이내 개략 견적을 회신합니다.
+              맞춤 설비처럼 검토가 필요한 경우 담당 엔지니어가 배정되어 일정과 함께 안내드립니다.
+            </div>
+          </details>
+
+          <details class="reveal bezel rounded-2xl p-2 group" style="--i:2">
+            <summary class="flex items-center justify-between gap-4 rounded-[calc(1rem-0.1rem)] bg-[color:var(--surface)] px-6 py-5">
+              <span class="kr font-semibold text-lg">한국과 베트남 중 어디에서 생산되나요?</span>
+              <iconify-icon icon="solar:alt-arrow-down-linear" class="faq-chevron text-[22px] shrink-0 tw" style="color:var(--brand)" aria-hidden="true"></iconify-icon>
+            </summary>
+            <div class="faq-body kr px-6 pb-5 pt-1 text-[color:var(--muted)] leading-relaxed">
+              프로젝트 성격에 따라 결정됩니다. 설계·시제품·초도 양산과 품질 관리는 한국 본사가 담당하고,
+              대량 양산은 베트남 생산법인 TECH-ON VINA가 맡습니다. 두 거점 모두 동일한 공정 표준과 검사 기준을 따릅니다.
+            </div>
+          </details>
+
+          <details class="reveal bezel rounded-2xl p-2 group" style="--i:3">
+            <summary class="flex items-center justify-between gap-4 rounded-[calc(1rem-0.1rem)] bg-[color:var(--surface)] px-6 py-5">
+              <span class="kr font-semibold text-lg">OEM과 ODM 모두 가능한가요?</span>
+              <iconify-icon icon="solar:alt-arrow-down-linear" class="faq-chevron text-[22px] shrink-0 tw" style="color:var(--brand)" aria-hidden="true"></iconify-icon>
+            </summary>
+            <div class="faq-body kr px-6 pb-5 pt-1 text-[color:var(--muted)] leading-relaxed">
+              네, 모두 가능합니다. 고객 도면대로 생산하는 OEM은 물론, 요구 사양만 주시면 설계부터 제안하는
+              ODM 방식도 지원합니다. 회로·기구 설계 역량을 내부에 보유하고 있어 초기 기획 단계부터 협업할 수 있습니다.
+            </div>
+          </details>
+
+          <details class="reveal bezel rounded-2xl p-2 group" style="--i:4">
+            <summary class="flex items-center justify-between gap-4 rounded-[calc(1rem-0.1rem)] bg-[color:var(--surface)] px-6 py-5">
+              <span class="kr font-semibold text-lg">품질 인증과 시험 성적서를 받을 수 있나요?</span>
+              <iconify-icon icon="solar:alt-arrow-down-linear" class="faq-chevron text-[22px] shrink-0 tw" style="color:var(--brand)" aria-hidden="true"></iconify-icon>
+            </summary>
+            <div class="faq-body kr px-6 pb-5 pt-1 text-[color:var(--muted)] leading-relaxed">
+              테크온은 ISO 9001·14001 인증을 보유하고 있으며, 제어반은 KS·IEC 규격 시험 성적서를 함께 제공합니다.
+              필요한 검사 항목이 있다면 발주 전에 알려주시면 사양에 반영해 드립니다.
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 11. CTA + 문의 폼 (Full-bleed 전환 섹션)                       -->
+    <!-- ============================================================ -->
+    <section id="contact" class="py-24 md:py-32 lg:py-40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal relative rounded-[2.5rem] overflow-hidden amb" style="--i:0">
+          <div class="absolute inset-0" style="background:linear-gradient(135deg,var(--brand),var(--brand-dark))" aria-hidden="true"></div>
+          <div class="absolute inset-0 grid-bg opacity-20" aria-hidden="true"></div>
+          <div class="absolute -top-16 -right-10 w-72 h-72 rounded-full bg-white/10 drift" aria-hidden="true"></div>
+
+          <div class="relative grid grid-cols-1 lg:grid-cols-2 gap-10 p-8 md:p-14">
+            <!-- 좌: 카피 -->
+            <div class="text-white">
+              <span class="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] uppercase tracking-[0.15em] font-semibold bg-white/15">
+                Get a Quote
+              </span>
+              <h2 class="kr mt-5 font-display text-4xl md:text-5xl font-extrabold tracking-tight leading-[1.1]">
+                프로젝트가 있으신가요?<br>3분이면 문의가 끝납니다
+              </h2>
+              <p class="kr mt-5 text-white/85 text-lg leading-relaxed max-w-[46ch]">
+                도면이나 대략적인 요구 사양만 있어도 괜찮습니다. 담당 엔지니어가 검토 후
+                영업일 기준 24시간 이내에 회신드립니다.
+              </p>
+              <ul class="mt-8 space-y-3 text-white/90">
+                <li class="flex items-center gap-3 kr"><iconify-icon icon="solar:phone-rounded-bold" class="text-[22px]" aria-hidden="true"></iconify-icon>대표전화 031-000-0000</li>
+                <li class="flex items-center gap-3 kr"><iconify-icon icon="solar:letter-bold" class="text-[22px]" aria-hidden="true"></iconify-icon>sales@tech-on.kr</li>
+                <li class="flex items-center gap-3 kr"><iconify-icon icon="solar:clock-circle-bold" class="text-[22px]" aria-hidden="true"></iconify-icon>평일 09:00 – 18:00 (KST)</li>
+              </ul>
+            </div>
+
+            <!-- 우: 폼 (Double-Bezel) -->
+            <div class="bezel rounded-[2rem] p-2">
+              <form class="rounded-[calc(2rem-0.5rem)] bg-[color:var(--surface)] p-6 md:p-7 space-y-4" novalidate
+                    onsubmit="return techonSubmit(event)" data-cta="contact-form-submit" aria-label="견적·기술문의 폼">
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="f-name" class="block text-sm font-medium kr mb-1.5">담당자명 <span style="color:var(--brand)">*</span></label>
+                    <input id="f-name" name="name" type="text" required autocomplete="name"
+                           class="w-full rounded-xl border border-[color:var(--line)] bg-white px-4 py-3 text-[15px] placeholder:text-[color:var(--muted)]"
+                           placeholder="예: 하윤서">
+                  </div>
+                  <div>
+                    <label for="f-company" class="block text-sm font-medium kr mb-1.5">회사명 <span style="color:var(--brand)">*</span></label>
+                    <input id="f-company" name="company" type="text" required autocomplete="organization"
+                           class="w-full rounded-xl border border-[color:var(--line)] bg-white px-4 py-3 text-[15px] placeholder:text-[color:var(--muted)]"
+                           placeholder="예: 스텔라랩스">
+                  </div>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="f-email" class="block text-sm font-medium kr mb-1.5">이메일 <span style="color:var(--brand)">*</span></label>
+                    <input id="f-email" name="email" type="email" required autocomplete="email"
+                           class="w-full rounded-xl border border-[color:var(--line)] bg-white px-4 py-3 text-[15px] placeholder:text-[color:var(--muted)]"
+                           placeholder="name@company.com">
+                  </div>
+                  <div>
+                    <label for="f-type" class="block text-sm font-medium kr mb-1.5">문의 유형</label>
+                    <select id="f-type" name="type"
+                            class="w-full rounded-xl border border-[color:var(--line)] bg-white px-4 py-3 text-[15px]">
+                      <option>산업용 제어반</option>
+                      <option>전자 어셈블리 / PCB</option>
+                      <option>커스텀 자동화 설비</option>
+                      <option>기타 기술 문의</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <label for="f-msg" class="block text-sm font-medium kr mb-1.5">문의 내용</label>
+                  <textarea id="f-msg" name="message" rows="3"
+                            class="w-full rounded-xl border border-[color:var(--line)] bg-white px-4 py-3 text-[15px] placeholder:text-[color:var(--muted)] resize-none"
+                            placeholder="수량, 납기, 요구 사양 등을 간단히 적어주세요."></textarea>
+                </div>
+                <div class="flex items-start gap-2.5">
+                  <input id="f-agree" name="agree" type="checkbox" required class="mt-1 w-4 h-4 accent-[color:var(--brand)]">
+                  <label for="f-agree" class="text-sm text-[color:var(--muted)] kr">
+                    <a href="#privacy" class="underline font-medium text-[color:var(--text)]">개인정보처리방침</a>에 동의하며 문의 내용을 제출합니다. <span style="color:var(--brand)">*</span>
+                  </label>
+                </div>
+                <p id="f-status" class="text-sm hidden" role="status" aria-live="polite"></p>
+                <button type="submit" id="f-submit" data-cta="contact-submit-btn"
+                        class="w-full cta-primary rounded-full px-6 py-4 text-lg font-semibold inline-flex items-center justify-center gap-2">
+                  <span class="f-label">문의 보내기</span>
+                  <span class="f-spinner hidden"><iconify-icon icon="solar:refresh-linear" class="text-[20px] animate-spin" aria-hidden="true"></iconify-icon></span>
+                  <span class="grid place-items-center w-8 h-8 rounded-full bg-white/20 f-arrow">
+                    <iconify-icon icon="solar:arrow-right-linear" class="text-[18px]" aria-hidden="true"></iconify-icon>
+                  </span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================ -->
+  <!-- 12. FOOTER — 법적 정보                                         -->
+  <!-- ============================================================ -->
+  <footer class="bg-[#0e1526] text-white/80 pt-20 pb-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-10">
+        <div class="col-span-2">
+          <div class="flex items-center gap-2.5">
+            <span class="grid place-items-center w-9 h-9 rounded-xl text-white font-display font-extrabold text-lg" style="background:var(--brand)">T</span>
+            <span class="font-display font-extrabold tracking-tight text-lg text-white">TECH-ON</span>
+          </div>
+          <p class="kr mt-4 text-sm leading-relaxed max-w-xs text-white/60">
+            산업용 제어반, 전자 어셈블리, PCB, 커스텀 자동화 설비를 OEM·ODM으로 공급하는
+            전기·전자·제어 시스템 제조 전문 기업입니다.
+          </p>
+          <div class="flex gap-2 mt-6">
+            <a href="#" aria-label="테크온 링크드인" class="grid place-items-center w-10 h-10 rounded-full bg-white/10 hover:bg-white/20"><iconify-icon icon="solar:link-linear" class="text-[20px]" aria-hidden="true"></iconify-icon></a>
+            <a href="mailto:sales@tech-on.kr" aria-label="이메일 문의" class="grid place-items-center w-10 h-10 rounded-full bg-white/10 hover:bg-white/20"><iconify-icon icon="solar:letter-linear" class="text-[20px]" aria-hidden="true"></iconify-icon></a>
+            <a href="tel:031-000-0000" aria-label="전화 문의" class="grid place-items-center w-10 h-10 rounded-full bg-white/10 hover:bg-white/20"><iconify-icon icon="solar:phone-linear" class="text-[20px]" aria-hidden="true"></iconify-icon></a>
+          </div>
+        </div>
+
+        <nav aria-label="제조 역량 링크">
+          <h3 class="font-semibold text-white text-sm kr">제조 역량</h3>
+          <ul class="mt-4 space-y-2.5 text-sm text-white/60">
+            <li><a href="#capabilities" class="hover:text-white kr">산업용 제어반</a></li>
+            <li><a href="#capabilities" class="hover:text-white kr">전자 어셈블리</a></li>
+            <li><a href="#capabilities" class="hover:text-white kr">PCB 설계·제작</a></li>
+            <li><a href="#capabilities" class="hover:text-white kr">자동화 설비</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="회사 정보 링크">
+          <h3 class="font-semibold text-white text-sm kr">회사</h3>
+          <ul class="mt-4 space-y-2.5 text-sm text-white/60">
+            <li><a href="#global" class="hover:text-white kr">글로벌 생산</a></li>
+            <li><a href="#trust" class="hover:text-white kr">인증·연혁</a></li>
+            <li><a href="#process" class="hover:text-white kr">품질 공정</a></li>
+            <li><a href="#faq" class="hover:text-white kr">자주 묻는 질문</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="문의 링크">
+          <h3 class="font-semibold text-white text-sm kr">문의</h3>
+          <ul class="mt-4 space-y-2.5 text-sm text-white/60">
+            <li><a href="#contact" class="hover:text-white kr">견적 요청</a></li>
+            <li><a href="#contact" class="hover:text-white kr">기술 문의</a></li>
+            <li><a href="mailto:sales@tech-on.kr" class="hover:text-white">sales@tech-on.kr</a></li>
+            <li><a href="tel:031-000-0000" class="hover:text-white tnum">031-000-0000</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- 사업자 정보 -->
+      <div class="mt-14 pt-8 border-t border-white/10 text-xs text-white/50 kr leading-relaxed">
+        <p class="font-medium text-white/70 kr">(주)테크온 &nbsp;|&nbsp; TECH-ON Co., Ltd.</p>
+        <p class="mt-2">
+          대표이사: 최시우 &nbsp;·&nbsp; 사업자등록번호: 000-00-00000 &nbsp;·&nbsp;
+          주소: 경기도 안산시 단원구 000로 00 (샘플 · 교체 대상)
+        </p>
+        <p class="mt-1">
+          해외법인: TECH-ON VINA Co., Ltd. (Vietnam) &nbsp;·&nbsp; 대표전화: 031-000-0000 &nbsp;·&nbsp; 이메일: sales@tech-on.kr
+        </p>
+      </div>
+
+      <div class="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <p class="text-xs text-white/40 tnum">© 2026 TECH-ON Co., Ltd. All rights reserved.</p>
+        <nav aria-label="법적 고지" class="flex items-center gap-5 text-xs">
+          <a id="privacy" href="#" class="text-white/60 hover:text-white kr font-medium">개인정보처리방침</a>
+          <a href="#" class="text-white/60 hover:text-white kr">이용약관</a>
+          <a href="#top" class="text-white/60 hover:text-white kr inline-flex items-center gap-1">맨 위로 <iconify-icon icon="solar:arrow-up-linear" aria-hidden="true"></iconify-icon></a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================ -->
+  <!-- JSON-LD 구조화 데이터                                          -->
+  <!-- ============================================================ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "(주)테크온",
+    "alternateName": "TECH-ON Co., Ltd.",
+    "url": "https://www.tech-on.kr",
+    "logo": "https://www.tech-on.kr/logo.png",
+    "description": "산업용 제어반, 전자 어셈블리, PCB, 커스텀 자동화 설비를 OEM·ODM으로 공급하는 전기·전자·제어 시스템 제조 전문 기업.",
+    "foundingDate": "2004",
+    "email": "sales@tech-on.kr",
+    "telephone": "+82-31-000-0000",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "KR",
+      "addressRegion": "경기도",
+      "addressLocality": "안산시"
+    },
+    "subOrganization": {
+      "@type": "Organization",
+      "name": "TECH-ON VINA Co., Ltd.",
+      "location": { "@type": "Place", "address": { "@type": "PostalAddress", "addressCountry": "VN" } }
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "산업용 제어 시스템 제조 (OEM/ODM)",
+    "provider": { "@type": "Organization", "name": "(주)테크온", "url": "https://www.tech-on.kr" },
+    "areaServed": ["KR", "VN"],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "제조 역량",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "산업용 제어반 제작" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "전자 어셈블리 (SMT/Box-build)" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "PCB 설계·제작" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "커스텀 자동화 설비" } }
+      ]
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "최소 발주 수량(MOQ)이 어떻게 되나요?", "acceptedAnswer": { "@type": "Answer", "text": "제품 유형에 따라 다릅니다. 제어반과 커스텀 자동화 설비는 단품 소량 제작이 가능하며, 전자 어셈블리·PCB 양산은 사양 협의 후 최적 MOQ를 제안해 드립니다. 시제품 대응도 별도로 지원합니다." } },
+      { "@type": "Question", "name": "견적은 얼마나 빨리 받을 수 있나요?", "acceptedAnswer": { "@type": "Answer", "text": "도면·사양이 명확한 표준 제어반은 영업일 기준 24시간 이내 개략 견적을 회신합니다. 맞춤 설비처럼 검토가 필요한 경우 담당 엔지니어가 배정되어 일정과 함께 안내드립니다." } },
+      { "@type": "Question", "name": "한국과 베트남 중 어디에서 생산되나요?", "acceptedAnswer": { "@type": "Answer", "text": "설계·시제품·초도 양산과 품질 관리는 한국 본사가 담당하고, 대량 양산은 베트남 생산법인 TECH-ON VINA가 맡습니다. 두 거점 모두 동일한 공정 표준과 검사 기준을 따릅니다." } },
+      { "@type": "Question", "name": "OEM과 ODM 모두 가능한가요?", "acceptedAnswer": { "@type": "Answer", "text": "네, 모두 가능합니다. 고객 도면대로 생산하는 OEM은 물론, 요구 사양만 주시면 설계부터 제안하는 ODM 방식도 지원합니다." } },
+      { "@type": "Question", "name": "품질 인증과 시험 성적서를 받을 수 있나요?", "acceptedAnswer": { "@type": "Answer", "text": "테크온은 ISO 9001·14001 인증을 보유하고 있으며, 제어반은 KS·IEC 규격 시험 성적서를 함께 제공합니다." } }
+    ]
+  }
+  </script>
+
+  <!-- ============================================================ -->
+  <!-- INTERACTIONS                                                  -->
+  <!-- ============================================================ -->
+  <script>
+    // Scroll reveal
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        els.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+
+    // Mobile menu
+    (function () {
+      var btn = document.getElementById('menuBtn');
+      var menu = document.getElementById('mobileMenu');
+      var close = document.getElementById('menuClose');
+      function open() { menu.classList.remove('hidden'); btn.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
+      function shut() { menu.classList.add('hidden'); btn.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
+      btn.addEventListener('click', open);
+      close.addEventListener('click', shut);
+      document.querySelectorAll('.mob-link, #mobileMenu a[href="#contact"]').forEach(function (a) { a.addEventListener('click', shut); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !menu.classList.contains('hidden')) shut(); });
+    })();
+
+    // Form submit (demo — 실제 엔드포인트 연결 위치)
+    function techonSubmit(e) {
+      e.preventDefault();
+      var form = e.target;
+      var btn = document.getElementById('f-submit');
+      var status = document.getElementById('f-status');
+      var label = form.querySelector('.f-label');
+      var spinner = form.querySelector('.f-spinner');
+      var arrow = form.querySelector('.f-arrow');
+
+      if (!form.checkValidity()) {
+        status.textContent = '필수 항목을 모두 입력하고 개인정보처리방침에 동의해 주세요.';
+        status.style.color = 'var(--warn)';
+        status.classList.remove('hidden');
+        form.reportValidity();
+        return false;
+      }
+      // 로딩 상태
+      btn.disabled = true; btn.style.opacity = '0.85';
+      label.textContent = '전송 중';
+      spinner.classList.remove('hidden'); arrow.classList.add('hidden');
+      status.classList.add('hidden');
+
+      // TODO(연동): fetch('/api/inquiry', {...}) 로 실제 전송
+      setTimeout(function () {
+        spinner.classList.add('hidden');
+        label.textContent = '접수 완료';
+        arrow.classList.remove('hidden');
+        status.textContent = '문의가 접수되었습니다. 영업일 기준 24시간 이내에 회신드리겠습니다.';
+        status.style.color = 'var(--ok)';
+        status.classList.remove('hidden');
+        btn.disabled = false; btn.style.opacity = '1';
+        form.reset();
+      }, 1200);
+      return false;
+    }
+  </script>
+</body>
+</html>

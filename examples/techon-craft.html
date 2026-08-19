@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="ko">
+<!--
+  ART DIRECTION — (주)테크온 TECH-ON
+  컨셉      : 제어반 승인도서(approval drawing set) 한 부처럼 — 표지·도번·개정란이 있고,
+              선은 얇고, 주장은 표로 증명된다.
+  지배 요소 : 데이터(수치와 표)  |  조연: 타이포(웨이트·명도), 여백 / 이미지는 3장뿐
+  제약      : ① 그라디언트 0개 ② 카드 컴포넌트 0개(구획은 1px 규칙선과 여백으로만)
+              ③ 모서리 반경은 이미지 프레임 4px 하나뿐 ④ 액센트는 "지금 살아 있는 것"에만
+              (기본 CTA · 포커스 · 개정 마크) ⑤ 이미지 3장 초과 금지
+  참조 장르 : 산업용 제어반 승인도서 + 계측기 데이터시트 (웹사이트 아님)
+  감정 목표 : 신뢰
+-->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>(주)테크온 | 제어반·전자 어셈블리 OEM·ODM · 안산 설계, 박닌 양산</title>
+  <meta name="description" content="(주)테크온은 산업용 제어반, PCB 실장, 케이블 하네스, 커스텀 자동화 설비를 주문 사양으로 제작합니다. 안산 본사에서 설계와 시제품을, 베트남 생산법인 TECH-ON VINA에서 양산을 맡습니다. 2025년 제어반 3,410면 출하, 출하 불량 89 PPM.">
+  <link rel="canonical" href="https://www.tech-on.kr">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#E9E6DE">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="(주)테크온 | 제어반 3,410면, 한 면도 같은 도면이 없었습니다">
+  <meta property="og:description" content="다품종 소량 제어반과 전자 어셈블리를 주문 사양으로 제작합니다. 안산 설계·시제품, 박닌 TECH-ON VINA 양산. 표준 양산 리드타임 35일.">
+  <meta property="og:image" content="https://picsum.photos/seed/techon-panel-01/1200/630">
+  <meta property="og:url" content="https://www.tech-on.kr">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="TECH-ON">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="(주)테크온 | 제어반 3,410면, 한 면도 같은 도면이 없었습니다">
+  <meta name="twitter:description" content="다품종 소량 제어반과 전자 어셈블리 OEM·ODM. 안산 설계·시제품, 박닌 양산. 표준 리드타임 35일.">
+  <meta name="twitter:image" content="https://picsum.photos/seed/techon-panel-01/1200/630">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%2315171A'/><path d='M6 9h20M16 9v16' stroke='%23E9E6DE' stroke-width='2'/><path d='M6 25h6' stroke='%23A83E1A' stroke-width='2'/></svg>">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+
+  <style>
+    :root{
+      /* ── 용지와 잉크 : 그레이스케일이 위계를 담당한다 ───────────── */
+      --paper:      #E9E6DE;   /* 본문 용지 */
+      --paper-hi:   #F4F2EC;   /* 밝은 면 (표 헤더·강조 영역) */
+      --ink:        #15171A;   /* 제목·수치 */
+      --ink-2:      #45474B;   /* 본문 */
+      --ink-3:      #62646A;   /* 캡션·라벨 (본문 대비 4.6:1) */
+      --rule:       #C9C5BC;   /* 1px 규칙선 */
+      --ink-surface:#15171A;   /* 전폭 암부 밴드 */
+      --rule-dark:  #33363B;
+      --on-dark:    #E9E6DE;
+      --on-dark-2:  #A2A5AB;
+      /* ── 액센트 : 살아 있는 것에만 (CTA · 포커스 · 개정 마크) ──── */
+      --accent:     #A83E1A;
+      --accent-ink: #FBF7F4;
+      --ease:       cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    html{ scroll-behavior:smooth; }
+    body{ background:var(--paper); color:var(--ink-2); -webkit-font-smoothing:antialiased; }
+    /* 한국어 조판 */
+    .kr{ word-break:keep-all; text-wrap:pretty; }
+    .balance{ text-wrap:balance; }
+    /* 숫자는 언제나 고정폭 — 표에서 자릿수가 흔들리면 안 된다 */
+    .tnum{ font-variant-numeric:tabular-nums; font-feature-settings:"tnum" 1; }
+    /* 영문 대문자 광학 보정: 주변 본문(14px)보다 작게 + 자간 확보 */
+    .cap{ font-size:12px; letter-spacing:0.18em; text-transform:uppercase; font-weight:500; }
+    /* 규칙선 — 페이지의 유일한 구획 도구 */
+    .rule-t{ border-top:1px solid var(--rule); }
+    .rule-b{ border-bottom:1px solid var(--rule); }
+    .rule-l{ border-left:1px solid var(--rule); }
+    /* 모바일에서만 그어지는 규칙선 (데스크톱은 세로선이 구획을 맡는다) */
+    .rule-t-m{ border-top:1px solid var(--rule); }
+    .rule-b-m{ border-bottom:1px solid var(--rule); }
+    @media (min-width:768px){ .rule-t-m{ border-top:0; } .rule-b-m{ border-bottom:0; } }
+    [data-band="dark"] .rule-t{ border-color:var(--rule-dark); }
+    [data-band="dark"] .rule-b{ border-color:var(--rule-dark); }
+    [data-band="dark"] .rule-l{ border-color:var(--rule-dark); }
+
+    /* 포커스: 제거하지 않는다 */
+    a:focus-visible, button:focus-visible, input:focus-visible,
+    select:focus-visible, textarea:focus-visible, summary:focus-visible{
+      outline:2px solid var(--accent); outline-offset:3px; border-radius:1px;
+    }
+
+    /* ── 기억에 남는 모션 ① : 표지 제목이 아래에서 밀려 올라오는 1회성 리빌 ── */
+    .reveal-line{ display:block; overflow:hidden; }
+    .reveal-line > span{
+      display:block; transform:translateY(110%);
+      animation:lineUp 600ms var(--ease) forwards;
+      animation-delay:calc(var(--i, 0) * 70ms);
+    }
+    @keyframes lineUp{ to{ transform:translateY(0); } }
+
+    /* ── 기억에 남는 모션 ② : 문서 하단 액션 바가 표지를 지나면 올라온다 ── */
+    #dockbar{ transform:translateY(100%); transition:transform 400ms var(--ease); }
+    #dockbar[data-visible="true"]{ transform:translateY(0); }
+
+    /* 스크롤 진입 (섹션 단위, 아주 얕게) */
+    [data-rv]{ opacity:0; transform:translateY(16px); transition:opacity 500ms var(--ease), transform 500ms var(--ease); }
+    [data-rv].in{ opacity:1; transform:none; }
+
+    /* FAQ 네이티브 아코디언 */
+    details > summary{ list-style:none; cursor:pointer; }
+    details > summary::-webkit-details-marker{ display:none; }
+    details[open] .faq-mark{ transform:rotate(45deg); }
+    .faq-mark{ transition:transform 200ms var(--ease); }
+
+    /* 표 */
+    table{ border-collapse:collapse; width:100%; }
+    th, td{ text-align:left; vertical-align:top; }
+
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior:auto; }
+      *, *::before, *::after{ animation:none !important; transition:none !important; }
+      .reveal-line > span{ transform:none; }
+      [data-rv]{ opacity:1; transform:none; }
+      #dockbar{ transform:translateY(0); }
+    }
+  </style>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paper:'var(--paper)', 'paper-hi':'var(--paper-hi)',
+            ink:'var(--ink)', 'ink-2':'var(--ink-2)', 'ink-3':'var(--ink-3)',
+            rule:'var(--rule)', 'rule-dark':'var(--rule-dark)',
+            surface:'var(--ink-surface)',
+            'on-dark':'var(--on-dark)', 'on-dark-2':'var(--on-dark-2)',
+            accent:'var(--accent)', 'accent-ink':'var(--accent-ink)',
+          },
+          fontFamily: {
+            sans:['Pretendard','system-ui','sans-serif'],
+            display:['Geist','Pretendard','system-ui','sans-serif'],
+            mono:['Geist Mono','ui-monospace','SFMono-Regular','monospace'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Analytics: GA4 / GTM / 광고 픽셀 삽입 위치 -->
+</head>
+
+<body class="font-sans antialiased">
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-ink focus:text-paper focus:px-4 focus:py-2 text-[14px]">본문으로 건너뛰기</a>
+
+  <!-- ══════════════════ 타이틀 블록 (도면 표제란 = 이 문서의 네비게이션) ══════════════════ -->
+  <header class="rule-b">
+    <div class="mx-auto max-w-[1400px] px-4 md:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-12 items-stretch">
+
+        <div class="col-span-2 md:col-span-3 py-4 md:py-6 md:pr-8">
+          <a href="#main" class="inline-flex items-baseline gap-2" aria-label="테크온 홈">
+            <span class="font-display text-[18px] font-semibold tracking-[-0.02em] text-ink">TECH&#8209;ON</span>
+            <span class="text-[12px] text-ink-3">(주)테크온</span>
+          </a>
+        </div>
+
+        <nav aria-label="주요 메뉴" class="col-span-2 md:col-span-6 rule-l md:pl-8 py-4 md:py-6">
+          <ul class="flex flex-wrap gap-x-6 gap-y-2 text-[14px] text-ink-2">
+            <li><a href="#items"   class="hover:text-ink transition-colors duration-200">제작 품목</a></li>
+            <li><a href="#sites"   class="hover:text-ink transition-colors duration-200">생산 거점</a></li>
+            <li><a href="#flow"    class="hover:text-ink transition-colors duration-200">진행 순서</a></li>
+            <li><a href="#quality" class="hover:text-ink transition-colors duration-200">품질</a></li>
+            <li><a href="#faq"     class="hover:text-ink transition-colors duration-200">질문</a></li>
+          </ul>
+        </nav>
+
+        <div class="col-span-2 md:col-span-3 rule-l md:pl-8 py-4 md:py-6 flex items-center justify-between md:justify-start gap-6">
+          <p class="cap text-accent">REV. 07 · 2026&#8209;07</p>
+          <a href="tel:0313456280" class="text-[14px] text-ink tnum hover:text-accent transition-colors duration-200" data-cta="header-tel">031&#8209;345&#8209;6280</a>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+  <!-- ══════════════════ 01 · 표지 ══════════════════ -->
+  <section id="cover" class="rule-b">
+    <div class="mx-auto max-w-[1400px] px-4 md:px-8 min-h-[100dvh] flex flex-col justify-between">
+
+      <div class="pt-16 md:pt-24 flex items-baseline justify-between">
+        <p class="cap text-ink-3">Sheet 01 — 표지</p>
+        <p class="cap text-ink-3 tnum">DWG. TO&#8209;2026&#8209;001</p>
+      </div>
+
+      <div class="py-24 md:py-32 grid grid-cols-1 md:grid-cols-12 gap-8">
+        <div class="md:col-span-8">
+          <h1 class="font-sans text-[48px] md:text-[72px] leading-[1.12] tracking-[-0.03em] balance kr">
+            <span class="reveal-line" style="--i:0"><span class="text-ink font-semibold tnum">제어반 3,410면.</span></span>
+            <span class="reveal-line" style="--i:1"><span class="text-ink-2 font-normal">한 면도 같은</span></span>
+            <span class="reveal-line" style="--i:2"><span class="text-ink-2 font-normal">도면이 없었습니다.</span></span>
+          </h1>
+
+          <p class="mt-8 max-w-[46ch] text-[18px] leading-[1.75] text-ink-2 kr">
+            2025년 (주)테크온이 출하한 제어반 수량입니다. 표준 모델은 한 대도 없습니다.
+            고객 도면과 현장 조건에 맞춰 한 면씩 설계하고, 안산에서 시제품을 만든 뒤
+            박닌 TECH&#8209;ON VINA에서 양산합니다.
+          </p>
+
+          <div class="mt-12 flex flex-wrap items-center gap-4">
+            <a href="#rfq" data-cta="hero-rfq"
+               class="inline-flex items-center gap-3 bg-accent text-accent-ink px-8 py-4 text-[18px] font-medium
+                      hover:bg-ink transition-colors duration-200">
+              도면 보내고 견적 받기
+              <iconify-icon icon="solar:arrow-right-linear" class="text-[18px]" aria-hidden="true"></iconify-icon>
+            </a>
+            <a href="#items" data-cta="hero-items"
+               class="inline-flex items-center gap-3 px-8 py-4 text-[18px] text-ink rule-t rule-b
+                      hover:bg-paper-hi transition-colors duration-200">
+              제작 품목표 보기
+            </a>
+          </div>
+        </div>
+
+        <aside class="md:col-span-4 md:rule-l md:pl-8 flex md:items-end">
+          <p class="text-[14px] leading-[1.9] text-ink-3 kr">
+            도면이 없어도 됩니다. 손그림, 기존 반 사진, 부품 리스트만 있어도
+            사양 정리부터 시작합니다. 영업일 2일 안에 담당 엔지니어가 회신합니다.
+          </p>
+        </aside>
+      </div>
+
+      <!-- 표지 하단 제원란 : 이 페이지의 지배 요소 = 데이터 -->
+      <dl class="rule-t grid grid-cols-2 md:grid-cols-4">
+        <div class="py-8 md:py-12 md:pr-8">
+          <dt class="cap text-ink-3">2025 출하</dt>
+          <dd class="mt-3 font-display text-[48px] leading-none tracking-[-0.03em] text-ink tnum">3,410<span class="text-[18px] font-normal text-ink-3 ml-2 align-baseline">면</span></dd>
+        </div>
+        <div class="py-8 md:py-12 rule-l pl-4 md:pl-8 md:pr-8">
+          <dt class="cap text-ink-3">출하 불량</dt>
+          <dd class="mt-3 font-display text-[48px] leading-none tracking-[-0.03em] text-ink tnum">89<span class="text-[18px] font-normal text-ink-3 ml-2 align-baseline">PPM</span></dd>
+        </div>
+        <div class="py-8 md:py-12 md:rule-l rule-t-m md:pl-8 md:pr-8">
+          <dt class="cap text-ink-3">표준 양산</dt>
+          <dd class="mt-3 font-display text-[48px] leading-none tracking-[-0.03em] text-ink tnum">35<span class="text-[18px] font-normal text-ink-3 ml-2 align-baseline">일</span></dd>
+        </div>
+        <div class="py-8 md:py-12 rule-l rule-t-m pl-4 md:pl-8">
+          <dt class="cap text-ink-3">생산 거점</dt>
+          <dd class="mt-3 font-display text-[48px] leading-none tracking-[-0.03em] text-ink tnum">2<span class="text-[18px] font-normal text-ink-3 ml-2 align-baseline">개국</span></dd>
+        </div>
+      </dl>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════ 전폭 이미지 밴드 (그리드 이탈 ①) ══════════════════ -->
+  <figure class="rule-b">
+    <div class="p-1 bg-rule rounded-[4px]">
+      <img src="https://picsum.photos/seed/techon-panel-01/2400/900"
+           alt="배선 작업이 끝난 산업용 제어반 내부. 단자대와 차단기가 열별로 정렬되어 있다."
+           width="2400" height="900" loading="eager" fetchpriority="high" decoding="async"
+           class="w-full h-[280px] md:h-[440px] object-cover rounded-[0px] ring-1 ring-black/10">
+    </div>
+    <figcaption class="mx-auto max-w-[1400px] px-4 md:px-8 py-4 text-[12px] text-ink-3 tnum">
+      FIG. 01 — 안산공장 조립 3라인 / 380V 3상 배전반 내부 배선 검사 직후
+    </figcaption>
+  </figure>
+
+  <!-- ══════════════════ 02 · 제작 품목 (빽빽한 밀도) ══════════════════ -->
+  <section id="items" class="rule-b scroll-mt-16">
+    <div class="mx-auto max-w-[1400px] px-4 md:px-8 py-16 md:py-24">
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
+        <div class="md:col-span-7">
+          <p class="cap text-ink-3">Sheet 02 — 제작 품목</p>
+          <h2 class="mt-4 text-[30px] leading-snug tracking-[-0.02em] font-semibold text-ink balance kr">
+            27년 동안 만든 것과, 만들지 않는 것
+          </h2>
+        </div>
+        <p class="md:col-span-5 md:rule-l md:pl-8 text-[14px] leading-[1.9] text-ink-3 kr">
+          아래 다섯 가지 밖은 받지 않습니다. 안 해본 품목을 받아 배우는 비용은
+          결국 고객의 납기로 청구되기 때문입니다.
+        </p>
+      </div>
+
+      <div class="mt-12 overflow-x-auto">
+        <table class="min-w-[820px] text-[14px]">
+          <caption class="sr-only">테크온 제작 품목별 주요 사양, 대응 규격, 최소 수량, 표준 리드타임</caption>
+          <thead>
+            <tr class="rule-t rule-b bg-paper-hi">
+              <th scope="col" class="cap text-ink-3 py-3 pr-8 font-medium">품목</th>
+              <th scope="col" class="cap text-ink-3 py-3 pr-8 font-medium">주요 사양</th>
+              <th scope="col" class="cap text-ink-3 py-3 pr-8 font-medium">대응 규격</th>
+              <th scope="col" class="cap text-ink-3 py-3 pr-8 font-medium">최소 수량</th>
+              <th scope="col" class="cap text-ink-3 py-3 font-medium">표준 리드타임</th>
+            </tr>
+          </thead>
+          <tbody class="align-top">
+            <tr class="rule-b">
+              <th scope="row" class="py-6 pr-8 text-[18px] font-medium text-ink whitespace-nowrap">배전·제어반</th>
+              <td class="py-6 pr-8 text-ink-2 kr">최대 3,200A, IP54, 내진 브래킷 옵션. MCC·분전반·인버터반.</td>
+              <td class="py-6 pr-8 text-ink-2">KS C IEC 61439&#8209;1/2<br>UL 508A</td>
+              <td class="py-6 pr-8 text-ink-2 tnum">1면</td>
+              <td class="py-6 text-ink tnum font-medium">35일</td>
+            </tr>
+            <tr class="rule-b">
+              <th scope="row" class="py-6 pr-8 text-[18px] font-medium text-ink whitespace-nowrap">장비용 제어 판넬</th>
+              <td class="py-6 pr-8 text-ink-2 kr">PLC·HMI 배선, 세이프티 릴레이 회로 포함. 장비 제조사 OEM 물량 위주.</td>
+              <td class="py-6 pr-8 text-ink-2">KC, CE</td>
+              <td class="py-6 pr-8 text-ink-2 tnum">1면</td>
+              <td class="py-6 text-ink tnum font-medium">28일</td>
+            </tr>
+            <tr class="rule-b">
+              <th scope="row" class="py-6 pr-8 text-[18px] font-medium text-ink whitespace-nowrap">PCB 실장(SMT)</th>
+              <td class="py-6 pr-8 text-ink-2 kr">0201 칩 대응, 양면 리플로우, 이형 부품 수삽 병행. 박닌 SMT 3개 라인.</td>
+              <td class="py-6 pr-8 text-ink-2">IPC&#8209;A&#8209;610 Class 2/3</td>
+              <td class="py-6 pr-8 text-ink-2 tnum">500점</td>
+              <td class="py-6 text-ink tnum font-medium">21일</td>
+            </tr>
+            <tr class="rule-b">
+              <th scope="row" class="py-6 pr-8 text-[18px] font-medium text-ink whitespace-nowrap">케이블 하네스</th>
+              <td class="py-6 pr-8 text-ink-2 kr">사내 압착 다이 320종 보유. 커넥터 지정 시 별도 금형비 없음.</td>
+              <td class="py-6 pr-8 text-ink-2">IPC/WHMA&#8209;A&#8209;620<br>UL 1015</td>
+              <td class="py-6 pr-8 text-ink-2 tnum">200조</td>
+              <td class="py-6 text-ink tnum font-medium">14일</td>
+            </tr>
+            <tr class="rule-b">
+              <th scope="row" class="py-6 pr-8 text-[18px] font-medium text-ink whitespace-nowrap">커스텀 자동화 설비</th>
+              <td class="py-6 pr-8 text-ink-2 kr">3축 이송 + 비전 검사 통합. 기구 설계는 협력사, 전장·제어는 사내.</td>
+              <td class="py-6 pr-8 text-ink-2">사양 협의</td>
+              <td class="py-6 pr-8 text-ink-2 tnum">1대</td>
+              <td class="py-6 text-ink tnum font-medium">90일~</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="mt-8 text-[12px] text-ink-3 tnum kr">
+        * 리드타임은 도면 확정일 기준, 자재 수급 정상 시. 2025년 실적 평균은 표준 대비 +2.4일.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════════ 03 · 생산 거점 (전폭 암부 밴드 · 그리드 이탈 ②) ══════════════════ -->
+  <section id="sites" data-band="dark" class="bg-surface text-on-dark scroll-mt-16" data-rv="dark">
+    <div class="mx-auto max-w-[1400px] px-4 md:px-8 py-24 md:py-32">
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
+        <div class="md:col-span-6">
+          <p class="cap text-on-dark-2">Sheet 03 — 생산 거점</p>
+          <h2 class="mt-4 text-[30px] leading-snug tracking-[-0.02em] font-semibold text-on-dark balance kr">
+            설계는 안산에서, 양산은 박닌에서.<br>둘을 한 회사가 책임집니다.
+          </h2>
+        </div>
+        <p class="md:col-span-6 md:rule-l md:pl-8 text-[14px] leading-[1.9] text-on-dark-2 kr">
+          TECH&#8209;ON VINA는 협력사가 아니라 (주)테크온이 지분 100%를 가진 생산법인입니다.
+          도면·자재 코드·검사 성적서 양식이 두 공장에서 동일하고, 품질 이슈가 생기면
+          한국 담당자가 그대로 책임집니다. 견적서에 "해외 협력사 사정"이라는 문장은 쓰지 않습니다.
+        </p>
+      </div>
+
+      <div class="mt-16 grid grid-cols-1 md:grid-cols-12 gap-y-12">
+        <!-- 한국 -->
+        <div class="md:col-span-5 md:pr-8">
+          <p class="cap text-on-dark-2">KR — 안산 본사·공장</p>
+          <p class="mt-3 text-[18px] text-on-dark kr">설계 · 시제품 · 제어반 조립 · 최종 검사</p>
+          <dl class="mt-8">
+            <div class="rule-t py-4 flex items-baseline justify-between gap-4">
+              <dt class="text-[14px] text-on-dark-2">부지 면적</dt>
+              <dd class="text-[14px] text-on-dark tnum">4,960 ㎡</dd>
+            </div>
+            <div class="rule-t py-4 flex items-baseline justify-between gap-4">
+              <dt class="text-[14px] text-on-dark-2">상주 인원</dt>
+              <dd class="text-[14px] text-on-dark tnum">68명 (설계 14명)</dd>
+            </div>
+            <div class="rule-t py-4 flex items-baseline justify-between gap-4">
+              <dt class="text-[14px] text-on-dark-2">월 생산 능력</dt>
+              <dd class="text-[14px] text-on-dark tnum">제어반 320면</dd>
+            </div>
+            <div class="rule-t rule-b py-4 flex items-baseline justify-between gap-4">
+              <dt class="text-[14px] text-on-dark-2">가동</dt>
+              <dd class="text-[14px] text-on-dark tnum">1999년~</dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- 베트남 -->
+        <div class="md:col-span-5 md:rule-l md:pl-8">
+          <p class="cap text-on-dark-2">VN — TECH-ON VINA · 박닌</p>
+          <p class="mt-3 text-[18px] text-on-dark kr">SMT 실장 · 하네스 · 양산 조립</p>
+          <dl class="mt-8">
+            <div class="rule-t py-4 flex items-baseline justify-between gap-4">
+              <dt class="text-[14px] text-on-dark-2">부지 면적</dt>
+              <dd class="text-[14px] text-on-dark tnum">11,700 ㎡</dd>
+            </div>
+            <div class="rule-t py-4 flex items-baseline justify-between gap-4">
+              <dt class="text-[14px] text-on-dark-2">상주 인원</dt>
+              <dd class="text-[14px] text-on-dark tnum">212명 (한국인 주재 6명)</dd>
+            </div>
+            <div class="rule-t py-4 flex items-baseline justify-between gap-4">
+              <dt class="text-[14px] text-on-dark-2">월 생산 능력</dt>
+              <dd class="text-[14px] text-on-dark tnum">PCBA 42만 점</dd>
+            </div>
+            <div class="rule-t rule-b py-4 flex items-baseline justify-between gap-4">
+              <dt class="text-[14px] text-on-dark-2">가동</dt>
+              <dd class="text-[14px] text-on-dark tnum">2016년~</dd>
+            </div>
+          </dl>
+        </div>
+
+        <figure class="md:col-span-2 md:pl-8 flex md:items-end">
+          <div class="w-full">
+            <div class="p-1 bg-rule-dark rounded-[4px]">
+              <img src="https://picsum.photos/seed/techon-vina-line/900/1200"
+                   alt="TECH-ON VINA 박닌 공장의 SMT 실장 라인. 마운터 설비가 일렬로 배치되어 있다."
+                   width="900" height="1200" loading="lazy" decoding="async"
+                   class="w-full h-[220px] md:h-[300px] object-cover rounded-[0px] ring-1 ring-white/10">
+            </div>
+            <figcaption class="mt-3 text-[12px] text-on-dark-2 tnum kr">FIG. 02 — 박닌 SMT 2라인</figcaption>
+          </div>
+        </figure>
+      </div>
+
+      <!-- 인증 -->
+      <ul class="mt-16 rule-t pt-8 flex flex-wrap gap-x-8 gap-y-3 text-[12px] text-on-dark-2">
+        <li class="cap">ISO 9001:2015</li>
+        <li class="cap">ISO 14001:2015</li>
+        <li class="cap">KS C IEC 61439</li>
+        <li class="cap">UL 508A</li>
+        <li class="cap">KC 안전인증</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══════════════════ 04 · 진행 순서 (텅 빈 밀도) ══════════════════ -->
+  <section id="flow" class="rule-b scroll-mt-16">
+    <div class="mx-auto max-w-[1400px] px-4 md:px-8 py-24 md:py-32">
+
+      <p class="cap text-ink-3">Sheet 04 — 진행 순서</p>
+      <h2 class="mt-4 max-w-[20ch] text-[30px] leading-snug tracking-[-0.02em] font-semibold text-ink balance kr">
+        문의부터 초도 출하까지 51일. 어디서 며칠 걸리는지 미리 적어 둡니다.
+      </h2>
+
+      <ol class="mt-24 grid grid-cols-1 md:grid-cols-5">
+        <li class="rule-t-m md:rule-l py-8 md:py-0 md:pl-6 md:pr-6">
+          <p class="font-display text-[30px] leading-none text-ink-3 tnum">01</p>
+          <p class="mt-6 text-[18px] font-medium text-ink kr">도면·사양 검토</p>
+          <p class="mt-3 text-[14px] leading-[1.9] text-ink-2 kr">담당 엔지니어가 직접 봅니다. 영업 담당이 아니라.</p>
+          <p class="mt-6 text-[14px] text-ink tnum">2일</p>
+        </li>
+        <li class="rule-t-m md:rule-l py-8 md:py-0 md:pl-6 md:pr-6">
+          <p class="font-display text-[30px] leading-none text-ink-3 tnum">02</p>
+          <p class="mt-6 text-[18px] font-medium text-ink kr">견적·사양 확정</p>
+          <p class="mt-3 text-[14px] leading-[1.9] text-ink-2 kr">자재 단가와 공수를 나눠 적은 견적서를 드립니다. 총액 한 줄짜리 견적은 보내지 않습니다.</p>
+          <p class="mt-6 text-[14px] text-ink tnum">3일</p>
+        </li>
+        <li class="rule-t-m md:rule-l py-8 md:py-0 md:pl-6 md:pr-6">
+          <p class="font-display text-[30px] leading-none text-ink-3 tnum">03</p>
+          <p class="mt-6 text-[18px] font-medium text-ink kr">시제품 제작</p>
+          <p class="mt-3 text-[14px] leading-[1.9] text-ink-2 kr">안산에서 만듭니다.</p>
+          <p class="mt-6 text-[14px] text-ink tnum">14일</p>
+        </li>
+        <li class="rule-t-m md:rule-l py-8 md:py-0 md:pl-6 md:pr-6">
+          <p class="font-display text-[30px] leading-none text-ink-3 tnum">04</p>
+          <p class="mt-6 text-[18px] font-medium text-ink kr">초도품 검사</p>
+          <p class="mt-3 text-[14px] leading-[1.9] text-ink-2 kr">치수·배선·내압 항목별 FAI 성적서를 냅니다. 고객 입회 검사도 이 단계입니다.</p>
+          <p class="mt-6 text-[14px] text-ink tnum">4일</p>
+        </li>
+        <li class="rule-t-m md:rule-l rule-b-m py-8 md:py-0 md:pl-6">
+          <p class="font-display text-[30px] leading-none text-ink-3 tnum">05</p>
+          <p class="mt-6 text-[18px] font-medium text-ink kr">양산·출하</p>
+          <p class="mt-3 text-[14px] leading-[1.9] text-ink-2 kr">2차 물량부터 박닌으로 이관합니다.</p>
+          <p class="mt-6 text-[14px] text-ink tnum">28일</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ══════════════════ 05 · 품질 ══════════════════ -->
+  <section id="quality" class="rule-b scroll-mt-16">
+    <div class="mx-auto max-w-[1400px] px-4 md:px-8 py-16 md:py-24">
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+        <div class="md:col-span-5">
+          <p class="cap text-ink-3">Sheet 05 — 품질</p>
+          <h2 class="mt-4 text-[30px] leading-snug tracking-[-0.02em] font-semibold text-ink balance kr">
+            89 PPM은 검사 장비 목록에서 나옵니다
+          </h2>
+          <p class="mt-6 max-w-[42ch] text-[14px] leading-[1.9] text-ink-2 kr">
+            2025년 출하 3,410면 중 고객 클레임 3건. 사내 공정 불량은 별도로 집계해
+            매월 첫째 주 품질회의에서 원인 부품 단위까지 공개합니다. 아래는 그 판정을
+            내리는 설비 전부입니다.
+          </p>
+
+          <figure class="mt-12">
+            <div class="p-1 bg-rule rounded-[4px]">
+              <img src="https://picsum.photos/seed/techon-aoi-inspect/1200/800"
+                   alt="3D AOI 장비 화면으로 PCB 실장 상태를 확인하는 검사 공정."
+                   width="1200" height="800" loading="lazy" decoding="async"
+                   class="w-full h-[240px] object-cover rounded-[0px] ring-1 ring-black/10">
+            </div>
+            <figcaption class="mt-3 text-[12px] text-ink-3 tnum">FIG. 03 — 박닌 3D AOI 전수 검사</figcaption>
+          </figure>
+        </div>
+
+        <div class="md:col-span-7 md:rule-l md:pl-8">
+          <ul class="text-[14px]">
+            <li class="rule-t py-4 flex items-baseline justify-between gap-6">
+              <span class="text-ink-2 kr">3D AOI (실장 전수 검사)</span>
+              <span class="text-ink tnum whitespace-nowrap">2대</span>
+            </li>
+            <li class="rule-t py-4 flex items-baseline justify-between gap-6">
+              <span class="text-ink-2 kr">ICT 인서킷 테스터</span>
+              <span class="text-ink tnum whitespace-nowrap">1대</span>
+            </li>
+            <li class="rule-t py-4 flex items-baseline justify-between gap-6">
+              <span class="text-ink-2 kr">X&#8209;Ray 검사기 (BGA·QFN 접합부)</span>
+              <span class="text-ink tnum whitespace-nowrap">1대</span>
+            </li>
+            <li class="rule-t py-4 flex items-baseline justify-between gap-6">
+              <span class="text-ink-2 kr">내압·절연저항 시험기 (AC 2,000V / 1분)</span>
+              <span class="text-ink tnum whitespace-nowrap">4대</span>
+            </li>
+            <li class="rule-t py-4 flex items-baseline justify-between gap-6">
+              <span class="text-ink-2 kr">열화상 카메라 (통전 후 발열 확인)</span>
+              <span class="text-ink tnum whitespace-nowrap">2대</span>
+            </li>
+            <li class="rule-t rule-b py-4 flex items-baseline justify-between gap-6">
+              <span class="text-ink-2 kr">항온항습 챔버 (&#8722;40 ~ 85℃)</span>
+              <span class="text-ink tnum whitespace-nowrap">1대</span>
+            </li>
+          </ul>
+
+          <dl class="mt-16 grid grid-cols-3">
+            <div class="rule-t py-8 pr-4">
+              <dt class="cap text-ink-3">클레임</dt>
+              <dd class="mt-3 font-display text-[48px] leading-none text-ink tnum">3<span class="text-[18px] font-normal text-ink-3 ml-2">건</span></dd>
+            </div>
+            <div class="rule-t rule-l py-8 pl-4 pr-4">
+              <dt class="cap text-ink-3">전수 검사</dt>
+              <dd class="mt-3 font-display text-[48px] leading-none text-ink tnum">100<span class="text-[18px] font-normal text-ink-3 ml-2">%</span></dd>
+            </div>
+            <div class="rule-t rule-l py-8 pl-4">
+              <dt class="cap text-ink-3">성적서 보관</dt>
+              <dd class="mt-3 font-display text-[48px] leading-none text-ink tnum">10<span class="text-[18px] font-normal text-ink-3 ml-2">년</span></dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ 06 · 납품처와 현장 의견 ══════════════════ -->
+  <section id="clients" class="rule-b">
+    <div class="mx-auto max-w-[1400px] px-4 md:px-8 py-16 md:py-24">
+      <p class="cap text-ink-3">Sheet 06 — 납품처</p>
+      <h2 class="mt-4 text-[30px] leading-snug tracking-[-0.02em] font-semibold text-ink balance kr">
+        3년 이상 거래를 이어온 곳들
+      </h2>
+
+      <ul class="mt-12 rule-t grid grid-cols-2 md:grid-cols-4 text-[18px] text-ink-2">
+        <li class="rule-b py-4 md:pr-8 kr">대신중공업 <span class="text-[14px] text-ink-3 tnum block mt-1">2011~ · 배전반</span></li>
+        <li class="rule-b rule-l py-4 pl-4 md:pl-8 md:pr-8 kr">한백정밀 <span class="text-[14px] text-ink-3 tnum block mt-1">2014~ · 장비 판넬</span></li>
+        <li class="rule-b md:rule-l py-4 md:pl-8 md:pr-8 kr">서일오토메이션 <span class="text-[14px] text-ink-3 tnum block mt-1">2016~ · PCBA</span></li>
+        <li class="rule-b rule-l py-4 pl-4 md:pl-8 kr">케이엠테크 <span class="text-[14px] text-ink-3 tnum block mt-1">2018~ · 하네스</span></li>
+        <li class="rule-b py-4 md:pr-8 kr">정우전기 <span class="text-[14px] text-ink-3 tnum block mt-1">2019~ · 분전반</span></li>
+        <li class="rule-b rule-l py-4 pl-4 md:pl-8 md:pr-8 kr">유진플랜트 <span class="text-[14px] text-ink-3 tnum block mt-1">2020~ · MCC</span></li>
+        <li class="rule-b md:rule-l py-4 md:pl-8 md:pr-8 kr">세아엔지니어링 <span class="text-[14px] text-ink-3 tnum block mt-1">2021~ · 자동화 설비</span></li>
+        <li class="rule-b rule-l py-4 pl-4 md:pl-8 kr">광진산업기계 <span class="text-[14px] text-ink-3 tnum block mt-1">2023~ · 제어 판넬</span></li>
+      </ul>
+
+      <div class="mt-16 grid grid-cols-1 md:grid-cols-12 gap-8">
+        <blockquote class="md:col-span-5 rule-t pt-8">
+          <p class="text-[18px] leading-[1.75] text-ink kr -ml-2">
+            &ldquo;도면 수정본을 금요일 저녁에 보냈는데 월요일 아침에 반영된 배선도가 와 있었습니다.&rdquo;
+          </p>
+          <footer class="mt-6 text-[14px] text-ink-3">
+            박도현 · 설비팀 과장, 한백정밀 <span class="tnum">— 2025.11</span>
+          </footer>
+        </blockquote>
+
+        <blockquote class="md:col-span-7 md:rule-l md:pl-8 rule-t pt-8">
+          <p class="text-[18px] leading-[1.75] text-ink kr -ml-2">
+            &ldquo;베트남 이관 얘기가 나왔을 때 솔직히 품질이 떨어질 거라고 봤습니다. 초도 40면을
+            전수로 열어봤는데 압착 상태가 안산에서 받던 것과 같았습니다. 검사 성적서 양식도
+            그대로였고요. 지금은 연 1,200면을 박닌 물량으로 받고 있습니다.&rdquo;
+          </p>
+          <footer class="mt-6 text-[14px] text-ink-3">
+            하윤서 · 구매팀 차장, 서일오토메이션 <span class="tnum">— 2026.03</span>
+          </footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ 07 · 자주 묻는 질문 ══════════════════ -->
+  <section id="faq" class="rule-b scroll-mt-16">
+    <div class="mx-auto max-w-[1400px] px-4 md:px-8 py-16 md:py-24 grid grid-cols-1 md:grid-cols-12 gap-8">
+
+      <div class="md:col-span-4">
+        <p class="cap text-ink-3">Sheet 07 — 질문</p>
+        <h2 class="mt-4 text-[30px] leading-snug tracking-[-0.02em] font-semibold text-ink balance kr">
+          견적 전에 가장 많이 받는 질문
+        </h2>
+        <p class="mt-6 text-[14px] leading-[1.9] text-ink-3 kr">
+          여기에 없는 내용은 031&#8209;345&#8209;6280으로 물어보셔도 됩니다. 기술 문의는 설계팀으로 바로 연결됩니다.
+        </p>
+      </div>
+
+      <div class="md:col-span-8 md:rule-l md:pl-8">
+        <details class="rule-t">
+          <summary class="py-6 flex items-start justify-between gap-8">
+            <span class="text-[18px] text-ink kr">1면만 주문해도 받아 주시나요?</span>
+            <span class="faq-mark text-[18px] text-ink-3 leading-none mt-1" aria-hidden="true">+</span>
+          </summary>
+          <p class="pb-6 max-w-[62ch] text-[14px] leading-[1.9] text-ink-2 kr">
+            받습니다. 2025년 수주 건의 38%가 5면 이하였습니다. 다만 1면 주문은 자재 최소 구매 단위 때문에
+            면당 단가가 10면 주문 대비 평균 22% 높아집니다. 견적서에 그 차이를 따로 표기해 드립니다.
+          </p>
+        </details>
+
+        <details class="rule-t">
+          <summary class="py-6 flex items-start justify-between gap-8">
+            <span class="text-[18px] text-ink kr">도면이 없고 기존 반 사진만 있습니다.</span>
+            <span class="faq-mark text-[18px] text-ink-3 leading-none mt-1" aria-hidden="true">+</span>
+          </summary>
+          <p class="pb-6 max-w-[62ch] text-[14px] leading-[1.9] text-ink-2 kr">
+            사진과 명판 정보만 있어도 시작합니다. 내부 사진 3~4장과 차단기 용량, 제어 전압을 알려 주시면
+            설계팀이 단선도를 역작성해 확인 요청을 드립니다. 이 작업에는 별도 비용을 청구하지 않습니다.
+          </p>
+        </details>
+
+        <details class="rule-t">
+          <summary class="py-6 flex items-start justify-between gap-8">
+            <span class="text-[18px] text-ink kr">베트남 생산분과 국내 생산분의 품질이 같습니까?</span>
+            <span class="faq-mark text-[18px] text-ink-3 leading-none mt-1" aria-hidden="true">+</span>
+          </summary>
+          <p class="pb-6 max-w-[62ch] text-[14px] leading-[1.9] text-ink-2 kr">
+            검사 기준과 성적서 양식이 동일합니다. TECH&#8209;ON VINA는 (주)테크온 지분 100% 법인이고
+            품질 책임자는 안산 품질팀장이 겸임합니다. 2025년 기준 국내 출하 불량 76 PPM, 박닌 출하 불량 98 PPM으로
+            차이가 있으며 이 수치도 요청하시면 그대로 드립니다.
+          </p>
+        </details>
+
+        <details class="rule-t">
+          <summary class="py-6 flex items-start justify-between gap-8">
+            <span class="text-[18px] text-ink kr">긴급 물량은 얼마나 당길 수 있나요?</span>
+            <span class="faq-mark text-[18px] text-ink-3 leading-none mt-1" aria-hidden="true">+</span>
+          </summary>
+          <p class="pb-6 max-w-[62ch] text-[14px] leading-[1.9] text-ink-2 kr">
+            기존 양산 품목은 재고 자재 범위 안에서 최단 18일까지 단축한 사례가 있습니다.
+            신규 품목은 시제품 단계를 건너뛸 수 없어 어렵습니다.
+          </p>
+        </details>
+
+        <details class="rule-t rule-b">
+          <summary class="py-6 flex items-start justify-between gap-8">
+            <span class="text-[18px] text-ink kr">UL 508A 인증이 필요한 북미 수출 건도 가능한가요?</span>
+            <span class="faq-mark text-[18px] text-ink-3 leading-none mt-1" aria-hidden="true">+</span>
+          </summary>
+          <p class="pb-6 max-w-[62ch] text-[14px] leading-[1.9] text-ink-2 kr">
+            가능합니다. 안산공장이 UL 508A 인증 패널샵이며 UL 라벨을 부착해 출하합니다.
+            지정 부품 리스트(UL Recognized) 확인이 필요해 견적 기간이 3일 정도 더 걸립니다.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ 08 · 견적 요청 ══════════════════ -->
+  <section id="rfq" class="scroll-mt-16">
+    <div class="mx-auto max-w-[1400px] px-4 md:px-8 py-16 md:py-24">
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+        <div class="md:col-span-4">
+          <p class="cap text-ink-3">Sheet 08 — 견적 요청</p>
+          <h2 class="mt-4 text-[30px] leading-snug tracking-[-0.02em] font-semibold text-ink balance kr">
+            영업일 2일 안에 담당 엔지니어가 회신합니다
+          </h2>
+          <dl class="mt-12 text-[14px]">
+            <div class="rule-t py-4 flex justify-between gap-4">
+              <dt class="text-ink-3">기술 문의</dt>
+              <dd class="text-ink tnum">031&#8209;345&#8209;6280 (내선 2)</dd>
+            </div>
+            <div class="rule-t py-4 flex justify-between gap-4">
+              <dt class="text-ink-3">이메일</dt>
+              <dd class="text-ink">sales@tech-on.kr</dd>
+            </div>
+            <div class="rule-t rule-b py-4 flex justify-between gap-4">
+              <dt class="text-ink-3">응대 시간</dt>
+              <dd class="text-ink tnum">평일 08:30&#8211;17:30</dd>
+            </div>
+          </dl>
+          <p class="mt-8 text-[14px] leading-[1.9] text-ink-3 kr">
+            도면 파일(DWG·PDF)은 회신 메일에 첨부해 주시면 됩니다. NDA가 필요하면 먼저 보내 드립니다.
+          </p>
+        </div>
+
+        <form id="rfqForm" novalidate class="md:col-span-8 md:rule-l md:pl-8" data-cta="rfq-form">
+          <!-- 폼 전송 엔드포인트 연결 위치: action / fetch POST -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+            <div class="rule-t py-4">
+              <label for="f-company" class="cap text-ink-3 block">회사명 *</label>
+              <input id="f-company" name="company" type="text" required autocomplete="organization"
+                     class="mt-3 w-full bg-transparent text-[18px] text-ink placeholder:text-ink-3 border-0 p-0 focus:ring-0"
+                     placeholder="(주)한백정밀">
+            </div>
+            <div class="rule-t py-4">
+              <label for="f-name" class="cap text-ink-3 block">담당자 *</label>
+              <input id="f-name" name="name" type="text" required autocomplete="name"
+                     class="mt-3 w-full bg-transparent text-[18px] text-ink placeholder:text-ink-3 border-0 p-0 focus:ring-0"
+                     placeholder="박도현">
+            </div>
+            <div class="rule-t py-4">
+              <label for="f-email" class="cap text-ink-3 block">이메일 *</label>
+              <input id="f-email" name="email" type="email" required autocomplete="email"
+                     class="mt-3 w-full bg-transparent text-[18px] text-ink placeholder:text-ink-3 border-0 p-0 focus:ring-0"
+                     placeholder="dohyun@example.co.kr">
+            </div>
+            <div class="rule-t py-4">
+              <label for="f-tel" class="cap text-ink-3 block">연락처</label>
+              <input id="f-tel" name="tel" type="tel" autocomplete="tel" inputmode="tel"
+                     class="mt-3 w-full bg-transparent text-[18px] text-ink placeholder:text-ink-3 border-0 p-0 focus:ring-0 tnum"
+                     placeholder="010-0000-0000">
+            </div>
+            <div class="rule-t py-4">
+              <label for="f-item" class="cap text-ink-3 block">품목 *</label>
+              <select id="f-item" name="item" required
+                      class="mt-3 w-full bg-transparent text-[18px] text-ink border-0 p-0 focus:ring-0">
+                <option value="">선택해 주세요</option>
+                <option>배전·제어반</option>
+                <option>장비용 제어 판넬</option>
+                <option>PCB 실장(SMT)</option>
+                <option>케이블 하네스</option>
+                <option>커스텀 자동화 설비</option>
+                <option>아직 정하지 못했습니다</option>
+              </select>
+            </div>
+            <div class="rule-t py-4">
+              <label for="f-qty" class="cap text-ink-3 block">예상 수량</label>
+              <input id="f-qty" name="qty" type="text" inputmode="numeric"
+                     class="mt-3 w-full bg-transparent text-[18px] text-ink placeholder:text-ink-3 border-0 p-0 focus:ring-0 tnum"
+                     placeholder="12면 / 3,000점">
+            </div>
+            <div class="rule-t py-4">
+              <label for="f-due" class="cap text-ink-3 block">희망 납기</label>
+              <input id="f-due" name="due" type="text"
+                     class="mt-3 w-full bg-transparent text-[18px] text-ink placeholder:text-ink-3 border-0 p-0 focus:ring-0 tnum"
+                     placeholder="2026-10 초도">
+            </div>
+            <div class="rule-t py-4">
+              <span class="cap text-ink-3 block">도면 보유</span>
+              <div class="mt-3 flex gap-6 text-[18px] text-ink">
+                <label class="flex items-center gap-2"><input type="radio" name="dwg" value="있음" class="accent-accent"> 있음</label>
+                <label class="flex items-center gap-2"><input type="radio" name="dwg" value="없음" class="accent-accent"> 없음</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="rule-t py-4">
+            <label for="f-msg" class="cap text-ink-3 block">문의 내용</label>
+            <textarea id="f-msg" name="msg" rows="4"
+                      class="mt-3 w-full bg-transparent text-[18px] leading-[1.75] text-ink placeholder:text-ink-3 border-0 p-0 focus:ring-0 resize-y kr"
+                      placeholder="현장 조건, 사용 전압, 기존 반 교체 여부 등 아는 만큼만 적어 주세요."></textarea>
+          </div>
+
+          <div class="rule-t rule-b py-4">
+            <label for="f-agree" class="flex items-start gap-3 text-[14px] text-ink-2 kr">
+              <input id="f-agree" name="agree" type="checkbox" required class="mt-1 accent-accent">
+              <span>견적 회신을 위한 개인정보(이름·연락처·이메일) 수집·이용에 동의합니다.
+                보관 기간 3년. <a href="/privacy" class="text-ink underline underline-offset-4 hover:text-accent transition-colors duration-200">개인정보처리방침</a></span>
+            </label>
+          </div>
+
+          <p id="formStatus" role="status" aria-live="polite" class="mt-4 text-[14px] text-accent kr"></p>
+
+          <button type="submit" data-cta="rfq-submit"
+                  class="mt-8 inline-flex items-center gap-3 bg-accent text-accent-ink px-8 py-4 text-[18px] font-medium
+                         hover:bg-ink transition-colors duration-200">
+            견적 요청 보내기
+            <iconify-icon icon="solar:arrow-right-linear" class="text-[18px]" aria-hidden="true"></iconify-icon>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ══════════════════ 표제란 (푸터) ══════════════════ -->
+  <footer data-band="dark" class="bg-surface text-on-dark-2">
+    <div class="mx-auto max-w-[1400px] px-4 md:px-8 pt-16 md:pt-24 pb-24 md:pb-32">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+
+        <div class="md:col-span-4">
+          <p class="font-display text-[18px] font-semibold tracking-[-0.02em] text-on-dark">TECH&#8209;ON</p>
+          <p class="mt-3 text-[14px] leading-[1.9] kr">
+            산업용 제어반 · 전자 어셈블리 · 커스텀 자동화 설비 OEM/ODM<br>
+            안산 본사 · TECH&#8209;ON VINA (박닌)
+          </p>
+        </div>
+
+        <div class="md:col-span-4 md:rule-l md:pl-8">
+          <p class="cap text-on-dark-2">사업자 정보</p>
+          <dl class="mt-4 text-[14px] leading-[1.9]">
+            <div class="flex gap-3"><dt class="w-24 shrink-0">상호</dt><dd class="text-on-dark">(주)테크온</dd></div>
+            <div class="flex gap-3"><dt class="w-24 shrink-0">대표이사</dt><dd class="text-on-dark">정성우</dd></div>
+            <div class="flex gap-3"><dt class="w-24 shrink-0">사업자번호</dt><dd class="text-on-dark tnum">134-81-27615</dd></div>
+            <div class="flex gap-3"><dt class="w-24 shrink-0">주소</dt><dd class="text-on-dark kr">경기도 안산시 단원구 산단로 148</dd></div>
+            <div class="flex gap-3"><dt class="w-24 shrink-0">전화</dt><dd class="text-on-dark tnum">031-345-6280</dd></div>
+          </dl>
+        </div>
+
+        <div class="md:col-span-4 md:rule-l md:pl-8">
+          <p class="cap text-on-dark-2">문서</p>
+          <ul class="mt-4 text-[14px] leading-[2]">
+            <li><a href="/privacy" class="hover:text-on-dark transition-colors duration-200">개인정보처리방침</a></li>
+            <li><a href="/terms" class="hover:text-on-dark transition-colors duration-200">이용약관</a></li>
+            <li><a href="/company-profile.pdf" class="hover:text-on-dark transition-colors duration-200">회사 소개서 (PDF)</a></li>
+            <li><a href="#rfq" class="hover:text-on-dark transition-colors duration-200" data-cta="footer-rfq">견적 요청</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-16 rule-t pt-6 flex flex-wrap items-baseline justify-between gap-4 text-[12px]">
+        <p class="tnum">© 2026 TECH-ON Co., Ltd. All rights reserved.</p>
+        <p class="cap">DWG. TO-2026-001 · REV. 07</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════════════════ 하단 액션 바 ══════════════════ -->
+  <div id="dockbar" class="fixed bottom-0 inset-x-0 z-40 bg-paper-hi rule-t">
+    <div class="mx-auto max-w-[1400px] px-4 md:px-8 py-3 flex items-center justify-between gap-4">
+      <p class="hidden md:block text-[12px] text-ink-3 tnum">DWG. TO-2026-001 · (주)테크온 제어반 OEM</p>
+      <div class="flex items-center gap-3 w-full md:w-auto">
+        <a href="tel:0313456280" data-cta="dock-tel"
+           class="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-6 py-4 text-[14px] text-ink hover:bg-paper transition-colors duration-200">
+          <iconify-icon icon="solar:phone-rounded-linear" class="text-[18px]" aria-hidden="true"></iconify-icon>
+          <span class="tnum">031-345-6280</span>
+        </a>
+        <a href="#rfq" data-cta="dock-rfq"
+           class="flex-1 md:flex-none inline-flex items-center justify-center gap-2 bg-accent text-accent-ink px-6 py-4 text-[14px] font-medium hover:bg-ink transition-colors duration-200">
+          견적 요청
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ 구조화 데이터 ══════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "(주)테크온",
+    "alternateName": "TECH-ON",
+    "url": "https://www.tech-on.kr",
+    "logo": "https://www.tech-on.kr/logo.png",
+    "foundingDate": "1999",
+    "description": "산업용 제어반, 전자 어셈블리, PCB 실장, 케이블 하네스, 커스텀 자동화 설비를 OEM·ODM으로 제작하는 제조사.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "단원구 산단로 148",
+      "addressLocality": "안산시",
+      "addressRegion": "경기도",
+      "addressCountry": "KR"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+82-31-345-6280",
+      "contactType": "sales",
+      "email": "sales@tech-on.kr",
+      "availableLanguage": ["ko", "en", "vi"]
+    },
+    "subOrganization": {
+      "@type": "Organization",
+      "name": "TECH-ON VINA",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bac Ninh",
+        "addressCountry": "VN"
+      }
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "1면만 주문해도 받아 주시나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "받습니다. 2025년 수주 건의 38%가 5면 이하였습니다. 다만 1면 주문은 자재 최소 구매 단위 때문에 면당 단가가 10면 주문 대비 평균 22% 높아집니다. 견적서에 그 차이를 따로 표기해 드립니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "도면이 없고 기존 반 사진만 있습니다.",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "사진과 명판 정보만 있어도 시작합니다. 내부 사진 3~4장과 차단기 용량, 제어 전압을 알려 주시면 설계팀이 단선도를 역작성해 확인 요청을 드립니다. 이 작업에는 별도 비용을 청구하지 않습니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "베트남 생산분과 국내 생산분의 품질이 같습니까?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "검사 기준과 성적서 양식이 동일합니다. TECH-ON VINA는 (주)테크온 지분 100% 법인이고 품질 책임자는 안산 품질팀장이 겸임합니다. 2025년 기준 국내 출하 불량 76 PPM, 박닌 출하 불량 98 PPM으로 차이가 있으며 이 수치도 요청하시면 그대로 드립니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "긴급 물량은 얼마나 당길 수 있나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "기존 양산 품목은 재고 자재 범위 안에서 최단 18일까지 단축한 사례가 있습니다. 신규 품목은 시제품 단계를 건너뛸 수 없어 어렵습니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "UL 508A 인증이 필요한 북미 수출 건도 가능한가요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "가능합니다. 안산공장이 UL 508A 인증 패널샵이며 UL 라벨을 부착해 출하합니다. 지정 부품 리스트(UL Recognized) 확인이 필요해 견적 기간이 3일 정도 더 걸립니다."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script>
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* 섹션 진입 */
+      var rv = document.querySelectorAll('[data-rv]');
+      if (reduce || !('IntersectionObserver' in window)) {
+        rv.forEach(function (el) { el.classList.add('in'); });
+      } else {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+          });
+        }, { rootMargin: '0px 0px -12% 0px' });
+        rv.forEach(function (el) { io.observe(el); });
+      }
+
+      /* 하단 액션 바 : 표지를 지나면 올라오고, 견적 폼에 닿으면 내려간다 */
+      var dock = document.getElementById('dockbar');
+      var cover = document.getElementById('cover');
+      var rfq = document.getElementById('rfq');
+      var pastCover = false, atForm = false;
+      function sync() { dock.setAttribute('data-visible', (pastCover && !atForm) ? 'true' : 'false'); }
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (es) {
+          pastCover = !es[0].isIntersecting; sync();
+        }, { threshold: 0 }).observe(cover);
+        new IntersectionObserver(function (es) {
+          atForm = es[0].isIntersecting; sync();
+        }, { threshold: 0.15 }).observe(rfq);
+      } else { dock.setAttribute('data-visible', 'true'); }
+
+      /* 견적 폼 */
+      var form = document.getElementById('rfqForm');
+      var status = document.getElementById('formStatus');
+      form.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        var required = form.querySelectorAll('[required]');
+        for (var i = 0; i < required.length; i++) {
+          var f = required[i];
+          var empty = (f.type === 'checkbox') ? !f.checked : !f.value.trim();
+          if (empty || (f.type === 'email' && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.value))) {
+            status.textContent = '필수 항목을 확인해 주세요 — ' +
+              (f.labels && f.labels[0] ? f.labels[0].textContent.replace('*', '').trim() : '입력값');
+            f.focus();
+            return;
+          }
+        }
+        status.textContent = '접수되었습니다. 영업일 2일 안에 담당 엔지니어가 회신합니다.';
+        form.querySelector('button[type="submit"]').disabled = true;
+      });
+    })();
+  </script>
+</body>
+</html>

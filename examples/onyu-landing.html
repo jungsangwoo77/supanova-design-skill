@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>온유 ONYU | 하루를 다스리는 유기농 발효차 정기구독</title>
+  <meta name="description" content="국내산 유기농 찻잎을 저온에서 천천히 발효한 온유. 매일 마시는 차 한 잔으로 속을 편안하게, 정기구독으로 2주마다 신선하게 배송받으세요. 첫 구독 30% 할인.">
+  <link rel="canonical" href="https://onyu.kr">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="온유 ONYU | 하루를 다스리는 유기농 발효차 정기구독">
+  <meta property="og:description" content="국내산 유기농 찻잎을 저온 발효한 프리미엄 웰니스 차. 2주마다 신선하게 배송되는 정기구독으로 만나보세요.">
+  <meta property="og:image" content="https://picsum.photos/seed/onyu-og/1200/630">
+  <meta property="og:url" content="https://onyu.kr">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="온유 ONYU">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="온유 ONYU | 하루를 다스리는 유기농 발효차 정기구독">
+  <meta name="twitter:description" content="국내산 유기농 찻잎을 저온 발효한 프리미엄 웰니스 차. 2주마다 신선하게 배송받으세요.">
+  <meta name="twitter:image" content="https://picsum.photos/seed/onyu-og/1200/630">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236E7B5B'/%3E%3Ctext x='16' y='22' font-size='18' text-anchor='middle' fill='%23FAF7F0' font-family='serif'%3E%E6%B9%AF%3C/text%3E%3C/svg%3E">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
+  <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Pretendard', 'system-ui', 'sans-serif'],
+            serif: ['Fraunces', 'Pretendard', 'serif'],
+          },
+          colors: {
+            brand: 'var(--brand)',
+            'brand-soft': 'var(--brand-soft)',
+            espresso: 'var(--espresso)',
+            cream: 'var(--bg)',
+            surface: 'var(--surface)',
+            ink: 'var(--text)',
+            muted: 'var(--muted)',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    :root {
+      --brand: #6E7B5B;          /* 세이지 그린 액센트 (채도 낮음) */
+      --brand-soft: #98A681;     /* 밝은 세이지 */
+      --brand-ink: #F4F6EF;      /* 세이지 위 텍스트 */
+      --espresso: #3B2F2A;       /* 에스프레소 딥 */
+      --bg: #FAF7F0;             /* 크림 종이 배경 */
+      --surface: #F2ECDF;        /* 카드/서피스 */
+      --surface-2: #FFFFFF;      /* 화이트 페이퍼 */
+      --text: #2C2420;           /* 본문 잉크 */
+      --muted: #6E635B;          /* 보조 텍스트 (대비 4.5:1) */
+      --line: #E4DBCB;           /* 헤어라인 */
+      --radius: 2rem;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* 종이 노이즈 텍스처 */
+    .paper-noise::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      pointer-events: none;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+    }
+
+    .display { font-family: 'Fraunces', 'Pretendard', serif; }
+    .u-ease { transition: all 0.5s var(--ease); }
+
+    /* Double-Bezel 표면 */
+    .bezel {
+      background: rgba(59, 47, 42, 0.04);
+      padding: 0.375rem;
+      border-radius: var(--radius);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+    }
+    .bezel-core {
+      background: var(--surface-2);
+      border-radius: calc(var(--radius) - 0.375rem);
+      box-shadow: inset 0 1px 1px rgba(255,255,255,0.8), 0 10px 40px -18px rgba(59,47,42,0.25);
+    }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: .4rem;
+      border-radius: 9999px; padding: .3rem .75rem;
+      font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+      font-weight: 500;
+      background: rgba(110,123,91,0.12); color: var(--brand);
+    }
+
+    /* CTA */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .75rem;
+      border-radius: 9999px; padding: 1rem 1.25rem 1rem 1.75rem;
+      background: var(--espresso); color: var(--bg);
+      font-weight: 600; font-size: 1.0625rem;
+      transition: all 0.5s var(--ease);
+    }
+    .btn-primary .arrow {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 2rem; height: 2rem; border-radius: 9999px;
+      background: rgba(250,247,240,0.14);
+      transition: all 0.5s var(--ease);
+    }
+    .btn-primary:hover { transform: scale(1.02); box-shadow: 0 18px 40px -16px rgba(59,47,42,0.55); }
+    .btn-primary:hover .arrow { transform: translateX(4px); }
+    .btn-primary:active { transform: scale(0.98); }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: .6rem;
+      border-radius: 9999px; padding: 1rem 1.5rem;
+      border: 1px solid var(--espresso); color: var(--espresso);
+      font-weight: 600; font-size: 1.0625rem;
+      transition: all 0.5s var(--ease);
+    }
+    .btn-ghost:hover { background: var(--espresso); color: var(--bg); transform: scale(1.02); }
+    .btn-ghost:active { transform: scale(0.98); }
+
+    :where(a, button, summary, input, [tabindex]):focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--brand);
+      border-radius: 6px;
+    }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(2rem); filter: blur(4px); }
+    .reveal.in {
+      opacity: 1; transform: translateY(0); filter: blur(0);
+      transition: opacity 0.9s var(--ease), transform 0.9s var(--ease), filter 0.9s var(--ease);
+      transition-delay: calc(var(--i, 0) * 80ms);
+    }
+
+    /* Marquee */
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee-track { display: flex; width: max-content; animation: marquee 32s linear infinite; }
+
+    /* Floating steam */
+    @keyframes drift { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-14px) rotate(1.5deg); } }
+    .drift { animation: drift 9s ease-in-out infinite; }
+
+    details.faq > summary { list-style: none; cursor: pointer; }
+    details.faq > summary::-webkit-details-marker { display: none; }
+    details.faq[open] .faq-icon { transform: rotate(45deg); }
+    details.faq > div { overflow: hidden; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1 !important; transform: none !important; filter: none !important; }
+    }
+  </style>
+</head>
+
+<body class="paper-noise font-sans antialiased">
+<!-- Analytics: GA4 / GTM / 광고 픽셀 삽입 위치 -->
+
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-[70] focus:top-4 focus:left-4 focus:bg-espresso focus:text-cream focus:px-4 focus:py-2 focus:rounded-full">본문 바로가기</a>
+
+  <!-- ============ NAV ============ -->
+  <header class="fixed top-0 inset-x-0 z-40 px-4">
+    <nav aria-label="주요 메뉴" class="mt-4 mx-auto w-full max-w-6xl flex items-center justify-between rounded-full backdrop-blur-xl bg-[rgba(250,247,240,0.72)] border border-[var(--line)] pl-6 pr-3 py-2.5 shadow-[0_8px_30px_-18px_rgba(59,47,42,0.4)]">
+      <a href="#main" class="flex items-center gap-2" aria-label="온유 홈">
+        <span class="display text-2xl font-semibold text-espresso tracking-tight">온유</span>
+        <span class="hidden sm:inline text-[11px] tracking-[0.3em] text-muted mt-1">ONYU</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8 text-[15px] font-medium text-ink/80">
+        <a href="#story" class="u-ease hover:text-espresso">브랜드 이야기</a>
+        <a href="#benefits" class="u-ease hover:text-espresso">효능</a>
+        <a href="#plans" class="u-ease hover:text-espresso">정기구독</a>
+        <a href="#reviews" class="u-ease hover:text-espresso">후기</a>
+        <a href="#faq" class="u-ease hover:text-espresso">자주 묻는 질문</a>
+      </div>
+      <div class="flex items-center gap-2">
+        <button type="button" aria-label="장바구니 열기" class="hidden sm:inline-flex u-ease w-10 h-10 rounded-full items-center justify-center text-espresso hover:bg-[var(--surface)]">
+          <iconify-icon icon="solar:bag-4-linear" width="22" aria-hidden="true"></iconify-icon>
+        </button>
+        <a href="#plans" data-cta="nav-subscribe" class="hidden sm:inline-flex u-ease rounded-full bg-espresso text-cream px-5 py-2.5 text-[15px] font-semibold hover:scale-[1.02] active:scale-[0.98]">구독 시작</a>
+        <button type="button" id="menuBtn" aria-label="메뉴 열기" aria-expanded="false" class="md:hidden u-ease w-10 h-10 rounded-full flex items-center justify-center text-espresso hover:bg-[var(--surface)]">
+          <iconify-icon icon="solar:hamburger-menu-linear" width="24" aria-hidden="true"></iconify-icon>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mobile menu overlay -->
+  <div id="mobileMenu" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 backdrop-blur-3xl bg-[rgba(250,247,240,0.92)]"></div>
+    <div class="relative min-h-[100dvh] flex flex-col px-6 pt-24 pb-10">
+      <button type="button" id="menuClose" aria-label="메뉴 닫기" class="absolute top-7 right-6 w-11 h-11 rounded-full flex items-center justify-center text-espresso border border-[var(--line)]">
+        <iconify-icon icon="solar:close-circle-linear" width="26" aria-hidden="true"></iconify-icon>
+      </button>
+      <nav aria-label="모바일 메뉴" class="flex flex-col gap-2 text-espresso">
+        <a href="#story" class="mobile-link display text-4xl py-3 border-b border-[var(--line)]">브랜드 이야기</a>
+        <a href="#benefits" class="mobile-link display text-4xl py-3 border-b border-[var(--line)]">효능</a>
+        <a href="#plans" class="mobile-link display text-4xl py-3 border-b border-[var(--line)]">정기구독</a>
+        <a href="#reviews" class="mobile-link display text-4xl py-3 border-b border-[var(--line)]">후기</a>
+        <a href="#faq" class="mobile-link display text-4xl py-3 border-b border-[var(--line)]">자주 묻는 질문</a>
+      </nav>
+      <a href="#plans" data-cta="mobilemenu-subscribe" class="btn-primary mt-auto justify-center w-full">
+        구독 시작하기 <span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18" aria-hidden="true"></iconify-icon></span>
+      </a>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- ============ 1. HERO (Editorial Split) ============ -->
+    <section class="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28 lg:pt-44">
+      <div class="pointer-events-none absolute -top-24 -left-24 w-[36rem] h-[36rem] rounded-full bg-brand/10 blur-3xl drift" aria-hidden="true"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+
+          <div class="lg:col-span-6 xl:col-span-5">
+            <span class="eyebrow reveal">국내산 유기농 · 저온 발효</span>
+            <h1 class="reveal mt-6 display font-semibold text-espresso tracking-tight leading-[1.08] text-[3.25rem] sm:text-6xl lg:text-7xl break-keep-all" style="--i:1">
+              하루를<br>
+              <span class="italic text-brand">다스리는</span> 차,<br>
+              온유.
+            </h1>
+            <p class="reveal mt-7 text-lg text-muted leading-relaxed max-w-[46ch] break-keep-all" style="--i:2">
+              서두르지 않고 천천히 익힌 발효차입니다. 카페인은 낮추고 풍미는 깊게, 매일 마시는 한 잔이 속을 편안하게 다독입니다.
+            </p>
+            <div class="reveal mt-9 flex flex-col sm:flex-row gap-3" style="--i:3">
+              <a href="#plans" data-cta="hero-subscribe" class="btn-primary justify-center">
+                첫 구독 30% 할인 받기
+                <span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18" aria-hidden="true"></iconify-icon></span>
+              </a>
+              <a href="#story" data-cta="hero-story" class="btn-ghost justify-center">
+                <iconify-icon icon="solar:leaf-linear" width="20" aria-hidden="true"></iconify-icon>
+                온유의 이야기
+              </a>
+            </div>
+            <div class="reveal mt-9 flex items-center gap-5" style="--i:4">
+              <div class="flex -space-x-3">
+                <img src="https://i.pravatar.cc/80?u=onyu-hayun" alt="구독자 하윤서님 프로필" class="w-10 h-10 rounded-full border-2 border-cream object-cover" loading="lazy" decoding="async">
+                <img src="https://i.pravatar.cc/80?u=onyu-dohyun" alt="구독자 박도현님 프로필" class="w-10 h-10 rounded-full border-2 border-cream object-cover" loading="lazy" decoding="async">
+                <img src="https://i.pravatar.cc/80?u=onyu-seojin" alt="구독자 이서진님 프로필" class="w-10 h-10 rounded-full border-2 border-cream object-cover" loading="lazy" decoding="async">
+                <img src="https://i.pravatar.cc/80?u=onyu-haneul" alt="구독자 김하늘님 프로필" class="w-10 h-10 rounded-full border-2 border-cream object-cover" loading="lazy" decoding="async">
+              </div>
+              <div class="text-sm">
+                <div class="flex items-center gap-1 text-brand" aria-hidden="true">
+                  <iconify-icon icon="solar:star-bold" width="15"></iconify-icon>
+                  <iconify-icon icon="solar:star-bold" width="15"></iconify-icon>
+                  <iconify-icon icon="solar:star-bold" width="15"></iconify-icon>
+                  <iconify-icon icon="solar:star-bold" width="15"></iconify-icon>
+                  <iconify-icon icon="solar:star-bold" width="15"></iconify-icon>
+                </div>
+                <p class="text-muted mt-0.5"><span class="font-semibold text-espresso tabular-nums">47,200+</span>명이 온유와 함께합니다 · <span class="tabular-nums">4.87</span>/5.0</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-6 xl:col-span-7 relative">
+            <div class="bezel drift">
+              <div class="bezel-core overflow-hidden">
+                <img src="https://picsum.photos/seed/onyu-tea-hero/1100/1300"
+                     alt="따뜻한 김이 피어오르는 온유 발효차 한 잔과 유기농 찻잎"
+                     class="w-full h-[26rem] sm:h-[32rem] lg:h-[38rem] object-cover"
+                     width="1100" height="1300" loading="eager" fetchpriority="high" decoding="async">
+              </div>
+            </div>
+            <div class="absolute -bottom-6 -left-4 sm:left-6 bezel w-[15rem] hidden sm:block">
+              <div class="bezel-core p-5">
+                <div class="flex items-center gap-3">
+                  <div class="w-11 h-11 rounded-full bg-brand/15 flex items-center justify-center text-brand shrink-0">
+                    <iconify-icon icon="solar:cup-hot-linear" width="24" aria-hidden="true"></iconify-icon>
+                  </div>
+                  <div>
+                    <p class="display text-2xl font-semibold text-espresso leading-none tabular-nums">180일</p>
+                    <p class="text-[13px] text-muted mt-1 break-keep-all">항아리에서 자연 발효</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 2. SOCIAL PROOF (Marquee bar) ============ -->
+    <section aria-label="언론 및 파트너" class="py-8 border-y border-[var(--line)] bg-[var(--surface)]/60 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-5">
+        <p class="text-center text-[12px] tracking-[0.2em] uppercase text-muted">전국 프리미엄 리테일과 미디어가 주목한 온유</p>
+      </div>
+      <div class="relative">
+        <div class="marquee-track gap-14 text-espresso/45">
+          <span class="display text-2xl italic whitespace-nowrap">스텔라 리빙</span>
+          <span class="display text-2xl whitespace-nowrap">루미너스 매거진</span>
+          <span class="display text-2xl italic whitespace-nowrap">브릿지웍스 셀렉트</span>
+          <span class="display text-2xl whitespace-nowrap">넥스트비전 웰니스</span>
+          <span class="display text-2xl italic whitespace-nowrap">플로우 마켓</span>
+          <span class="display text-2xl whitespace-nowrap">베리파이 리빙랩</span>
+          <span class="display text-2xl italic whitespace-nowrap">스텔라 리빙</span>
+          <span class="display text-2xl whitespace-nowrap">루미너스 매거진</span>
+          <span class="display text-2xl italic whitespace-nowrap">브릿지웍스 셀렉트</span>
+          <span class="display text-2xl whitespace-nowrap">넥스트비전 웰니스</span>
+          <span class="display text-2xl italic whitespace-nowrap">플로우 마켓</span>
+          <span class="display text-2xl whitespace-nowrap">베리파이 리빙랩</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3. STORY (Editorial Split reversed) ============ -->
+    <section id="story" class="py-24 md:py-32 lg:py-40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+          <div class="reveal relative order-2 lg:order-1">
+            <div class="grid grid-cols-5 grid-rows-6 gap-4 h-[30rem] sm:h-[38rem]">
+              <div class="col-span-3 row-span-4 bezel">
+                <div class="bezel-core overflow-hidden h-full">
+                  <img src="https://picsum.photos/seed/onyu-field/700/900" alt="이른 아침 안개 낀 유기농 차밭에서 찻잎을 손으로 따는 모습" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                </div>
+              </div>
+              <div class="col-span-2 row-span-3 col-start-4 bezel">
+                <div class="bezel-core overflow-hidden h-full">
+                  <img src="https://picsum.photos/seed/onyu-jar/500/500" alt="발효가 진행 중인 전통 항아리들이 나란히 놓인 모습" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                </div>
+              </div>
+              <div class="col-span-2 row-span-3 col-start-4 row-start-4 bezel">
+                <div class="bezel-core overflow-hidden h-full">
+                  <img src="https://picsum.photos/seed/onyu-pour/500/600" alt="유리 주전자에서 맑은 발효차를 따르는 장면" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                </div>
+              </div>
+              <div class="col-span-3 row-span-2 col-start-1 row-start-5 bezel">
+                <div class="bezel-core overflow-hidden h-full">
+                  <img src="https://picsum.photos/seed/onyu-leaves/700/400" alt="건조 후 곱게 덖은 발효 찻잎 클로즈업" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="order-1 lg:order-2">
+            <span class="eyebrow reveal">우리가 차를 만드는 방식</span>
+            <h2 class="reveal mt-6 display text-4xl md:text-5xl lg:text-6xl font-semibold text-espresso leading-[1.12] tracking-tight break-keep-all" style="--i:1">
+              빠른 건 많습니다.<br>느린 건 드뭅니다.
+            </h2>
+            <p class="reveal mt-6 text-lg text-muted leading-relaxed max-w-[52ch] break-keep-all" style="--i:2">
+              온유는 지리산 자락 해발 400m 유기농 다원에서 손으로 딴 찻잎만 씁니다. 뜨거운 열로 밀어붙이는 대신, 항아리 안에서 6개월을 기다립니다. 시간이 만든 깊은 단맛과 부드러운 목넘김은 서두를수록 사라지는 것들입니다.
+            </p>
+            <dl class="reveal mt-10 grid grid-cols-2 gap-x-6 gap-y-8" style="--i:3">
+              <div class="border-l-2 border-brand pl-4">
+                <dt class="display text-3xl font-semibold text-espresso tabular-nums">100%</dt>
+                <dd class="text-sm text-muted mt-1 break-keep-all">국내산 유기농 인증 찻잎</dd>
+              </div>
+              <div class="border-l-2 border-brand pl-4">
+                <dt class="display text-3xl font-semibold text-espresso tabular-nums">0</dt>
+                <dd class="text-sm text-muted mt-1 break-keep-all">인공 향료·색소·설탕</dd>
+              </div>
+              <div class="border-l-2 border-brand pl-4">
+                <dt class="display text-3xl font-semibold text-espresso tabular-nums">저온</dt>
+                <dd class="text-sm text-muted mt-1 break-keep-all">28°C 항아리 자연 발효</dd>
+              </div>
+              <div class="border-l-2 border-brand pl-4">
+                <dt class="display text-3xl font-semibold text-espresso tabular-nums">1.2%</dt>
+                <dd class="text-sm text-muted mt-1 break-keep-all">커피 대비 낮은 카페인</dd>
+              </div>
+            </dl>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 4. BENEFITS (Asymmetric Bento) ============ -->
+    <section id="benefits" class="py-24 md:py-32 lg:py-40 bg-[var(--surface)]/50 border-y border-[var(--line)]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl">
+          <span class="eyebrow reveal">한 잔의 이유</span>
+          <h2 class="reveal mt-6 display text-4xl md:text-5xl lg:text-6xl font-semibold text-espresso leading-[1.12] tracking-tight break-keep-all" style="--i:1">
+            몸이 먼저<br>알아차리는 변화
+          </h2>
+          <p class="reveal mt-5 text-lg text-muted leading-relaxed break-keep-all" style="--i:2">
+            발효 과정에서 생긴 유익균과 폴리페놀이 매일의 리듬을 다정하게 붙잡아 줍니다.
+          </p>
+        </div>
+
+        <div class="mt-14 grid grid-cols-1 md:grid-cols-6 gap-4 md:gap-5">
+          <article class="reveal md:col-span-4 bezel" style="--i:0">
+            <div class="bezel-core p-8 md:p-10 h-full flex flex-col md:flex-row md:items-center gap-8">
+              <div class="flex-1">
+                <div class="w-12 h-12 rounded-2xl bg-brand/15 flex items-center justify-center text-brand">
+                  <iconify-icon icon="solar:stomach-linear" width="26" aria-hidden="true"></iconify-icon>
+                </div>
+                <h3 class="mt-5 display text-2xl md:text-3xl font-semibold text-espresso break-keep-all">속이 편안한 발효의 힘</h3>
+                <p class="mt-3 text-muted leading-relaxed max-w-[42ch] break-keep-all">
+                  6개월 발효로 생성된 유산균과 소화 효소가 더부룩함을 덜어 줍니다. 식후 한 잔이 습관이 되는 이유입니다.
+                </p>
+              </div>
+              <div class="md:w-44 shrink-0">
+                <img src="https://picsum.photos/seed/onyu-benefit-cup/500/500" alt="김이 오르는 온유 찻잔" class="w-full h-40 md:h-44 rounded-2xl object-cover" loading="lazy" decoding="async">
+              </div>
+            </div>
+          </article>
+
+          <article class="reveal md:col-span-2 bezel" style="--i:1">
+            <div class="bezel-core p-8 h-full flex flex-col">
+              <div class="w-12 h-12 rounded-2xl bg-brand/15 flex items-center justify-center text-brand">
+                <iconify-icon icon="solar:moon-stars-linear" width="26" aria-hidden="true"></iconify-icon>
+              </div>
+              <h3 class="mt-5 display text-2xl font-semibold text-espresso break-keep-all">저녁에도 부담 없이</h3>
+              <p class="mt-3 text-muted leading-relaxed break-keep-all">
+                커피의 1.2% 수준 카페인. 잠들기 전 마셔도 밤을 방해하지 않습니다.
+              </p>
+            </div>
+          </article>
+
+          <article class="reveal md:col-span-2 bezel" style="--i:2">
+            <div class="bezel-core p-8 h-full flex flex-col">
+              <div class="w-12 h-12 rounded-2xl bg-brand/15 flex items-center justify-center text-brand">
+                <iconify-icon icon="solar:shield-check-linear" width="26" aria-hidden="true"></iconify-icon>
+              </div>
+              <h3 class="mt-5 display text-2xl font-semibold text-espresso break-keep-all">항산화 폴리페놀</h3>
+              <p class="mt-3 text-muted leading-relaxed break-keep-all">
+                발효로 활성이 높아진 폴리페놀이 일상의 피로에 맞섭니다.
+              </p>
+            </div>
+          </article>
+
+          <article class="reveal md:col-span-4 bezel" style="--i:3">
+            <div class="bezel-core p-8 md:p-10 h-full flex flex-col md:flex-row md:items-center gap-8">
+              <div class="md:w-44 shrink-0 order-2 md:order-1">
+                <img src="https://picsum.photos/seed/onyu-benefit-leaf/500/500" alt="곱게 덖은 발효 찻잎" class="w-full h-40 md:h-44 rounded-2xl object-cover" loading="lazy" decoding="async">
+              </div>
+              <div class="flex-1 order-1 md:order-2">
+                <div class="w-12 h-12 rounded-2xl bg-brand/15 flex items-center justify-center text-brand">
+                  <iconify-icon icon="solar:leaf-linear" width="26" aria-hidden="true"></iconify-icon>
+                </div>
+                <h3 class="mt-5 display text-2xl md:text-3xl font-semibold text-espresso break-keep-all">깊지만 가벼운 풍미</h3>
+                <p class="mt-3 text-muted leading-relaxed max-w-[42ch] break-keep-all">
+                  구수한 첫맛 뒤에 은은한 단맛이 남습니다. 설탕도 향료도 없이, 찻잎이 시간과 만들어 낸 맛 그대로입니다.
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. COMPARISON (Us vs Them) ============ -->
+    <section id="compare" class="py-24 md:py-32 lg:py-40">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto">
+          <span class="eyebrow reveal">무엇이 다른가</span>
+          <h2 class="reveal mt-6 display text-4xl md:text-5xl lg:text-6xl font-semibold text-espresso leading-[1.12] tracking-tight break-keep-all" style="--i:1">
+            온유 vs 시판 티백
+          </h2>
+          <p class="reveal mt-5 text-lg text-muted leading-relaxed break-keep-all" style="--i:2">
+            가격표에 적히지 않는 차이를 정리했습니다.
+          </p>
+        </div>
+
+        <div class="reveal mt-14 bezel" style="--i:3">
+          <div class="bezel-core overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse min-w-[560px]">
+                <caption class="sr-only">온유와 일반 시판 티백의 품질 비교표</caption>
+                <thead>
+                  <tr class="border-b border-[var(--line)]">
+                    <th scope="col" class="p-5 md:p-6 text-sm font-medium text-muted">비교 항목</th>
+                    <th scope="col" class="p-5 md:p-6 bg-brand/5 rounded-t-2xl">
+                      <span class="display text-xl font-semibold text-espresso">온유</span>
+                    </th>
+                    <th scope="col" class="p-5 md:p-6 text-espresso/70 font-medium">일반 시판 티백</th>
+                  </tr>
+                </thead>
+                <tbody class="text-[15px]">
+                  <tr class="border-b border-[var(--line)]">
+                    <th scope="row" class="p-5 md:p-6 font-medium text-ink break-keep-all">원재료</th>
+                    <td class="p-5 md:p-6 bg-brand/5">
+                      <span class="inline-flex items-center gap-2 text-espresso"><iconify-icon icon="solar:check-circle-bold" width="20" class="text-brand" aria-hidden="true"></iconify-icon>국내산 유기농 통잎</span>
+                    </td>
+                    <td class="p-5 md:p-6 text-muted">
+                      <span class="inline-flex items-center gap-2"><iconify-icon icon="solar:minus-circle-linear" width="20" aria-hidden="true"></iconify-icon>수입 분쇄 찻잎 혼합</span>
+                    </td>
+                  </tr>
+                  <tr class="border-b border-[var(--line)]">
+                    <th scope="row" class="p-5 md:p-6 font-medium text-ink break-keep-all">가공 방식</th>
+                    <td class="p-5 md:p-6 bg-brand/5">
+                      <span class="inline-flex items-center gap-2 text-espresso"><iconify-icon icon="solar:check-circle-bold" width="20" class="text-brand" aria-hidden="true"></iconify-icon>180일 저온 자연 발효</span>
+                    </td>
+                    <td class="p-5 md:p-6 text-muted">
+                      <span class="inline-flex items-center gap-2"><iconify-icon icon="solar:minus-circle-linear" width="20" aria-hidden="true"></iconify-icon>고온 급속 건조</span>
+                    </td>
+                  </tr>
+                  <tr class="border-b border-[var(--line)]">
+                    <th scope="row" class="p-5 md:p-6 font-medium text-ink break-keep-all">첨가물</th>
+                    <td class="p-5 md:p-6 bg-brand/5">
+                      <span class="inline-flex items-center gap-2 text-espresso"><iconify-icon icon="solar:check-circle-bold" width="20" class="text-brand" aria-hidden="true"></iconify-icon>무향료·무색소</span>
+                    </td>
+                    <td class="p-5 md:p-6 text-muted">
+                      <span class="inline-flex items-center gap-2"><iconify-icon icon="solar:close-circle-linear" width="20" aria-hidden="true"></iconify-icon>인공 향료 첨가 잦음</span>
+                    </td>
+                  </tr>
+                  <tr class="border-b border-[var(--line)]">
+                    <th scope="row" class="p-5 md:p-6 font-medium text-ink break-keep-all">신선도</th>
+                    <td class="p-5 md:p-6 bg-brand/5">
+                      <span class="inline-flex items-center gap-2 text-espresso"><iconify-icon icon="solar:check-circle-bold" width="20" class="text-brand" aria-hidden="true"></iconify-icon>주문 후 소분·2주 배송</span>
+                    </td>
+                    <td class="p-5 md:p-6 text-muted">
+                      <span class="inline-flex items-center gap-2"><iconify-icon icon="solar:minus-circle-linear" width="20" aria-hidden="true"></iconify-icon>장기 대량 재고 유통</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="p-5 md:p-6 font-medium text-ink break-keep-all">포장</th>
+                    <td class="p-5 md:p-6 bg-brand/5 rounded-b-2xl">
+                      <span class="inline-flex items-center gap-2 text-espresso"><iconify-icon icon="solar:check-circle-bold" width="20" class="text-brand" aria-hidden="true"></iconify-icon>생분해 크래프트 포장</span>
+                    </td>
+                    <td class="p-5 md:p-6 text-muted">
+                      <span class="inline-flex items-center gap-2"><iconify-icon icon="solar:close-circle-linear" width="20" aria-hidden="true"></iconify-icon>플라스틱 삼각 티백</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 6. PLANS (Subscription pricing + toggle) ============ -->
+    <section id="plans" class="py-24 md:py-32 lg:py-40 bg-espresso text-cream relative overflow-hidden">
+      <div class="pointer-events-none absolute top-0 right-0 w-[30rem] h-[30rem] rounded-full bg-brand/20 blur-3xl" aria-hidden="true"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div class="text-center max-w-2xl mx-auto">
+          <span class="eyebrow reveal" style="background:rgba(152,166,129,0.2);color:var(--brand-soft)">정기구독</span>
+          <h2 class="reveal mt-6 display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.12] tracking-tight break-keep-all" style="--i:1">
+            떨어지기 전에,<br>알아서 도착합니다
+          </h2>
+          <p class="reveal mt-5 text-lg text-cream/70 leading-relaxed break-keep-all" style="--i:2">
+            원하는 주기로 신선하게. 언제든 건너뛰거나 해지할 수 있습니다.
+          </p>
+
+          <!-- Toggle -->
+          <div class="reveal mt-9 inline-flex items-center gap-1 p-1.5 rounded-full bg-cream/10 border border-cream/15" style="--i:3" role="group" aria-label="배송 주기 선택">
+            <button type="button" id="toggle2w" data-cta="toggle-biweekly" aria-pressed="true" class="u-ease rounded-full px-6 py-2.5 text-sm font-semibold bg-cream text-espresso">2주 배송</button>
+            <button type="button" id="toggle1m" data-cta="toggle-monthly" aria-pressed="false" class="u-ease rounded-full px-6 py-2.5 text-sm font-semibold text-cream/80">월 1회 배송 <span class="text-brand-soft">-8%</span></button>
+          </div>
+        </div>
+
+        <div class="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+
+          <!-- Tier 1 -->
+          <article class="reveal rounded-[2rem] p-8 bg-cream/[0.06] border border-cream/10 flex flex-col" style="--i:0">
+            <h3 class="display text-2xl font-semibold">가볍게 시작</h3>
+            <p class="mt-2 text-sm text-cream/60 break-keep-all">하루 한 잔, 입문용 30팩</p>
+            <div class="mt-6 flex items-end gap-1">
+              <span class="display text-5xl font-semibold tabular-nums price" data-m="23,900" data-b="19,900">19,900</span>
+              <span class="text-cream/60 mb-1.5">원 / <span class="cycle">2주</span></span>
+            </div>
+            <p class="mt-1 text-sm text-cream/45"><span class="line-through tabular-nums">28,000원</span> · 첫 구독 30% 할인</p>
+            <ul class="mt-7 space-y-3 text-[15px] text-cream/85 flex-1">
+              <li class="flex gap-3 break-keep-all"><iconify-icon icon="solar:check-circle-bold" width="20" class="text-brand-soft shrink-0 mt-0.5" aria-hidden="true"></iconify-icon>발효 홍차 30팩</li>
+              <li class="flex gap-3 break-keep-all"><iconify-icon icon="solar:check-circle-bold" width="20" class="text-brand-soft shrink-0 mt-0.5" aria-hidden="true"></iconify-icon>무료 배송</li>
+              <li class="flex gap-3 break-keep-all"><iconify-icon icon="solar:check-circle-bold" width="20" class="text-brand-soft shrink-0 mt-0.5" aria-hidden="true"></iconify-icon>언제든 해지 가능</li>
+            </ul>
+            <a href="#" data-cta="plan-starter" class="u-ease mt-8 inline-flex items-center justify-center gap-2 rounded-full border border-cream/25 py-3.5 font-semibold hover:bg-cream hover:text-espresso hover:scale-[1.02] active:scale-[0.98]">시작하기</a>
+          </article>
+
+          <!-- Tier 2 (Recommended) -->
+          <article class="reveal relative rounded-[2rem] p-8 bg-cream text-espresso border border-cream flex flex-col md:scale-105 ring-2 ring-brand shadow-[0_30px_60px_-20px_rgba(0,0,0,0.5)]" style="--i:1">
+            <span class="absolute -top-3 left-1/2 -translate-x-1/2 eyebrow" style="background:var(--brand);color:var(--brand-ink)">가장 인기</span>
+            <h3 class="display text-2xl font-semibold">매일의 루틴</h3>
+            <p class="mt-2 text-sm text-muted break-keep-all">아침·저녁 두 잔, 넉넉한 60팩</p>
+            <div class="mt-6 flex items-end gap-1">
+              <span class="display text-5xl font-semibold tabular-nums text-espresso price" data-m="37,900" data-b="32,900">32,900</span>
+              <span class="text-muted mb-1.5">원 / <span class="cycle">2주</span></span>
+            </div>
+            <p class="mt-1 text-sm text-muted"><span class="line-through tabular-nums">47,000원</span> · 첫 구독 30% 할인</p>
+            <ul class="mt-7 space-y-3 text-[15px] text-ink flex-1">
+              <li class="flex gap-3 break-keep-all"><iconify-icon icon="solar:check-circle-bold" width="20" class="text-brand shrink-0 mt-0.5" aria-hidden="true"></iconify-icon>발효 홍차·청차 60팩</li>
+              <li class="flex gap-3 break-keep-all"><iconify-icon icon="solar:check-circle-bold" width="20" class="text-brand shrink-0 mt-0.5" aria-hidden="true"></iconify-icon>계절 한정 블렌드 우선 제공</li>
+              <li class="flex gap-3 break-keep-all"><iconify-icon icon="solar:check-circle-bold" width="20" class="text-brand shrink-0 mt-0.5" aria-hidden="true"></iconify-icon>전용 유리 티포트 증정</li>
+              <li class="flex gap-3 break-keep-all"><iconify-icon icon="solar:check-circle-bold" width="20" class="text-brand shrink-0 mt-0.5" aria-hidden="true"></iconify-icon>배송일 자유 변경·건너뛰기</li>
+            </ul>
+            <a href="#" data-cta="plan-daily" class="btn-primary mt-8 justify-center">
+              이 구독 담기
+              <span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18" aria-hidden="true"></iconify-icon></span>
+            </a>
+          </article>
+
+          <!-- Tier 3 -->
+          <article class="reveal rounded-[2rem] p-8 bg-cream/[0.06] border border-cream/10 flex flex-col" style="--i:2">
+            <h3 class="display text-2xl font-semibold">함께 나누는</h3>
+            <p class="mt-2 text-sm text-cream/60 break-keep-all">가족·선물용 큐레이션 120팩</p>
+            <div class="mt-6 flex items-end gap-1">
+              <span class="display text-5xl font-semibold tabular-nums price" data-m="59,900" data-b="52,900">52,900</span>
+              <span class="text-cream/60 mb-1.5">원 / <span class="cycle">2주</span></span>
+            </div>
+            <p class="mt-1 text-sm text-cream/45"><span class="line-through tabular-nums">76,000원</span> · 첫 구독 30% 할인</p>
+            <ul class="mt-7 space-y-3 text-[15px] text-cream/85 flex-1">
+              <li class="flex gap-3 break-keep-all"><iconify-icon icon="solar:check-circle-bold" width="20" class="text-brand-soft shrink-0 mt-0.5" aria-hidden="true"></iconify-icon>4종 발효차 120팩</li>
+              <li class="flex gap-3 break-keep-all"><iconify-icon icon="solar:check-circle-bold" width="20" class="text-brand-soft shrink-0 mt-0.5" aria-hidden="true"></iconify-icon>선물 포장·카드 무료</li>
+              <li class="flex gap-3 break-keep-all"><iconify-icon icon="solar:check-circle-bold" width="20" class="text-brand-soft shrink-0 mt-0.5" aria-hidden="true"></iconify-icon>전용 티 소믈리에 상담</li>
+            </ul>
+            <a href="#" data-cta="plan-share" class="u-ease mt-8 inline-flex items-center justify-center gap-2 rounded-full border border-cream/25 py-3.5 font-semibold hover:bg-cream hover:text-espresso hover:scale-[1.02] active:scale-[0.98]">시작하기</a>
+          </article>
+        </div>
+
+        <p class="reveal mt-8 text-center text-sm text-cream/50 break-keep-all" style="--i:3">
+          모든 구독은 첫 배송 전까지 100% 무료 취소 · 개봉 후에도 14일 이내 환불 보장
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 7. REVIEWS (Masonry) ============ -->
+    <section id="reviews" class="py-24 md:py-32 lg:py-40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <div class="max-w-xl">
+            <span class="eyebrow reveal">구독자들의 이야기</span>
+            <h2 class="reveal mt-6 display text-4xl md:text-5xl lg:text-6xl font-semibold text-espresso leading-[1.12] tracking-tight break-keep-all" style="--i:1">
+              매일 아침이<br>조금 달라졌습니다
+            </h2>
+          </div>
+          <div class="reveal flex items-center gap-6" style="--i:2">
+            <div>
+              <p class="display text-4xl font-semibold text-espresso tabular-nums">4.87</p>
+              <div class="flex items-center gap-0.5 text-brand mt-1" aria-hidden="true">
+                <iconify-icon icon="solar:star-bold" width="16"></iconify-icon>
+                <iconify-icon icon="solar:star-bold" width="16"></iconify-icon>
+                <iconify-icon icon="solar:star-bold" width="16"></iconify-icon>
+                <iconify-icon icon="solar:star-bold" width="16"></iconify-icon>
+                <iconify-icon icon="solar:star-bold" width="16"></iconify-icon>
+              </div>
+            </div>
+            <div class="w-px h-12 bg-[var(--line)]"></div>
+            <div>
+              <p class="display text-4xl font-semibold text-espresso tabular-nums">12,847</p>
+              <p class="text-sm text-muted mt-1">개의 실제 후기</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-14 columns-1 md:columns-2 lg:columns-3 gap-5 [column-fill:_balance]">
+          <!-- review card template -->
+          <figure class="reveal break-inside-avoid mb-5 bezel">
+            <div class="bezel-core p-6">
+              <div class="flex items-center gap-0.5 text-brand" aria-label="별점 5점 만점에 5점">
+                <iconify-icon icon="solar:star-bold" width="15" aria-hidden="true"></iconify-icon><iconify-icon icon="solar:star-bold" width="15" aria-hidden="true"></iconify-icon><iconify-icon icon="solar:star-bold" width="15" aria-hidden="true"></iconify-icon><iconify-icon icon="solar:star-bold" width="15" aria-hidden="true"></iconify-icon><iconify-icon icon="solar:star-bold" width="15" aria-hidden="true"></iconify-icon>
+              </div>
+              <blockquote class="mt-4 text-ink leading-relaxed break-keep-all">
+                “커피를 끊고 뭘 마실지 고민이었는데, 온유로 정착했어요. 저녁에 마셔도 속이 편하고 잠도 잘 옵니다. 향이 인공적이지 않아서 계속 손이 가요.”
+              </blockquote>
+              <figcaption class="mt-5 flex items-center gap-3">
+                <img src="https://i.pravatar.cc/80?u=review-hayun" alt="하윤서님 프로필" class="w-10 h-10 rounded-full object-cover" loading="lazy" decoding="async">
+                <div><p class="font-semibold text-ink text-sm">하윤서</p><p class="text-xs text-muted">프로덕트 디자이너 · 8개월째 구독</p></div>
+              </figcaption>
+            </div>
+          </figure>
+
+          <figure class="reveal break-inside-avoid mb-5 bezel" style="--i:1">
+            <div class="bezel-core p-6">
+              <div class="flex items-center gap-0.5 text-brand" aria-label="별점 5점 만점에 5점">
+                <iconify-icon icon="solar:star-bold" width="15" aria-hidden="true"></iconify-icon><iconify-icon icon="solar:star-bold" width="15" aria-hidden="true"></iconify-icon><iconify-icon icon="solar:star-bold" width="15" aria-hidden="true"></iconify-icon><iconify-icon icon="solar:star-bold" width="15" aria-hidden="true"></iconify-icon><iconify-icon icon="solar:star-bold" width="15" aria-hidden="true"></iconify-icon>
+              </div>
+              <blockquote class="mt-4 text-ink leading-relaxed break-keep-all">
+                “2주마다 딱 떨어질 때쯤 도착해서 신경 쓸 일이 없어요. 재고 걱정 없이 매일 마시는 루틴이 생겼습니다.”
+              </blockquote>
+              <figcaption class="mt-5 flex items-center gap-3">
+                <img src="https://i.pravatar.cc/80?u=review-dohyun" alt="박도현님 프로필" class="w-10 h-10 rounded-full object-cover" loading="lazy" decoding="async">
+                <div><p class="font-semibold text-ink text-sm">박도현</p><p class="text-xs text-muted">스타트업 대표 · 1년째 구독</p></div>
+              </figcaption>
+            </div>
+          </figure>
+
+          <figure class="reveal break-inside-avoid mb-5 bezel" style="--i:2">
+            <div class="bezel-core overflow-hidden">
+              <img src="https://picsum.photos/seed/onyu-review-photo/600/440" alt="구독자가 아침 식탁에서 촬영한 온유 찻잔" class="w-full h-48 object-cover" loading="lazy" decoding="async">
+              <div class="p-6">
+                <blockquote class="text-ink leading-relaxed break-keep-all">
+                  “선물로 받았다가 제가 구독까지 하게 됐네요. 포장도 예쁘고 무엇보다 맛이 깊어요. 단맛이 은은하게 남는 게 인상적입니다.”
+                </blockquote>
+                <figcaption class="mt-5 flex items-center gap-3">
+                  <img src="https://i.pravatar.cc/80?u=review-seojin" alt="이서진님 프로필" class="w-10 h-10 rounded-full object-cover" loading="lazy" decoding="async">
+                  <div><p class="font-semibold text-ink text-sm">이서진</p><p class="text-xs text-muted">브랜드 디렉터 · 5개월째 구독</p></div>
+                </figcaption>
+              </div>
+            </div>
+          </figure>
+
+          <figure class="reveal break-inside-avoid mb-5 bezel">
+            <div class="bezel-core p-6">
+              <div class="flex items-center gap-0.5 text-brand" aria-label="별점 5점 만점에 5점">
+                <iconify-icon icon="solar:star-bold" width="15" aria-hidden="true"></iconify-icon><iconify-icon icon="solar:star-bold" width="15" aria-hidden="true"></iconify-icon><iconify-icon icon="solar:star-bold" width="15" aria-hidden="true"></iconify-icon><iconify-icon icon="solar:star-bold" width="15" aria-hidden="true"></iconify-icon><iconify-icon icon="solar:star-bold" width="15" aria-hidden="true"></iconify-icon>
+              </div>
+              <blockquote class="mt-4 text-ink leading-relaxed break-keep-all">
+                “위가 예민한 편이라 녹차도 부담스러웠는데 발효차라 그런지 훨씬 편안해요. 식후에 마시면 더부룩함이 확실히 덜합니다.”
+              </blockquote>
+              <figcaption class="mt-5 flex items-center gap-3">
+                <img src="https://i.pravatar.cc/80?u=review-yerin" alt="오예린님 프로필" class="w-10 h-10 rounded-full object-cover" loading="lazy" decoding="async">
+                <div><p class="font-semibold text-ink text-sm">오예린</p><p class="text-xs text-muted">마케팅 리드 · 6개월째 구독</p></div>
+              </figcaption>
+            </div>
+          </figure>
+
+          <figure class="reveal break-inside-avoid mb-5 bezel" style="--i:1">
+            <div class="bezel-core p-6">
+              <div class="flex items-center gap-0.5 text-brand" aria-label="별점 5점 만점에 5점">
+                <iconify-icon icon="solar:star-bold" width="15" aria-hidden="true"></iconify-icon><iconify-icon icon="solar:star-bold" width="15" aria-hidden="true"></iconify-icon><iconify-icon icon="solar:star-bold" width="15" aria-hidden="true"></iconify-icon><iconify-icon icon="solar:star-bold" width="15" aria-hidden="true"></iconify-icon><iconify-icon icon="solar:star-half-bold" width="15" aria-hidden="true"></iconify-icon>
+              </div>
+              <blockquote class="mt-4 text-ink leading-relaxed break-keep-all">
+                “회사 책상에 두고 오후마다 한 잔씩 우려 마셔요. 커피 대신이라기보다 그냥 온유가 좋아서 마시는 거예요.”
+              </blockquote>
+              <figcaption class="mt-5 flex items-center gap-3">
+                <img src="https://i.pravatar.cc/80?u=review-siwoo" alt="최시우님 프로필" class="w-10 h-10 rounded-full object-cover" loading="lazy" decoding="async">
+                <div><p class="font-semibold text-ink text-sm">최시우</p><p class="text-xs text-muted">프론트엔드 개발자 · 3개월째 구독</p></div>
+              </figcaption>
+            </div>
+          </figure>
+
+          <figure class="reveal break-inside-avoid mb-5 bezel" style="--i:2">
+            <div class="bezel-core p-6">
+              <div class="flex items-center gap-0.5 text-brand" aria-label="별점 5점 만점에 5점">
+                <iconify-icon icon="solar:star-bold" width="15" aria-hidden="true"></iconify-icon><iconify-icon icon="solar:star-bold" width="15" aria-hidden="true"></iconify-icon><iconify-icon icon="solar:star-bold" width="15" aria-hidden="true"></iconify-icon><iconify-icon icon="solar:star-bold" width="15" aria-hidden="true"></iconify-icon><iconify-icon icon="solar:star-bold" width="15" aria-hidden="true"></iconify-icon>
+              </div>
+              <blockquote class="mt-4 text-ink leading-relaxed break-keep-all">
+                “부모님 선물로 시작했다가 온 가족이 함께 마셔요. 120팩 구독이 딱 맞습니다. 배송일도 앱에서 바로 바꿀 수 있어 편해요.”
+              </blockquote>
+              <figcaption class="mt-5 flex items-center gap-3">
+                <img src="https://i.pravatar.cc/80?u=review-jiwon" alt="한지원님 프로필" class="w-10 h-10 rounded-full object-cover" loading="lazy" decoding="async">
+                <div><p class="font-semibold text-ink text-sm">한지원</p><p class="text-xs text-muted">브랜드 매니저 · 10개월째 구독</p></div>
+              </figcaption>
+            </div>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 8. FAQ (native details) ============ -->
+    <section id="faq" class="py-24 md:py-32 lg:py-40 bg-[var(--surface)]/50 border-y border-[var(--line)]">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <span class="eyebrow reveal">자주 묻는 질문</span>
+          <h2 class="reveal mt-6 display text-4xl md:text-5xl font-semibold text-espresso leading-[1.12] tracking-tight break-keep-all" style="--i:1">
+            궁금한 점을 모았습니다
+          </h2>
+        </div>
+
+        <div class="mt-12 space-y-3">
+          <details class="faq reveal bezel group">
+            <summary class="bezel-core flex items-center justify-between gap-4 p-6">
+              <span class="font-semibold text-ink text-lg break-keep-all">정기구독은 언제든 해지할 수 있나요?</span>
+              <span class="faq-icon u-ease shrink-0 w-8 h-8 rounded-full bg-brand/12 flex items-center justify-center text-brand"><iconify-icon icon="solar:add-circle-linear" width="22" aria-hidden="true"></iconify-icon></span>
+            </summary>
+            <div><p class="px-6 pb-6 -mt-1 text-muted leading-relaxed break-keep-all">네, 약정이 없습니다. 마이페이지에서 다음 배송 예정일 하루 전까지 언제든 해지·일시정지·건너뛰기가 가능합니다. 해지 위약금이나 최소 구독 횟수는 없습니다.</p></div>
+          </details>
+
+          <details class="faq reveal bezel group" style="--i:1">
+            <summary class="bezel-core flex items-center justify-between gap-4 p-6">
+              <span class="font-semibold text-ink text-lg break-keep-all">배송 주기와 날짜를 바꿀 수 있나요?</span>
+              <span class="faq-icon u-ease shrink-0 w-8 h-8 rounded-full bg-brand/12 flex items-center justify-center text-brand"><iconify-icon icon="solar:add-circle-linear" width="22" aria-hidden="true"></iconify-icon></span>
+            </summary>
+            <div><p class="px-6 pb-6 -mt-1 text-muted leading-relaxed break-keep-all">2주 배송과 월 1회 배송 중 선택할 수 있고, 언제든 서로 변경 가능합니다. 배송 예정일도 원하는 날짜로 자유롭게 조정할 수 있어 여행이나 재고 상황에 맞출 수 있습니다.</p></div>
+          </details>
+
+          <details class="faq reveal bezel group" style="--i:2">
+            <summary class="bezel-core flex items-center justify-between gap-4 p-6">
+              <span class="font-semibold text-ink text-lg break-keep-all">카페인이 얼마나 들어 있나요?</span>
+              <span class="faq-icon u-ease shrink-0 w-8 h-8 rounded-full bg-brand/12 flex items-center justify-center text-brand"><iconify-icon icon="solar:add-circle-linear" width="22" aria-hidden="true"></iconify-icon></span>
+            </summary>
+            <div><p class="px-6 pb-6 -mt-1 text-muted leading-relaxed break-keep-all">한 잔 기준 약 6mg으로, 일반 드립 커피(약 120mg)의 1.2% 수준입니다. 저온 발효 과정에서 카페인이 크게 줄어 저녁이나 자기 전에 드셔도 부담이 적습니다.</p></div>
+          </details>
+
+          <details class="faq reveal bezel group" style="--i:3">
+            <summary class="bezel-core flex items-center justify-between gap-4 p-6">
+              <span class="font-semibold text-ink text-lg break-keep-all">개봉 후 맛이 없으면 환불되나요?</span>
+              <span class="faq-icon u-ease shrink-0 w-8 h-8 rounded-full bg-brand/12 flex items-center justify-center text-brand"><iconify-icon icon="solar:add-circle-linear" width="22" aria-hidden="true"></iconify-icon></span>
+            </summary>
+            <div><p class="px-6 pb-6 -mt-1 text-muted leading-relaxed break-keep-all">맛보장 정책을 운영합니다. 개봉하셨더라도 첫 주문 수령 후 14일 이내에 만족하지 못하셨다면 전액 환불해 드립니다. 고객센터로 사진과 함께 요청하시면 됩니다.</p></div>
+          </details>
+
+          <details class="faq reveal bezel group" style="--i:4">
+            <summary class="bezel-core flex items-center justify-between gap-4 p-6">
+              <span class="font-semibold text-ink text-lg break-keep-all">찻잎은 어디서 재배하나요?</span>
+              <span class="faq-icon u-ease shrink-0 w-8 h-8 rounded-full bg-brand/12 flex items-center justify-center text-brand"><iconify-icon icon="solar:add-circle-linear" width="22" aria-hidden="true"></iconify-icon></span>
+            </summary>
+            <div><p class="px-6 pb-6 -mt-1 text-muted leading-relaxed break-keep-all">지리산 자락 해발 400m의 유기농 인증 다원에서 재배한 국내산 찻잎만 사용합니다. 농약과 화학비료 없이 재배하며, 수확부터 발효·소분·포장까지 전 과정을 국내에서 진행합니다.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 9. CTA (Full-bleed) ============ -->
+    <section class="py-24 md:py-32 lg:py-40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="reveal relative overflow-hidden rounded-[2.5rem] bg-brand text-[var(--brand-ink)] px-6 py-16 md:px-16 md:py-24">
+          <div class="pointer-events-none absolute -bottom-24 -right-16 w-[28rem] h-[28rem] rounded-full bg-espresso/15 blur-3xl drift" aria-hidden="true"></div>
+          <img src="https://picsum.photos/seed/onyu-cta-leaf/700/700" alt="" aria-hidden="true" class="pointer-events-none absolute -top-16 -left-10 w-72 h-72 object-cover rounded-full opacity-20 mix-blend-luminosity hidden md:block" loading="lazy" decoding="async">
+          <div class="relative max-w-2xl">
+            <h2 class="display text-4xl md:text-6xl font-semibold leading-[1.08] tracking-tight break-keep-all">
+              오늘 한 잔으로<br>내일의 리듬을
+            </h2>
+            <p class="mt-6 text-lg text-[var(--brand-ink)]/85 leading-relaxed max-w-[46ch] break-keep-all">
+              첫 구독 30% 할인과 전용 티포트 증정. 마음에 들지 않으면 14일 이내 전액 환불해 드립니다.
+            </p>
+            <div class="mt-9 flex flex-col sm:flex-row gap-3">
+              <a href="#plans" data-cta="footer-cta-subscribe" class="u-ease inline-flex items-center justify-center gap-3 rounded-full bg-espresso text-cream px-7 py-4 text-lg font-semibold hover:scale-[1.02] active:scale-[0.98] hover:shadow-[0_18px_40px_-16px_rgba(0,0,0,0.6)]">
+                구독 시작하기
+                <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-cream/15"><iconify-icon icon="solar:arrow-right-linear" width="18" aria-hidden="true"></iconify-icon></span>
+              </a>
+              <a href="#story" data-cta="footer-cta-story" class="u-ease inline-flex items-center justify-center gap-2 rounded-full border border-espresso/40 text-espresso px-7 py-4 text-lg font-semibold hover:bg-espresso hover:text-cream hover:scale-[1.02] active:scale-[0.98]">
+                브랜드 더 알아보기
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Email capture -->
+        <div class="reveal mt-8 bezel" style="--i:1">
+          <div class="bezel-core p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-6 md:justify-between">
+            <div class="max-w-md">
+              <h3 class="display text-2xl font-semibold text-espresso break-keep-all">아직 고민 중이신가요?</h3>
+              <p class="mt-2 text-muted break-keep-all">뉴스레터를 구독하면 첫 구매 10% 쿠폰과 발효차 우림법 가이드를 보내드립니다.</p>
+            </div>
+            <form class="w-full md:w-auto flex flex-col gap-3" onsubmit="event.preventDefault(); this.reset(); document.getElementById('formMsg').textContent='구독이 완료되었습니다. 쿠폰을 이메일로 보내드렸어요.';" novalidate>
+              <div class="flex flex-col sm:flex-row gap-3">
+                <label for="email" class="sr-only">이메일 주소</label>
+                <input id="email" name="email" type="email" required autocomplete="email" placeholder="이메일 주소"
+                       class="u-ease w-full sm:w-64 rounded-full border border-[var(--line)] bg-cream px-5 py-3.5 text-ink placeholder:text-muted/70 focus-visible:ring-2 focus-visible:ring-brand focus:outline-none">
+                <button type="submit" data-cta="newsletter-subscribe" class="u-ease shrink-0 rounded-full bg-brand text-[var(--brand-ink)] px-6 py-3.5 font-semibold hover:scale-[1.02] active:scale-[0.98]">쿠폰 받기</button>
+              </div>
+              <label class="flex items-start gap-2 text-xs text-muted break-keep-all">
+                <input type="checkbox" required class="mt-0.5 accent-[var(--brand)]">
+                <span><a href="#privacy" class="underline decoration-[var(--line)] hover:text-espresso">개인정보처리방침</a>에 동의하며 마케팅 정보 수신에 동의합니다.</span>
+              </label>
+              <p id="formMsg" role="status" aria-live="polite" class="text-sm text-brand"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="bg-espresso text-cream/80 pt-20 pb-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-10">
+        <div class="col-span-2">
+          <div class="flex items-center gap-2">
+            <span class="display text-3xl font-semibold text-cream">온유</span>
+            <span class="text-[11px] tracking-[0.3em] text-cream/50 mt-1">ONYU</span>
+          </div>
+          <p class="mt-4 text-sm leading-relaxed max-w-xs text-cream/60 break-keep-all">
+            서두르지 않고 천천히 익힌 국내산 유기농 발효차. 매일의 한 잔으로 하루를 다스립니다.
+          </p>
+          <div class="mt-6 flex gap-2">
+            <a href="#" aria-label="온유 인스타그램" class="u-ease w-10 h-10 rounded-full border border-cream/15 flex items-center justify-center text-cream/70 hover:bg-cream hover:text-espresso">
+              <iconify-icon icon="solar:gallery-linear" width="20" aria-hidden="true"></iconify-icon>
+            </a>
+            <a href="#" aria-label="온유 유튜브" class="u-ease w-10 h-10 rounded-full border border-cream/15 flex items-center justify-center text-cream/70 hover:bg-cream hover:text-espresso">
+              <iconify-icon icon="solar:play-circle-linear" width="20" aria-hidden="true"></iconify-icon>
+            </a>
+            <a href="#" aria-label="온유 카카오채널" class="u-ease w-10 h-10 rounded-full border border-cream/15 flex items-center justify-center text-cream/70 hover:bg-cream hover:text-espresso">
+              <iconify-icon icon="solar:chat-round-line-linear" width="20" aria-hidden="true"></iconify-icon>
+            </a>
+          </div>
+        </div>
+        <nav aria-label="제품" class="text-sm">
+          <h3 class="font-semibold text-cream mb-4">제품</h3>
+          <ul class="space-y-3 text-cream/60">
+            <li><a href="#plans" class="u-ease hover:text-cream">정기구독</a></li>
+            <li><a href="#benefits" class="u-ease hover:text-cream">발효차 효능</a></li>
+            <li><a href="#compare" class="u-ease hover:text-cream">품질 비교</a></li>
+            <li><a href="#" class="u-ease hover:text-cream">선물하기</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="회사" class="text-sm">
+          <h3 class="font-semibold text-cream mb-4">회사</h3>
+          <ul class="space-y-3 text-cream/60">
+            <li><a href="#story" class="u-ease hover:text-cream">브랜드 이야기</a></li>
+            <li><a href="#reviews" class="u-ease hover:text-cream">고객 후기</a></li>
+            <li><a href="#" class="u-ease hover:text-cream">다원 소식</a></li>
+            <li><a href="#" class="u-ease hover:text-cream">채용</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="고객지원" class="text-sm">
+          <h3 class="font-semibold text-cream mb-4">고객지원</h3>
+          <ul class="space-y-3 text-cream/60">
+            <li><a href="#faq" class="u-ease hover:text-cream">자주 묻는 질문</a></li>
+            <li><a href="#" class="u-ease hover:text-cream">배송 조회</a></li>
+            <li><a href="#" class="u-ease hover:text-cream">1:1 문의</a></li>
+            <li><a href="#refund" class="u-ease hover:text-cream">환불 정책</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="mt-14 pt-8 border-t border-cream/12 text-xs text-cream/45 leading-relaxed break-keep-all">
+        <div class="flex flex-wrap gap-x-5 gap-y-2 mb-4">
+          <a href="#privacy" id="privacy" class="u-ease font-medium text-cream/70 hover:text-cream">개인정보처리방침</a>
+          <a href="#terms" class="u-ease hover:text-cream">이용약관</a>
+          <a href="#refund" id="refund" class="u-ease hover:text-cream">환불·교환 정책</a>
+          <a href="#" class="u-ease hover:text-cream">사업자정보 확인</a>
+        </div>
+        <p>상호: 주식회사 온유 · 대표: 정민준 · 사업자등록번호: 214-88-04720 · 통신판매업신고: 2024-서울강남-04821</p>
+        <p class="mt-1">주소: 서울특별시 강남구 도산대로 152, 4층 · 고객센터: 1670-8820 (평일 10:00–18:00) · 이메일: care@onyu.kr</p>
+        <p class="mt-4">© 2026 주식회사 온유(ONYU). All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ JSON-LD ============ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "온유 ONYU",
+    "url": "https://onyu.kr",
+    "logo": "https://onyu.kr/logo.png",
+    "description": "국내산 유기농 찻잎을 저온 발효한 프리미엄 웰니스 발효차 D2C 브랜드",
+    "email": "care@onyu.kr",
+    "telephone": "+82-1670-8820",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "도산대로 152, 4층",
+      "addressLocality": "강남구",
+      "addressRegion": "서울특별시",
+      "addressCountry": "KR"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "온유 유기농 발효차 정기구독",
+    "image": "https://picsum.photos/seed/onyu-tea-hero/1100/1300",
+    "description": "국내산 유기농 찻잎을 항아리에서 180일간 저온 발효한 프리미엄 발효차. 2주 또는 월 1회 정기 배송.",
+    "brand": { "@type": "Brand", "name": "온유 ONYU" },
+    "offers": {
+      "@type": "Offer",
+      "url": "https://onyu.kr/#plans",
+      "priceCurrency": "KRW",
+      "price": "32900",
+      "availability": "https://schema.org/InStock",
+      "priceValidUntil": "2026-12-31"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.87",
+      "reviewCount": "12847",
+      "bestRating": "5"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "정기구독은 언제든 해지할 수 있나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "네, 약정이 없습니다. 마이페이지에서 다음 배송 예정일 하루 전까지 언제든 해지·일시정지·건너뛰기가 가능합니다. 해지 위약금이나 최소 구독 횟수는 없습니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "배송 주기와 날짜를 바꿀 수 있나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "2주 배송과 월 1회 배송 중 선택할 수 있고, 언제든 서로 변경 가능합니다. 배송 예정일도 원하는 날짜로 자유롭게 조정할 수 있어 여행이나 재고 상황에 맞출 수 있습니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "카페인이 얼마나 들어 있나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "한 잔 기준 약 6mg으로, 일반 드립 커피(약 120mg)의 1.2% 수준입니다. 저온 발효 과정에서 카페인이 크게 줄어 저녁이나 자기 전에 드셔도 부담이 적습니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "개봉 후 맛이 없으면 환불되나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "맛보장 정책을 운영합니다. 개봉하셨더라도 첫 주문 수령 후 14일 이내에 만족하지 못하셨다면 전액 환불해 드립니다. 고객센터로 사진과 함께 요청하시면 됩니다." }
+      },
+      {
+        "@type": "Question",
+        "name": "찻잎은 어디서 재배하나요?",
+        "acceptedAnswer": { "@type": "Answer", "text": "지리산 자락 해발 400m의 유기농 인증 다원에서 재배한 국내산 찻잎만 사용합니다. 농약과 화학비료 없이 재배하며, 수확부터 발효·소분·포장까지 전 과정을 국내에서 진행합니다." }
+      }
+    ]
+  }
+  </script>
+
+  <script>
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const menuClose = document.getElementById('menuClose');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const openMenu = () => { mobileMenu.classList.remove('hidden'); menuBtn.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; };
+    const closeMenu = () => { mobileMenu.classList.add('hidden'); menuBtn.setAttribute('aria-expanded','false'); document.body.style.overflow=''; };
+    menuBtn.addEventListener('click', openMenu);
+    menuClose.addEventListener('click', closeMenu);
+    document.querySelectorAll('.mobile-link, #mobileMenu a[href^="#"]').forEach(a => a.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) closeMenu(); });
+
+    // Pricing toggle (biweekly / monthly)
+    const t2w = document.getElementById('toggle2w');
+    const t1m = document.getElementById('toggle1m');
+    const setCycle = (monthly) => {
+      document.querySelectorAll('.price').forEach(el => { el.textContent = monthly ? el.dataset.m : el.dataset.b; });
+      document.querySelectorAll('.cycle').forEach(el => { el.textContent = monthly ? '월' : '2주'; });
+      t2w.setAttribute('aria-pressed', String(!monthly));
+      t1m.setAttribute('aria-pressed', String(monthly));
+      if (monthly) {
+        t1m.classList.add('bg-cream','text-espresso'); t1m.classList.remove('text-cream/80');
+        t2w.classList.remove('bg-cream','text-espresso'); t2w.classList.add('text-cream/80');
+      } else {
+        t2w.classList.add('bg-cream','text-espresso'); t2w.classList.remove('text-cream/80');
+        t1m.classList.remove('bg-cream','text-espresso'); t1m.classList.add('text-cream/80');
+      }
+    };
+    t2w.addEventListener('click', () => setCycle(false));
+    t1m.addEventListener('click', () => setCycle(true));
+
+    // Scroll reveal
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); } });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    }
+  </script>
+</body>
+</html>

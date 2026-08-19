@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<!--
+  =========================================================================
+  A4 원페이저 템플릿 (다크 헤더 · 크림 배경 · 클레이 액센트)
+  -------------------------------------------------------------------------
+  사용법:
+   1) 아래 "EDIT" 라고 주석 표시된 부분의 텍스트만 바꾸면 됩니다.
+      (CSS/구조는 그대로 둬도 대부분의 콘텐츠에 잘 맞습니다)
+   2) 색상을 바꾸려면 :root 안의 --ink, --clay, --cream 값만 바꾸면
+      전체 배색이 한 번에 바뀝니다. (하단 "색상 테마 예시" 참고)
+   3) PDF로 저장하려면:
+      - 크롬/엣지에서 이 파일을 열고
+      - Ctrl 또는 Cmd + P (인쇄) 후 대상: PDF로 저장
+      - 자세히 보기 에서 배경 그래픽 체크 (필수)
+      - 용지: A4, 여백: 없음(0) 으로 설정 후 저장
+      자세한 내용은 README.md 를 참고하세요.
+   4) 섹션이 넘치거나 남으면 main 태그 안의 section 블록을
+      통째로 추가/삭제하면 됩니다. 2단(border-r) 구조가 기본이며,
+      가격표처럼 전체 폭이 필요하면 style 에 grid-column:1 / -1 을 씁니다.
+  =========================================================================
+-->
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>원페이저 제목</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  /* =====================================================================
+     색상 토큰 — 여기 6개 값만 바꾸면 전체 톤이 바뀝니다.
+     ===================================================================== */
+  :root{
+    --cream:#F5F7FA;   /* 배경색 */
+    --ink:#0F2A43;     /* 헤더/푸터/진한 텍스트 */
+    --clay:#C9A227;    /* 포인트 컬러 (라벨, 강조 텍스트, 바) */
+    --clay-deep:#9A7B1A;
+    --paper:#FFFFFF;
+    --muted:#4A5A6A;   /* 보조 텍스트 */
+    --sand:#E2E8F0;    /* 연한 배경 (인용구, 게이지 트랙 등) */
+  }
+
+  /* ---- 색상 테마 예시 (원하는 세트로 위 :root 값을 통째로 교체하세요) ----
+  테마 A. 딥그린 × 골드
+    --cream:#F5F7FA; --ink:#0F2A43; --clay:#C9A227; --clay-deep:#9A7B1A; --paper:#FFFFFF; --muted:#4A5A6A; --sand:#E2E8F0;
+
+  테마 B. 인디고 × 코랄  (테크/제품 발표용)
+    --cream:#F3F2F8; --ink:#1B1B2F; --clay:#E0685A; --clay-deep:#B9483C;
+    --paper:#FFFFFF; --muted:#54536B; --sand:#E4E2F0;
+  ------------------------------------------------------------------- */
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  @page{ size:210mm 297mm; margin:0; }
+  html,body{
+    width:210mm; height:297mm;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Pretendard', sans-serif;
+    overflow:hidden;
+  }
+  .page{ width:210mm; height:297mm; display:flex; flex-direction:column; position:relative; }
+  .display{ font-family:'Noto Serif KR', serif; }
+  .mono{ font-family:'JetBrains Mono', monospace; letter-spacing:-0.01em; }
+
+  /* ===== 헤더 ===== */
+  header{
+    background:var(--ink); color:var(--cream);
+    padding:5mm 10mm 4mm;
+    display:flex; justify-content:space-between; align-items:flex-end;
+    position:relative; flex-shrink:0;
+  }
+  header::after{
+    content:""; position:absolute; left:0; right:0; bottom:0; height:2.2mm;
+    background:linear-gradient(90deg, var(--clay) 0%, var(--clay) 33%, var(--sand) 33%, var(--sand) 100%);
+  }
+  .eyebrow{ font-size:8.4pt; letter-spacing:0.14em; text-transform:uppercase; color:var(--sand); margin-bottom:3mm; font-weight:600; }
+  .eyebrow b{ color:var(--clay); }
+  h1{ font-size:33pt; line-height:0.98; font-weight:900; letter-spacing:-0.01em; }
+  .headline-right{ text-align:right; max-width:62mm; font-size:9.3pt; line-height:1.45; color:var(--sand); font-weight:400; }
+  .headline-right .num{ color:var(--clay); font-weight:700; }
+
+  /* ===== 본문 그리드 ===== */
+  main{ flex:1; display:grid; grid-template-columns:1.28fr 1fr; grid-template-rows:auto auto auto; gap:0; }
+  section{ padding:4mm 10mm; }
+  .border-r{ border-right:0.5pt solid var(--ink); }
+  .border-b{ border-bottom:0.5pt solid var(--ink); }
+
+  .tag{
+    display:inline-block; font-size:7.6pt; font-weight:700; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--clay-deep);
+    border:0.7pt solid var(--clay-deep); border-radius:2mm;
+    padding:0.6mm 2.4mm; margin-bottom:2.5mm;
+  }
+  .sec-title{ font-size:13.5pt; font-weight:700; margin-bottom:2.6mm; letter-spacing:-0.01em; }
+  p{ font-size:8.8pt; line-height:1.44; color:#2b2822; }
+  .lede{ font-size:9.6pt; line-height:1.46; }
+  .lede b{ color:var(--clay-deep); }
+
+  /* 3단 비교 게이지 (before/after/경쟁사 비교 등에 재사용) */
+  .gauge{ margin-top:4mm; }
+  .gauge-row{ display:flex; align-items:center; gap:2.8mm; margin-bottom:2mm; }
+  .gauge-label{ width:26mm; font-size:8pt; font-weight:600; text-align:right; flex-shrink:0; }
+  .gauge-track{ flex:1; height:4.6mm; background:var(--sand); border-radius:1mm; position:relative; overflow:hidden; }
+  .gauge-fill{ height:100%; border-radius:1mm; }
+  .g1 .gauge-fill{ width:88%; background:#B7C2CE; }   /* 비교 대상 A */
+  .g2 .gauge-fill{ width:100%; background:var(--clay); } /* 이번 주제 (강조) */
+  .g3 .gauge-fill{ width:98%; background:var(--ink); }  /* 비교 대상 B (최상위) */
+  .gauge-note{ font-size:7.3pt; color:var(--muted); margin-top:1.5mm; line-height:1.4; }
+
+  /* ===== 강조 스트립 (가격/스펙/핵심수치 등 4칸) ===== */
+  .price-strip{
+    background:var(--ink); color:var(--cream);
+    display:grid; grid-template-columns:30mm 30mm 30mm 1fr; grid-template-rows:auto auto;
+  }
+  .price-strip .cell{ padding:3mm 5mm 1.5mm; border-right:0.5pt solid #3a382f; min-width:0; }
+  .price-strip .plabel{ font-size:6.8pt; text-transform:uppercase; letter-spacing:0.04em; color:var(--sand); margin-bottom:1.6mm; white-space:nowrap; }
+  .price-strip .pval{ font-size:13.5pt; font-weight:700; white-space:nowrap; }
+  .price-strip .pval span{ font-size:7.4pt; font-weight:400; color:var(--sand); }
+  .price-strip .pnote{ grid-column:1 / 4; padding:1mm 5mm 2.5mm; font-size:7pt; color:#C9C2AE; line-height:1.35; border-right:0.5pt solid #3a382f; }
+  .price-strip .cta{ grid-row:1 / 3; grid-column:4; background:var(--clay); display:flex; flex-direction:column; justify-content:center; padding:3.5mm 8mm; }
+  .price-strip .cta .pv{ font-size:11pt; font-weight:700; }
+  .price-strip .cta .ps{ font-size:7.8pt; margin-top:1.6mm; line-height:1.45; }
+
+  ul{ list-style:none; }
+  li{ font-size:8.7pt; line-height:1.42; margin-bottom:1.3mm; padding-left:3.6mm; position:relative; color:#2b2822; }
+  li::before{ content:"—"; position:absolute; left:0; color:var(--clay-deep); font-weight:700; }
+  li b{ color:var(--ink); }
+
+  /* 배지 (짧은 키워드 강조) */
+  .badges{ display:flex; gap:2.5mm; margin:2.5mm 0 3mm; flex-wrap:wrap; }
+  .badge{ font-size:7.4pt; font-weight:600; padding:1.2mm 2.6mm; border-radius:1.5mm; background:var(--sand); color:var(--ink); }
+  .badge.warn{ background:#EADFCB; color:var(--clay-deep); border:0.6pt solid var(--clay-deep); }
+
+  /* 인용구 3단 */
+  .quotes{ background:var(--sand); }
+  .quote-grid{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:6mm; margin-top:2mm; }
+  .quote{ font-size:8.3pt; line-height:1.48; color:#2b2822; }
+  .quote .qmark{ font-family:'Noto Serif KR',serif; font-size:16pt; color:var(--clay); display:block; line-height:0.5; margin-bottom:1mm; }
+  .quote .attr{ margin-top:2mm; font-size:7.6pt; font-weight:700; color:var(--muted); }
+
+  /* ===== 푸터 ===== */
+  footer{
+    background:var(--ink); color:var(--sand);
+    padding:2.6mm 10mm; display:flex; justify-content:space-between; align-items:center;
+    flex-shrink:0; font-size:7.1pt;
+  }
+  footer .fmono{ color:var(--clay); }
+  footer .fright{ text-align:right; line-height:1.5; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ============ 헤더: 상단 카테고리·날짜 / 제목 / 한 줄 요약 ============ -->
+  <header>
+    <div>
+      <!-- EDIT: 브랜드명 · 카테고리 · 날짜 -->
+      <div class="eyebrow"><b>(주)테크온</b> · 월결산 보고 · 2026.07.10</div>
+      <h1 class="display">2026년 6월<br>월결산 보고</h1>
+    </div>
+    <div class="headline-right">
+      상반기 매출은 계획을 <span class="num">240백만원</span> 넘겼지만,
+      영업이익은 <span class="num">44백만원</span> 모자랍니다. 차이는 전부 박닌 노무비에서 나왔습니다.
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ 좌상단: 개요 + 3단 비교 게이지 ============ -->
+    <section class="border-r border-b">
+      <div class="tag">개요</div>
+      <p class="lede">상반기 누계 매출 <b>15,840백만원</b>, 영업이익 <b>1,196백만원</b>(7.6%)입니다.
+      매출은 계획 대비 101.5%, 전년 동기 대비 +13.8%로 4개 분기 연속 성장했습니다.
+      다만 영업이익은 계획의 96.5%에 그쳤습니다. <b>매출이 늘어난 만큼 이익이 따라오지 않은 달</b>이며,
+      원인은 6월 박닌 라인 증설에 따른 인력 선투입입니다.</p>
+      <div class="gauge">
+        <div class="gauge-row g1">
+          <div class="gauge-label">전년 동기 13,920</div>
+          <div class="gauge-track"><div class="gauge-fill"></div></div>
+        </div>
+        <div class="gauge-row g2">
+          <div class="gauge-label" style="color:var(--clay-deep)">2026 실적 15,840</div>
+          <div class="gauge-track"><div class="gauge-fill"></div></div>
+        </div>
+        <div class="gauge-row g3">
+          <div class="gauge-label">상반기 계획 15,600</div>
+          <div class="gauge-track"><div class="gauge-fill"></div></div>
+        </div>
+        <div class="gauge-note">단위 백만원. 막대 길이는 실적(15,840)을 100으로 둔 실제 비율입니다.</div>
+      </div>
+    </section>
+
+    <!-- ============ 우상단: 보조 설명 + 리스트 ============ -->
+    <section class="border-b">
+      <div class="tag">손익 요약</div>
+      <div class="sec-title">상반기 누계 (단위: 백만원)</div>
+      <ul>
+        <li><b>매출액 15,840</b> — 계획 15,600 · 달성률 101.5%</li>
+        <li><b>매출원가 13,010</b> — 원가율 82.1% (전년 81.4%, +0.7%p)</li>
+        <li><b>매출총이익 2,830</b> — 총이익률 17.9%</li>
+        <li><b>판매관리비 1,634</b> — 전년 대비 +9.2%</li>
+        <li><b>영업이익 1,196</b> — 계획 1,240 대비 △44</li>
+      </ul>
+      <p style="margin-top:3mm; font-size:8pt; color:var(--muted)">※ 6월 단월 매출 2,780 · 영업이익 214(7.7%). 외부감사 전 내부 관리 기준이며 확정치와 다를 수 있습니다.</p>
+    </section>
+
+    <!-- ============ 중단: 강조 스트립 (가격/스펙/핵심수치 4칸) ============ -->
+    <div class="price-strip border-b" style="grid-column:1 / -1;">
+      <div class="cell">
+        <!-- EDIT: 수치 3칸 + CTA 1칸 -->
+        <div class="plabel">상반기 매출</div>
+        <div class="pval">15,840<span>백만원</span></div>
+      </div>
+      <div class="cell">
+        <div class="plabel">영업이익률 (계획 7.9)</div>
+        <div class="pval">7.6<span>%</span></div>
+      </div>
+      <div class="cell" style="border-right:none;">
+        <div class="plabel">매출 달성률</div>
+        <div class="pval">101.5<span>%</span></div>
+      </div>
+      <div class="cta">
+        <div class="pv">7월에 회수됩니다</div>
+        <div class="ps">선투입 인력 34명이 7월 양산에 전량 투입됩니다. 하반기 계획은 수정하지 않습니다.</div>
+      </div>
+      <div class="pnote">※ 영업이익 달성률은 96.5%입니다. 미달 44백만원 중 38백만원이 박닌 노무비 선투입분입니다. 잔여 6백만원은 원자재 단가 변동분으로 3분기 판가에 반영 협의 중입니다.</div>
+    </div>
+
+    <!-- ============ 하단 좌: 리스트 섹션 ============ -->
+    <section class="border-r border-b">
+      <div class="tag">차이 분석</div>
+      <div class="sec-title">영업이익 계획 대비 △44백만원</div>
+      <ul>
+        <li><b>박닌 노무비 △38</b> — 6월 SMT 3라인 가동 대비 직접인력 34명 선채용. 가동은 7월 2주차부터</li>
+        <li><b>원자재 △6</b> — 차단기·커넥터 단가 평균 2.1% 상승. 3분기 판가 반영 협의 중</li>
+        <li><b>물류 +11</b> — 해상운임 하락으로 계획 대비 절감</li>
+        <li><b>안산 판관비 △11</b> — 상반기 인증 갱신(ISO 9001·14001) 비용 일시 반영</li>
+      </ul>
+    </section>
+
+    <!-- ============ 하단 우: 배지 + 설명 섹션 ============ -->
+    <section class="border-b">
+      <div class="tag">생산 · 품질</div>
+      <div class="sec-title">상반기 실적</div>
+      <div class="badges">
+        <span class="badge">제어반 1,712면</span>
+        <span class="badge">출하불량 84PPM</span>
+        <span class="badge">납기준수 96.8%</span>
+        <span class="badge warn">클레임 2건</span>
+      </div>
+      <p>제어반 출하는 연 계획 3,780면의 45.3%로 정상 진행 중입니다. 출하불량은 84PPM으로
+      사내 목표 100PPM 이내이며 전년 동기(112PPM) 대비 개선됐습니다.
+      클레임 2건은 모두 4월 이전 출하분이고, 원인은 동일 협력사 단자대 압착 불량으로 확인돼 5월 공급처를 교체했습니다.</p>
+    </section>
+
+    <!-- ============ 최하단: 인용구 3단 ============ -->
+    <section class="quotes" style="grid-column:1 / -1;">
+      <div class="tag">시사점 및 조치</div>
+      <div class="quote-grid">
+        <div class="quote">
+          <span class="qmark">1</span>
+          이익률 하락은 일시적입니다. 7월 가동률이 계획대로면 3분기에 연 8.0%로 복귀합니다.
+          <div class="attr">조치 없음 · 7월 실적으로 재확인</div>
+        </div>
+        <div class="quote">
+          <span class="qmark">2</span>
+          원자재 상승분 6백만원은 판가에 반영해야 합니다. 미반영 시 하반기 누적 18백만원으로 커집니다.
+          <div class="attr">영업본부 · 7월 중 고객 2사 협의</div>
+        </div>
+        <div class="quote">
+          <span class="qmark">3</span>
+          박닌 인력 34명의 7월 실가동률을 주 단위로 보고합니다. 80% 미달 시 채용 속도를 조정합니다.
+          <div class="attr">생산본부 · 매주 금요일 보고</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ 푸터 ============ -->
+  <footer>
+    <!-- EDIT: 좌측 = 출처/브랜드, 우측 = 링크/제작자 -->
+    <div>(주)테크온 재무팀 · <span class="fmono">TO-MC-2026-06</span> · 내부 관리 기준(외부감사 전)</div>
+    <div class="fright">작성: 재무팀 정민호<br>배포: 대표이사 · 경영관리본부 · 생산본부</div>
+  </footer>
+
+</div>
+</body>
+</html>

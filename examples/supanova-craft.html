@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="ko">
+<!--
+  ==========================================================================
+  ART DIRECTION — Supanova (craft pass / "after")
+  --------------------------------------------------------------------------
+  컨셉:      활자 견본집과 특허 명세서 사이 — 화면이 아니라 2색으로 인쇄된
+             기술 문서. 규칙이 먼저 있고 페이지는 그 결과로 딸려 나온다.
+  지배 요소:  타이포그래피(국문 헤드라인 + 조판 규칙표)
+             조연 → 여백, 표, 이미지 2장. 이미지는 절대 주인공이 되지 않는다.
+  제약:      ① 카드 컴포넌트 0개 (Double-Bezel 금지, border-radius 전역 0,
+                box-shadow 0개, backdrop-blur 0개, 그라디언트 0개)
+                → 구획은 1px 헤어라인과 여백만으로 만든다.
+             ② 잉크 2색만 — 먹(#141310)과 주홍(#b4381f). 주홍은 숫자 하나와
+                주요 CTA에만. 이미지도 grayscale로 잉크 세계에 편입.
+             ③ 이미지 2장, 아바타 사진 0장, 아이콘 1종(화살표)만.
+             ④ 타입 6종(12·16·20·30·48·72), 간격 10단 밖 임의값 0개.
+             ⑤ 기억에 남는 모션 2개 — 표제 괘선 그리기, 금지 목록 취소선.
+                그 외 스크롤 등장 애니메이션 0개.
+  참조 장르:  1970년대 활자 견본집(type specimen) · 특허 명세서 도면 ·
+             판권지(colophon). 웹사이트는 참조하지 않았다.
+  감정 목표:  신뢰 — 정확함에서 오는 종류의 신뢰.
+  --------------------------------------------------------------------------
+  중첩 라디우스 메모: 전역 radius 0 → 바깥−패딩 공식이 0으로 일관, 예외 없음.
+  ==========================================================================
+-->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Supanova | 랜딩페이지 조판 엔진 — 규칙 137개로 AI 티를 지웁니다</title>
+  <meta name="description" content="Supanova는 페이지를 그리기 전에 아트 디렉션 5개 항목을 확정하고, 폰트 후보에서 Inter와 Noto Sans KR을 제외하고, 간격을 10단 스케일 안에 잠급니다. 결과물은 빌드 도구 없이 열리는 단일 HTML 파일 한 개. 카드 정보 없이 14일 체험.">
+  <link rel="canonical" href="https://supanova.dev">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Supanova | 규칙 137개로 AI 티를 지웁니다">
+  <meta property="og:description" content="아트 디렉션 5개 항목을 먼저 정하고, 금지 목록 68개를 먼저 지웁니다. 출력은 단일 HTML 파일 한 개, 평균 48KB, 외부 요청 4건.">
+  <meta property="og:image" content="https://picsum.photos/seed/supanova-specimen-og/1200/630">
+  <meta property="og:image:alt" content="Supanova가 조판한 랜딩페이지 견본 지면">
+  <meta property="og:url" content="https://supanova.dev">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="Supanova">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Supanova | 규칙 137개로 AI 티를 지웁니다">
+  <meta name="twitter:description" content="아트 디렉션 5개 항목을 먼저 정하고, 금지 목록 68개를 먼저 지웁니다. 출력은 단일 HTML 파일 한 개.">
+  <meta name="twitter:image" content="https://picsum.photos/seed/supanova-specimen-og/1200/630">
+
+  <!-- Favicon: 종이 위 주홍 괘선 -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f3f1ec'/%3E%3Crect x='5' y='6' width='22' height='2' fill='%23141310'/%3E%3Crect x='5' y='14' width='22' height='2' fill='%23141310'/%3E%3Crect x='5' y='22' width='13' height='2' fill='%23b4381f'/%3E%3C/svg%3E">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      corePlugins: { preflight: true },
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Pretendard', 'Geist', 'system-ui', 'sans-serif'],
+            display: ['Geist', 'Pretendard', 'sans-serif'],
+            mono: ['"Geist Mono"', 'ui-monospace', 'monospace'],
+          },
+          /* 전부 :root 토큰 참조 — 하드코딩 색상 없음. alpha 변형은 쓰지 않는다. */
+          colors: {
+            paper: 'var(--paper)',
+            ink: 'var(--ink)',
+            body: 'var(--body)',
+            muted: 'var(--muted)',
+            rule: 'var(--rule)',
+            ruleStrong: 'var(--rule-strong)',
+            ink10: 'var(--ink-10)',
+            vermilion: 'var(--ink-2)',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    :root {
+      /* 잉크 2색 + 종이 — 웜 계열로만 통일 (쿨 그레이 혼용 없음) */
+      --paper:       #f3f1ec;
+      --paper-sunk:  #eceae3;   /* 지면 안의 얕은 음영 구역 */
+      --ink:         #141310;   /* 첫 번째 잉크(먹). 순수 검정 아님 */
+      --ink-2:       #b4381f;   /* 두 번째 잉크(주홍). hsl(11 71% 41%) */
+      --ink-2-deep:  #8f2b16;
+      --body:        #4c4941;   /* 본문 — 종이 대비 8.0:1 */
+      --muted:       #6b675e;   /* 보조 — 종이 대비 5.4:1 */
+      --rule:        #ded9d0;   /* 헤어라인 */
+      --rule-strong: #c2bcb0;
+      --ink-10:      rgba(20, 19, 16, 0.10); /* 이미지 안쪽 테두리용 */
+      --ease:        cubic-bezier(0.16, 1, 0.3, 1);
+      color-scheme: light;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--paper);
+      color: var(--body);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* 제약: 전역 radius 0 — 카드가 아니라 지면 */
+    *, *::before, *::after { border-radius: 0 !important; }
+
+    h1, h2, h3, blockquote { color: var(--ink); text-wrap: balance; }
+    p, li, dd { text-wrap: pretty; }
+
+    /* 숫자는 전부 고정폭 */
+    .tnum { font-variant-numeric: tabular-nums; }
+
+    /* 대문자·약어 광학 보정: 본문보다 작게 + 자간 넉넉히 */
+    .label {
+      font-family: 'Geist Mono', ui-monospace, monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+    }
+    .label--ink { color: var(--ink); }
+
+    /* 종이 질감 — 이 페이지가 쓰는 유일한 재질 아이디어 */
+    .paperstock::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      pointer-events: none;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+    }
+
+    /* ── 기억에 남는 모션 ①: 표제 괘선이 그려진다 (로드 후 1회) ── */
+    .drawrule {
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 600ms var(--ease) 240ms;
+    }
+    .drawrule.on { transform: scaleX(1); }
+
+    /* ── 기억에 남는 모션 ②: 금지 항목에 취소선이 그어진다 ── */
+    .strike { position: relative; display: inline; }
+    .strike::after {
+      content: "";
+      position: absolute;
+      left: -2px; right: -2px; top: 0.62em;
+      height: 1px;
+      background: var(--ink);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 520ms var(--ease);
+      transition-delay: calc(var(--i, 0) * 80ms);
+    }
+    .strike.on::after { transform: scaleX(1); }
+
+    /* 마이크로 인터랙션은 150~200ms */
+    .lift { transition: color 160ms var(--ease), background-color 160ms var(--ease), border-color 160ms var(--ease); }
+    .nudge { transition: transform 160ms var(--ease); }
+    .group:hover .nudge { transform: translateX(4px); }
+
+    /* 이미지: 밝은 종이 위에서 경계가 사라지지 않게 안쪽 테두리 */
+    .plate { filter: grayscale(1) contrast(1.04); }
+
+    a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible {
+      outline: 2px solid var(--ink-2);
+      outline-offset: 3px;
+    }
+    summary { list-style: none; }
+    summary::-webkit-details-marker { display: none; }
+
+    /* 먹 지면 위 입력칸 — 플레이스홀더도 대비 4.5:1 이상 유지 */
+    #email::placeholder { color: #a8a29a; opacity: 1; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .drawrule, .strike::after { transform: scaleX(1) !important; }
+    }
+  </style>
+</head>
+
+<body class="paperstock font-sans antialiased">
+
+  <!-- Analytics: GA4 / GTM / 광고 픽셀 삽입 위치 -->
+
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-[70] focus:top-4 focus:left-4 focus:bg-ink focus:text-paper focus:px-4 focus:py-2 label label--ink">본문 바로가기</a>
+
+  <!-- ============================================================
+       01 · 표제 상단 (running head) — 고정 내비게이션 없음.
+       인쇄물의 머리글처럼 지면과 함께 스크롤되어 사라진다.
+       ============================================================ -->
+  <header class="border-b border-ruleStrong">
+    <div class="mx-auto max-w-6xl px-4 md:px-8 py-4 flex items-baseline justify-between gap-4">
+      <a href="#main" class="flex items-baseline gap-3 lift hover:text-ink" aria-label="Supanova 홈">
+        <span class="font-display font-medium text-base tracking-[0.14em] text-ink">SUPANOVA</span>
+        <span class="label hidden sm:inline">랜딩페이지 조판 엔진</span>
+      </a>
+      <nav aria-label="주요 메뉴" class="flex items-baseline gap-4 md:gap-8">
+        <a href="#rules" class="label lift hover:text-ink hidden sm:inline">규칙</a>
+        <a href="#specimen" class="label lift hover:text-ink hidden sm:inline">견본</a>
+        <a href="#price" class="label lift hover:text-ink hidden sm:inline">가격</a>
+        <a href="#trial" data-cta="masthead_trial" class="label label--ink border-b border-ink lift hover:text-vermilion hover:border-vermilion">체험 신청</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+  <!-- ============================================================
+       02 · 표제면 (title page) — 주장.
+       세로 여백을 위로 몰아두고 본문을 바닥에 붙인다(비대칭).
+       ============================================================ -->
+  <section id="hero" class="border-b border-ruleStrong">
+    <div class="mx-auto max-w-6xl px-4 md:px-8 min-h-[100dvh] flex flex-col justify-end pt-16 pb-16 md:pb-24">
+
+      <!-- 명세서 머리 정보. 그리드 위쪽 여백을 크게 남긴다. -->
+      <div class="border-t border-rule pt-3 mb-24 md:mb-32 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <p class="label">사양 01 — 조판 엔진</p>
+        <p class="label tnum">개정 2026.07.29</p>
+        <p class="label hidden md:block">본문 PRETENDARD</p>
+        <p class="label hidden md:block">숫자 GEIST MONO</p>
+      </div>
+
+      <h1 class="font-sans font-bold text-3xl sm:text-5xl md:text-7xl leading-tight tracking-tight break-keep-all max-w-[22ch]">
+        <span class="block">AI가 만든 티는</span>
+        <span class="block">규칙 <span class="font-mono font-medium text-vermilion tnum">137</span>개로</span>
+        <span class="block">지웁니다</span>
+      </h1>
+
+      <!-- 괘선 하나. 모션 ①이 여기 걸린다. -->
+      <div id="titleRule" class="drawrule h-px bg-ink mt-8 md:mt-12" aria-hidden="true"></div>
+
+      <div class="mt-8 md:mt-12 grid md:grid-cols-12 gap-8 md:gap-12 items-start">
+
+        <!-- 왼쪽: 출력물 사양. 빽빽한 작은 블록. -->
+        <dl class="md:col-span-4 border-t border-rule pt-4">
+          <div class="flex items-baseline justify-between gap-4 py-2 border-b border-rule">
+            <dt class="label">출력</dt>
+            <dd class="font-mono text-base text-ink tnum">HTML 1개</dd>
+          </div>
+          <div class="flex items-baseline justify-between gap-4 py-2 border-b border-rule">
+            <dt class="label">평균 용량</dt>
+            <dd class="font-mono text-base text-ink tnum">48 KB</dd>
+          </div>
+          <div class="flex items-baseline justify-between gap-4 py-2">
+            <dt class="label">외부 요청</dt>
+            <dd class="font-mono text-base text-ink tnum">4건</dd>
+          </div>
+        </dl>
+
+        <!-- 오른쪽: 헤드라인의 주장을 증명하는 서브카피. 열을 오른쪽으로 밀어 비대칭. -->
+        <div class="md:col-span-7 md:col-start-6">
+          <p class="text-xl leading-relaxed break-keep-all max-w-[46ch]">
+            Supanova는 지면을 그리기 전에 아트 디렉션 5개 항목을 먼저 확정합니다.
+            폰트 후보에서 Inter와 Noto Sans KR을 빼고, 간격은 10단 스케일 밖으로 나가지 못하게 잠그고,
+            한 지면에 쓰는 글자 크기를 6종으로 제한합니다.
+          </p>
+          <p class="mt-4 text-base leading-relaxed break-keep-all max-w-[46ch]">
+            그래서 결과물이 <span class="text-ink font-medium">서로 닮지 않습니다.</span>
+            빌드 도구도 필요 없습니다. 파일 하나를 더블클릭하면 열립니다.
+          </p>
+
+          <div class="mt-12 flex flex-col sm:flex-row sm:items-center gap-4">
+            <a href="#trial" data-cta="hero_trial"
+               class="group inline-flex items-center justify-center gap-2 bg-vermilion text-paper font-medium text-base px-8 py-4 lift hover:bg-[color:var(--ink-2-deep)] min-h-[48px]">
+              14일 체험 신청하기
+              <iconify-icon icon="solar:arrow-right-linear" class="nudge text-base" aria-hidden="true"></iconify-icon>
+            </a>
+            <a href="#specimen" data-cta="hero_specimen"
+               class="label label--ink border-b border-ink lift hover:text-vermilion hover:border-vermilion self-start sm:self-auto py-2">
+              먼저 견본 보기 &nbsp;→
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       03 · 규칙표 — 증거. 이 지면에서 가장 빽빽한 구역.
+       카드 대신 표와 괘선. 모션 ②(취소선)가 여기 걸린다.
+       ============================================================ -->
+  <section id="rules" class="border-b border-ruleStrong bg-[color:var(--paper-sunk)]">
+    <div class="mx-auto max-w-6xl px-4 md:px-8 py-16 md:py-24">
+
+      <div class="grid md:grid-cols-12 gap-4 md:gap-12 items-end border-b border-ink pb-4">
+        <div class="md:col-span-8">
+          <p class="label mb-4">규칙 137개 중 68개는 금지 목록</p>
+          <h2 class="text-3xl leading-snug tracking-tight break-keep-all font-bold">
+            무엇을 만들지 정하기 전에, 만들지 않을 것을 지웁니다
+          </h2>
+        </div>
+        <p class="md:col-span-4 text-base leading-relaxed break-keep-all">
+          아래 여섯 줄은 실제 엔진에 들어 있는 금지 항목입니다.
+          왼쪽 항목이 출력에 섞이면 생성은 통과하지 못하고 다시 돌아갑니다.
+        </p>
+      </div>
+
+      <!-- 규칙 원장(ledger) -->
+      <ol class="js-ledger">
+        <li class="grid md:grid-cols-12 gap-2 md:gap-12 items-baseline py-6 border-b border-rule">
+          <p class="label md:col-span-1 tnum">01</p>
+          <p class="md:col-span-5 text-base md:text-xl leading-snug break-keep-all text-muted">
+            <span class="strike" style="--i:0">Inter · Noto Sans KR · Roboto · 맑은 고딕</span>
+          </p>
+          <p class="md:col-span-6 text-base leading-relaxed break-keep-all">
+            Pretendard 400 / 500 / 700 세 벌과 Geist 두 벌. 한글 본문은 Pretendard로만 조판합니다.
+          </p>
+        </li>
+        <li class="grid md:grid-cols-12 gap-2 md:gap-12 items-baseline py-6 border-b border-rule">
+          <p class="label md:col-span-1 tnum">02</p>
+          <p class="md:col-span-5 text-base md:text-xl leading-snug break-keep-all text-muted">
+            <span class="strike" style="--i:1">보라에서 파랑으로 흐르는 그라디언트</span>
+          </p>
+          <p class="md:col-span-6 text-base leading-relaxed break-keep-all">
+            잉크는 두 개까지. 지면 위계는 명도와 웨이트로 먼저 세우고, 색은 마지막에 5% 미만 면적으로 얹습니다.
+            이 지면의 주홍도 숫자 하나와 버튼 두 개에만 있습니다.
+          </p>
+        </li>
+        <li class="grid md:grid-cols-12 gap-2 md:gap-12 items-baseline py-6 border-b border-rule">
+          <p class="label md:col-span-1 tnum">03</p>
+          <p class="md:col-span-5 text-base md:text-xl leading-snug break-keep-all text-muted">
+            <span class="strike" style="--i:2">똑같은 크기로 놓인 3열 카드</span>
+          </p>
+          <p class="md:col-span-6 text-base leading-relaxed break-keep-all">
+            카드는 “독립된 객체”라는 뜻입니다. 뜻이 없으면 쓰지 않습니다.
+            지금 보고 있는 이 지면에 카드는 0개입니다.
+          </p>
+        </li>
+        <li class="grid md:grid-cols-12 gap-2 md:gap-12 items-baseline py-6 border-b border-rule">
+          <p class="label md:col-span-1 tnum">04</p>
+          <p class="md:col-span-5 text-base md:text-xl leading-snug break-keep-all text-muted">
+            <span class="strike" style="--i:3">전 요소에 걸린 fadeInUp</span>
+          </p>
+          <p class="md:col-span-6 text-base leading-relaxed break-keep-all">
+            한 지면에 모션 2개. 나머지는 정적입니다. 방금 표제의 괘선이 하나, 이 취소선이 둘.
+          </p>
+        </li>
+        <li class="grid md:grid-cols-12 gap-2 md:gap-12 items-baseline py-6 border-b border-rule">
+          <p class="label md:col-span-1 tnum">05</p>
+          <p class="md:col-span-5 text-base md:text-xl leading-snug break-keep-all text-muted">
+            <span class="strike" style="--i:4">“혁신적인 솔루션으로 성장을 극대화”</span>
+          </p>
+          <p class="md:col-span-6 text-base leading-relaxed break-keep-all">
+            브랜드명을 지웠을 때 다른 회사에 그대로 쓸 수 있는 문장은 폐기합니다.
+            숫자, 회사명, 날짜로 다시 씁니다. 마지막에 형용사를 문장마다 하나씩 뺍니다.
+          </p>
+        </li>
+        <li class="grid md:grid-cols-12 gap-2 md:gap-12 items-baseline py-6 border-b border-ruleStrong">
+          <p class="label md:col-span-1 tnum">06</p>
+          <p class="md:col-span-5 text-base md:text-xl leading-snug break-keep-all text-muted">
+            <span class="strike" style="--i:5">padding: 27px 같은 손맛 값</span>
+          </p>
+          <p class="md:col-span-6 text-base leading-relaxed break-keep-all">
+            4 · 8 · 12 · 16 · 24 · 32 · 48 · 64 · 96 · 128. 이 열 개 밖으로 나간 값은 빌드에서 거부됩니다.
+          </p>
+        </li>
+      </ol>
+
+      <p class="mt-8 label">나머지 131개는 체험 계정의 규칙 열람 화면에서 전부 공개됩니다</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       04 · 인용 한 편 — 앞 섹션이 빽빽했으므로 여기는 비운다.
+       카드 6개 대신 주인공 하나 + 각주 둘(대비 4:1).
+       ============================================================ -->
+  <section id="voice" aria-label="사용자 평가" class="border-b border-ruleStrong">
+    <div class="mx-auto max-w-6xl px-4 md:px-8 py-24 md:py-32">
+      <div class="md:grid md:grid-cols-12 md:gap-12">
+        <blockquote class="md:col-span-10 md:col-start-2 text-3xl md:text-5xl leading-snug tracking-tight break-keep-all font-medium md:-ml-2"
+                    style="hanging-punctuation: first">
+          “외주 견적서 세 장을 받아놓고 이걸 먼저 돌렸습니다. 그날 밤에 사전예약 페이지를 열었고,
+          견적서는 아직 안 열었습니다.”
+        </blockquote>
+        <footer class="md:col-span-10 md:col-start-2 mt-12 border-t border-ink pt-4 flex flex-wrap items-baseline gap-x-4 gap-y-2">
+          <p class="text-base text-ink font-medium">하윤서</p>
+          <p class="label">스텔라랩스 · 공동창업자</p>
+          <p class="label tnum">2026.05 도입</p>
+        </footer>
+      </div>
+
+      <!-- 각주급 인용 둘. 주인공보다 4배 작게 둔다. -->
+      <div class="mt-24 grid md:grid-cols-12 gap-8 md:gap-12">
+        <div class="md:col-span-5 md:col-start-2 border-t border-rule pt-4">
+          <p class="text-base leading-relaxed break-keep-all">
+            “내려받은 파일을 열어보니 상단에 아트 디렉션 주석이 다섯 줄 적혀 있었습니다.
+            사람이 인수인계한 파일 같더군요.”
+          </p>
+          <p class="label mt-4">이서진 · 루미너스 · 프론트엔드 개발자</p>
+        </div>
+        <div class="md:col-span-5 border-t border-rule pt-4">
+          <p class="text-base leading-relaxed break-keep-all">
+            “마케팅팀이 직접 만들기 시작한 뒤로 실험 주기가 2주에서 나흘로 줄었습니다.”
+          </p>
+          <p class="label mt-4">박도현 · 베리파이 · 그로스 리드</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       05 · 견본과 사양 — 실물. 이미지는 이 지면에 단 2장뿐.
+       전폭 도판이 컨테이너 그리드를 의도적으로 한 번 깬다.
+       ============================================================ -->
+  <section id="specimen" class="border-b border-ruleStrong">
+    <div class="mx-auto max-w-6xl px-4 md:px-8 pt-16 md:pt-24">
+      <div class="flex flex-wrap items-baseline justify-between gap-4 border-b border-ink pb-4">
+        <h2 class="text-3xl leading-snug tracking-tight break-keep-all font-bold">출력 견본과 실측값</h2>
+        <p class="label">도판 A · B — 손대지 않은 생성 원본</p>
+      </div>
+    </div>
+
+    <!-- 도판 A: 전폭. 컨테이너를 넘어간다(그리드 파괴 1회). -->
+    <figure class="mt-8">
+      <img src="https://picsum.photos/seed/supanova-plate-a/1920/860"
+           alt="Supanova가 생성한 친환경 텀블러 브랜드 사전예약 페이지 전체 지면. 좌측에 큰 국문 표제, 우측에 제품 사진 한 장, 아래에 하나의 신청 양식이 놓여 있다."
+           width="1920" height="860"
+           class="plate w-full h-auto object-cover ring-1 ring-ink10"
+           loading="eager" fetchpriority="high" decoding="async">
+      <figcaption class="mx-auto max-w-6xl px-4 md:px-8 mt-4 flex flex-wrap items-baseline gap-x-4 gap-y-2">
+        <span class="label label--ink">도판 A</span>
+        <span class="label">프롬프트 — “친환경 텀블러 사전예약, 절제된 인쇄물 느낌으로”</span>
+        <span class="label tnum">생성 74초 · 사람이 고친 곳 3군데(전부 카피)</span>
+      </figcaption>
+    </figure>
+
+    <div class="mx-auto max-w-6xl px-4 md:px-8 py-16 md:py-24 grid md:grid-cols-12 gap-12">
+
+      <!-- 사양표: 라벨 왼쪽, 값 오른쪽 정렬 + 고정폭 숫자 -->
+      <div class="md:col-span-7">
+        <p class="label mb-4">실측 — 2026년 2분기 생성분 9,431건 기준</p>
+        <dl>
+          <div class="flex items-baseline justify-between gap-4 py-3 border-t border-rule">
+            <dt class="text-base">출력 형식</dt>
+            <dd class="font-mono text-base text-ink">단일 HTML</dd>
+          </div>
+          <div class="flex items-baseline justify-between gap-4 py-3 border-t border-rule">
+            <dt class="text-base">파일 수</dt>
+            <dd class="font-mono text-base text-ink tnum">1개</dd>
+          </div>
+          <div class="flex items-baseline justify-between gap-4 py-3 border-t border-rule">
+            <dt class="text-base">평균 용량</dt>
+            <dd class="font-mono text-base text-ink tnum">48 KB</dd>
+          </div>
+          <div class="flex items-baseline justify-between gap-4 py-3 border-t border-rule">
+            <dt class="text-base">외부 요청 수</dt>
+            <dd class="font-mono text-base text-ink tnum">4건</dd>
+          </div>
+          <div class="flex items-baseline justify-between gap-4 py-3 border-t border-rule">
+            <dt class="text-base">한 지면에 쓰인 글자 크기</dt>
+            <dd class="font-mono text-base text-ink tnum">6종</dd>
+          </div>
+          <div class="flex items-baseline justify-between gap-4 py-3 border-t border-rule">
+            <dt class="text-base">Lighthouse 접근성</dt>
+            <dd class="font-mono text-base text-ink tnum">100</dd>
+          </div>
+          <div class="flex items-baseline justify-between gap-4 py-3 border-t border-rule">
+            <dt class="text-base">평균 생성 시간</dt>
+            <dd class="font-mono text-base text-ink tnum">74초</dd>
+          </div>
+          <div class="flex items-baseline justify-between gap-4 py-3 border-t border-rule border-b border-ink">
+            <dt class="text-base">사용자 평가</dt>
+            <dd class="font-mono text-base text-ink tnum">4.87 / 5.00</dd>
+          </div>
+        </dl>
+        <p class="mt-4 label">측정: 캐시 없는 첫 방문 · 서울 리전 · 모바일 4G 기준</p>
+      </div>
+
+      <!-- 도판 B -->
+      <figure class="md:col-span-5">
+        <img src="https://picsum.photos/seed/supanova-plate-b/760/1000"
+           alt="같은 프롬프트로 생성된 페이지의 모바일 지면. 표제가 두 줄로 접히고 신청 양식이 화면 하단에 놓여 있다."
+           width="760" height="1000"
+           class="plate w-full h-auto object-cover ring-1 ring-ink10"
+           loading="lazy" decoding="async">
+        <figcaption class="mt-4">
+          <span class="label label--ink">도판 B</span>
+          <span class="label block mt-2">같은 파일, 393px 지면. 별도 모바일 버전 없음 — 브레이크포인트 4단이 파일 안에 함께 들어 있습니다.</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       06 · 가격 — 카드 3장 대신 인쇄된 가격 목록.
+       권장안은 확대·그림자가 아니라 잉크 무게로만 구분한다.
+       ============================================================ -->
+  <section id="price" class="border-b border-ruleStrong bg-[color:var(--paper-sunk)]">
+    <div class="mx-auto max-w-6xl px-4 md:px-8 py-16 md:py-24">
+      <div class="flex flex-wrap items-baseline justify-between gap-4 border-b border-ink pb-4">
+        <h2 class="text-3xl leading-snug tracking-tight break-keep-all font-bold">가격표</h2>
+        <p class="label">부가세 별도 · 월 단위 · 위약금 없음</p>
+      </div>
+
+      <!-- 개인 -->
+      <article class="grid md:grid-cols-12 gap-4 md:gap-12 items-baseline py-8 border-b border-rule">
+        <div class="md:col-span-3">
+          <h3 class="text-xl text-ink font-medium">개인</h3>
+          <p class="label mt-2">1인 창업가 · 사이드 프로젝트</p>
+        </div>
+        <p class="md:col-span-5 text-base leading-relaxed break-keep-all">
+          월 3회 생성. supanova.dev 하위 주소로 공개. 규칙 열람과 코드 내려받기 포함.
+        </p>
+        <div class="md:col-span-4 flex items-baseline justify-between gap-4">
+          <p class="font-mono text-3xl text-ink tnum">₩0</p>
+          <a href="#trial" data-cta="pricing_personal" class="label label--ink border-b border-ink lift hover:text-vermilion hover:border-vermilion py-2">신청 →</a>
+        </div>
+      </article>
+
+      <!-- 스튜디오 (권장) — 잉크 무게로만 강조 -->
+      <article class="grid md:grid-cols-12 gap-4 md:gap-12 items-baseline py-8 border-b border-rule bg-paper -mx-4 px-4 md:-mx-8 md:px-8">
+        <div class="md:col-span-3">
+          <div class="flex items-baseline gap-3">
+            <h3 class="text-xl text-ink font-bold">스튜디오</h3>
+            <span class="label label--ink">권장</span>
+          </div>
+          <p class="label mt-2">에이전시 · 마케팅팀</p>
+        </div>
+        <p class="md:col-span-5 text-base leading-relaxed break-keep-all text-ink">
+          월 60회 생성, 커스텀 도메인 연결, 브랜드 토큰 고정(로고 색과 서체를 규칙에 심습니다),
+          A/B 지면 두 벌 동시 생성.
+        </p>
+        <div class="md:col-span-4 flex items-baseline justify-between gap-4">
+          <p class="font-mono text-3xl text-ink font-medium tnum">₩29,000</p>
+          <a href="#trial" data-cta="pricing_studio" class="inline-flex items-center justify-center gap-2 bg-vermilion text-paper font-medium text-base px-8 py-4 lift hover:bg-[color:var(--ink-2-deep)] min-h-[48px]">14일 체험</a>
+        </div>
+      </article>
+
+      <!-- 팀 -->
+      <article class="grid md:grid-cols-12 gap-4 md:gap-12 items-baseline py-8 border-b border-ink">
+        <div class="md:col-span-3">
+          <h3 class="text-xl text-ink font-medium">팀</h3>
+          <p class="label mt-2">10인 이상 조직</p>
+        </div>
+        <p class="md:col-span-5 text-base leading-relaxed break-keep-all">
+          생성 무제한. 승인 절차, 감사 로그, 사내 금지 규칙 추가(예: 특정 서체 영구 차단), 전담 조판 검수 월 1회.
+        </p>
+        <div class="md:col-span-4 flex items-baseline justify-between gap-4">
+          <p class="font-mono text-3xl text-ink tnum">₩89,000</p>
+          <a href="#trial" data-cta="pricing_team" class="label label--ink border-b border-ink lift hover:text-vermilion hover:border-vermilion py-2">상담 →</a>
+        </div>
+      </article>
+
+      <p class="mt-4 label">체험 기간에는 카드 정보를 받지 않습니다. 14일이 끝나면 계정은 개인 요금제로 내려갑니다</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       07 · 반론 — 네이티브 details/summary. 상자 없이 괘선만.
+       JSON-LD FAQPage와 문항이 1:1로 일치한다.
+       ============================================================ -->
+  <section id="faq" class="border-b border-ruleStrong">
+    <div class="mx-auto max-w-6xl px-4 md:px-8 py-16 md:py-24 grid md:grid-cols-12 gap-8 md:gap-12">
+      <div class="md:col-span-4">
+        <h2 class="text-3xl leading-snug tracking-tight break-keep-all font-bold">받은 질문들</h2>
+        <p class="label mt-4">2026년 상반기 문의 중 상위 5건</p>
+      </div>
+
+      <div class="md:col-span-8">
+        <details class="group border-t border-ink py-4">
+          <summary class="cursor-pointer flex items-baseline justify-between gap-4">
+            <span class="text-base md:text-xl text-ink leading-snug break-keep-all font-medium">생성된 페이지끼리 서로 닮지 않나요?</span>
+            <span class="font-mono text-base text-muted transition-transform duration-200 group-open:rotate-45 shrink-0" aria-hidden="true">+</span>
+          </summary>
+          <p class="mt-4 text-base leading-relaxed break-keep-all max-w-[62ch]">
+            생성마다 아트 디렉션 5개 항목(컨셉·지배 요소·의도적 제약·참조 장르·감정 목표)을 새로 뽑고,
+            같은 조합은 재사용하지 않습니다. 특히 참조 장르는 웹사이트가 아닌 매체에서만 고릅니다.
+            지금 이 지면의 참조는 활자 견본집과 특허 명세서였습니다.
+          </p>
+        </details>
+
+        <details class="group border-t border-rule py-4">
+          <summary class="cursor-pointer flex items-baseline justify-between gap-4">
+            <span class="text-base md:text-xl text-ink leading-snug break-keep-all font-medium">정말 파일 하나로 끝나나요?</span>
+            <span class="font-mono text-base text-muted transition-transform duration-200 group-open:rotate-45 shrink-0" aria-hidden="true">+</span>
+          </summary>
+          <p class="mt-4 text-base leading-relaxed break-keep-all max-w-[62ch]">
+            네. 스타일과 스크립트가 문서 안에 들어간 HTML 한 개입니다. 번들러도, 노드 모듈도 없습니다.
+            평균 48KB이고 외부 요청은 CDN 4건뿐입니다. 그중 서체가 2건입니다.
+          </p>
+        </details>
+
+        <details class="group border-t border-rule py-4">
+          <summary class="cursor-pointer flex items-baseline justify-between gap-4">
+            <span class="text-base md:text-xl text-ink leading-snug break-keep-all font-medium">한국어 조판은 무엇이 다릅니까?</span>
+            <span class="font-mono text-base text-muted transition-transform duration-200 group-open:rotate-45 shrink-0" aria-hidden="true">+</span>
+          </summary>
+          <p class="mt-4 text-base leading-relaxed break-keep-all max-w-[62ch]">
+            모든 한글 덩어리에 <span class="font-mono text-ink">word-break: keep-all</span>을 넣어 단어가 어중간하게 끊기지 않게 합니다.
+            행간은 라틴 기준보다 한 단 올리고, 표제는 balance로 줄을 고릅니다.
+            숫자는 전부 고정폭이라 표에서 자리가 흔들리지 않습니다.
+          </p>
+        </details>
+
+        <details class="group border-t border-rule py-4">
+          <summary class="cursor-pointer flex items-baseline justify-between gap-4">
+            <span class="text-base md:text-xl text-ink leading-snug break-keep-all font-medium">규칙 137개를 제가 바꿀 수 있나요?</span>
+            <span class="font-mono text-base text-muted transition-transform duration-200 group-open:rotate-45 shrink-0" aria-hidden="true">+</span>
+          </summary>
+          <p class="mt-4 text-base leading-relaxed break-keep-all max-w-[62ch]">
+            팀 요금제에서 금지 항목을 추가할 수 있습니다. 다만 기본 68개 금지 항목은 해제되지 않습니다.
+            그걸 풀면 이 제품을 쓰는 이유가 없어지기 때문입니다.
+          </p>
+        </details>
+
+        <details class="group border-t border-rule border-b border-ink py-4">
+          <summary class="cursor-pointer flex items-baseline justify-between gap-4">
+            <span class="text-base md:text-xl text-ink leading-snug break-keep-all font-medium">체험이 끝나면 자동 결제됩니까?</span>
+            <span class="font-mono text-base text-muted transition-transform duration-200 group-open:rotate-45 shrink-0" aria-hidden="true">+</span>
+          </summary>
+          <p class="mt-4 text-base leading-relaxed break-keep-all max-w-[62ch]">
+            아니요. 신청할 때 카드 정보를 받지 않으므로 결제될 수단이 없습니다.
+            14일 뒤 계정은 개인 요금제로 내려가고, 그동안 만든 지면과 파일은 그대로 남습니다.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       08 · 전환 — 지면 전체에서 유일한 색 반전(먹 지면).
+       보조 CTA 없음. 문 하나만 둔다.
+       ============================================================ -->
+  <section id="trial" class="bg-ink text-paper">
+    <div class="mx-auto max-w-6xl px-4 md:px-8 py-24 md:py-32 grid md:grid-cols-12 gap-12">
+      <div class="md:col-span-6">
+        <p class="label" style="color:#a8a29a">체험 신청 · 카드 정보 없음</p>
+        <h2 class="mt-4 text-3xl md:text-5xl leading-snug tracking-tight break-keep-all font-bold" style="color:var(--paper)">
+          프롬프트 한 줄을 넣고, 규칙 137개가 지운 뒤에 남은 지면을 보세요
+        </h2>
+        <p class="mt-8 text-base leading-relaxed break-keep-all max-w-[42ch]" style="color:#cfcac1">
+          14일 동안 생성 크레딧 20회를 씁니다. 결제 수단을 등록하지 않으므로 자동 갱신도 없습니다.
+          만든 파일은 체험이 끝난 뒤에도 계정에 남습니다.
+        </p>
+      </div>
+
+      <form id="trialForm" class="md:col-span-6 md:col-start-7" novalidate>
+        <div class="border-t pt-4" style="border-color:#3b3830">
+          <label for="email" class="label" style="color:#a8a29a">업무용 이메일</label>
+          <input id="email" name="email" type="email" required autocomplete="email"
+                 placeholder="name@company.co.kr"
+                 class="mt-2 w-full bg-transparent border-b text-xl py-3 outline-none lift"
+                 style="border-color:#6b675e; color:var(--paper)"
+                 aria-describedby="emailHelp">
+          <p id="emailHelp" class="label mt-2" style="color:#a8a29a">가입 안내와 규칙 열람 링크를 보내는 데만 씁니다</p>
+        </div>
+
+        <div class="mt-8 flex items-start gap-3">
+          <input id="agree" name="agree" type="checkbox" required
+                 class="mt-1 w-4 h-4 shrink-0 accent-[color:var(--ink-2)]">
+          <label for="agree" class="text-base leading-relaxed break-keep-all" style="color:#cfcac1">
+            <a href="/privacy" class="underline lift hover:text-paper" style="color:var(--paper)">개인정보처리방침</a>에 따른
+            이메일 수집·이용에 동의합니다. 언제든 수신을 해지할 수 있습니다.
+          </label>
+        </div>
+
+        <button type="submit" data-cta="trial_submit"
+                class="mt-12 w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-vermilion text-paper font-medium text-base px-8 py-4 lift hover:bg-[color:var(--ink-2-deep)] min-h-[48px] group">
+          <span id="submitLabel">체험 시작하기</span>
+          <iconify-icon icon="solar:arrow-right-linear" class="nudge text-base" aria-hidden="true"></iconify-icon>
+        </button>
+
+        <p id="formStatus" role="status" aria-live="polite" class="label mt-4" style="color:#a8a29a"></p>
+      </form>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ============================================================
+       09 · 판권지 (colophon) — 인쇄물의 마지막 장.
+       ============================================================ -->
+  <footer class="border-t border-ruleStrong">
+    <div class="mx-auto max-w-6xl px-4 md:px-8 py-16 grid md:grid-cols-12 gap-8 md:gap-12">
+
+      <div class="md:col-span-4">
+        <p class="font-display font-medium text-base tracking-[0.14em] text-ink">SUPANOVA</p>
+        <p class="mt-4 text-base leading-relaxed break-keep-all max-w-[34ch]">
+          랜딩페이지 조판 엔진. 규칙 137개, 금지 항목 68개, 출력은 파일 한 개.
+        </p>
+        <p class="label mt-8">본문 PRETENDARD · 라틴과 숫자 GEIST / GEIST MONO · 잉크 2색</p>
+      </div>
+
+      <nav aria-label="제품 링크" class="md:col-span-2">
+        <h2 class="label label--ink mb-4">제품</h2>
+        <ul class="space-y-3">
+          <li><a href="#rules" class="text-base lift hover:text-ink">규칙 목록</a></li>
+          <li><a href="#specimen" class="text-base lift hover:text-ink">출력 견본</a></li>
+          <li><a href="#price" class="text-base lift hover:text-ink">가격표</a></li>
+          <li><a href="#faq" class="text-base lift hover:text-ink">받은 질문</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="회사 링크" class="md:col-span-2">
+        <h2 class="label label--ink mb-4">회사</h2>
+        <ul class="space-y-3">
+          <li><a href="/about" class="text-base lift hover:text-ink">소개</a></li>
+          <li><a href="/journal" class="text-base lift hover:text-ink">조판 기록</a></li>
+          <li><a href="/careers" class="text-base lift hover:text-ink">채용</a></li>
+          <li><a href="mailto:hello@supanova.dev" class="text-base lift hover:text-ink">문의</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="약관 및 정책" class="md:col-span-4">
+        <h2 class="label label--ink mb-4">약관 및 정책</h2>
+        <ul class="space-y-3">
+          <li><a href="/privacy" class="text-base text-ink underline lift hover:text-vermilion">개인정보처리방침</a></li>
+          <li><a href="/terms" class="text-base lift hover:text-ink">이용약관</a></li>
+          <li><a href="/refund" class="text-base lift hover:text-ink">환불 정책</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="mx-auto max-w-6xl px-4 md:px-8 pb-16">
+      <div class="border-t border-rule pt-4 space-y-1">
+        <p class="label">주식회사 수파노바 · 대표 한지원 · 사업자등록번호 214-88-01947</p>
+        <p class="label">서울특별시 강남구 테헤란로 231, 8층 · 통신판매업신고 2026-서울강남-04821</p>
+        <p class="label">고객센터 02-1544-0770 · 평일 10:00–18:00 · hello@supanova.dev</p>
+        <p class="label mt-4">© 2026 SUPANOVA. ALL RIGHTS RESERVED.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ 구조화 데이터 ============ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Supanova",
+    "alternateName": "주식회사 수파노바",
+    "url": "https://supanova.dev",
+    "logo": "https://supanova.dev/logo.png",
+    "description": "규칙 137개와 금지 항목 68개로 랜딩페이지를 조판하는 엔진. 출력은 단일 HTML 파일 한 개.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "테헤란로 231, 8층",
+      "addressLocality": "강남구",
+      "addressRegion": "서울특별시",
+      "addressCountry": "KR"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+82-2-1544-0770",
+      "contactType": "customer service",
+      "areaServed": "KR",
+      "availableLanguage": "Korean"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Supanova",
+    "applicationCategory": "DesignApplication",
+    "operatingSystem": "Web",
+    "url": "https://supanova.dev",
+    "description": "프롬프트를 넣으면 아트 디렉션 5개 항목을 먼저 확정하고 규칙 137개를 적용해 단일 HTML 랜딩페이지를 조판합니다.",
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "개인",
+        "price": "0",
+        "priceCurrency": "KRW",
+        "description": "월 3회 생성, 하위 주소 공개, 코드 내려받기"
+      },
+      {
+        "@type": "Offer",
+        "name": "스튜디오",
+        "price": "29000",
+        "priceCurrency": "KRW",
+        "description": "월 60회 생성, 커스텀 도메인, 브랜드 토큰 고정, A/B 지면 2벌"
+      },
+      {
+        "@type": "Offer",
+        "name": "팀",
+        "price": "89000",
+        "priceCurrency": "KRW",
+        "description": "생성 무제한, 승인 절차, 감사 로그, 사내 금지 규칙 추가"
+      }
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.87",
+      "bestRating": "5",
+      "ratingCount": "3142"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "생성된 페이지끼리 서로 닮지 않나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "생성마다 아트 디렉션 5개 항목(컨셉·지배 요소·의도적 제약·참조 장르·감정 목표)을 새로 뽑고, 같은 조합은 재사용하지 않습니다. 특히 참조 장르는 웹사이트가 아닌 매체에서만 고릅니다. 이 지면의 참조는 활자 견본집과 특허 명세서였습니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "정말 파일 하나로 끝나나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "네. 스타일과 스크립트가 문서 안에 들어간 HTML 한 개입니다. 번들러도, 노드 모듈도 없습니다. 평균 48KB이고 외부 요청은 CDN 4건뿐이며 그중 서체가 2건입니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "한국어 조판은 무엇이 다릅니까?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "모든 한글 덩어리에 word-break: keep-all을 넣어 단어가 어중간하게 끊기지 않게 합니다. 행간은 라틴 기준보다 한 단 올리고, 표제는 balance로 줄을 고릅니다. 숫자는 전부 고정폭이라 표에서 자리가 흔들리지 않습니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "규칙 137개를 제가 바꿀 수 있나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "팀 요금제에서 금지 항목을 추가할 수 있습니다. 다만 기본 68개 금지 항목은 해제되지 않습니다. 그걸 풀면 이 제품을 쓰는 이유가 없어지기 때문입니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "체험이 끝나면 자동 결제됩니까?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "아니요. 신청할 때 카드 정보를 받지 않으므로 결제될 수단이 없습니다. 14일 뒤 계정은 개인 요금제로 내려가고, 그동안 만든 지면과 파일은 그대로 남습니다."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- ============ 동작: 모션 2개 + 양식 검증. 그 외 없음. ============ -->
+  <script>
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* 모션 ① 표제 괘선 — 로드 직후 1회 */
+      var titleRule = document.getElementById('titleRule');
+      if (titleRule) {
+        if (reduce) {
+          titleRule.classList.add('on');
+        } else {
+          requestAnimationFrame(function () { titleRule.classList.add('on'); });
+        }
+      }
+
+      /* 모션 ② 금지 목록 취소선 — 원장이 화면에 들어올 때 1회, 80ms 스태거 */
+      var ledger = document.querySelector('.js-ledger');
+      if (ledger) {
+        var strikes = ledger.querySelectorAll('.strike');
+        var run = function () {
+          for (var i = 0; i < strikes.length; i++) strikes[i].classList.add('on');
+        };
+        if (reduce || !('IntersectionObserver' in window)) {
+          run();
+        } else {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) { run(); io.disconnect(); }
+            });
+          }, { threshold: 0.25 });
+          io.observe(ledger);
+        }
+      }
+
+      /* 체험 신청 양식 — 인라인 검증 + 제출 상태 */
+      var form = document.getElementById('trialForm');
+      if (!form) return;
+      var email = document.getElementById('email');
+      var agree = document.getElementById('agree');
+      var status = document.getElementById('formStatus');
+      var label = document.getElementById('submitLabel');
+      var valid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!valid.test(email.value.trim())) {
+          status.textContent = '이메일 주소를 다시 확인해 주세요.';
+          email.setAttribute('aria-invalid', 'true');
+          email.focus();
+          return;
+        }
+        email.removeAttribute('aria-invalid');
+        if (!agree.checked) {
+          status.textContent = '개인정보 수집·이용 동의가 필요합니다.';
+          agree.focus();
+          return;
+        }
+        label.textContent = '전송 중';
+        status.textContent = '';
+        setTimeout(function () {
+          label.textContent = '전송 완료';
+          status.textContent = email.value.trim() + ' 으로 규칙 열람 링크를 보냈습니다. 5분 안에 도착합니다.';
+        }, 700);
+      });
+    })();
+  </script>
+</body>
+</html>
