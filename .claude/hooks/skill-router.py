@@ -30,8 +30,16 @@ def contains(text, keyword):
     return kw in text
 
 
+def strip_skill_names(text, config):
+    # 스킬 이름 자체(techon-consolidated, a4-onepager 등)를 언급한 것은 작업 요청이 아니므로 매칭 대상에서 제외
+    for route in config.get("routes", []):
+        name = route["skill"].split(":")[-1].lower()
+        text = re.sub(r"(?<![a-z0-9-])" + re.escape(name) + r"(?![a-z0-9-])", " ", text)
+    return text
+
+
 def match(prompt, config):
-    text = prompt.lower()
+    text = strip_skill_names(prompt.lower(), config)
     hits = []
     for route in config.get("routes", []):
         matched = [k for k in route.get("keywords", []) if contains(text, k)]

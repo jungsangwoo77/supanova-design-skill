@@ -25,7 +25,7 @@
 | 공시·재무제표 조회 | `k-dart` | — |
 | 법령·조문 근거 | `korean-law-search` | — |
 | 산출물 형식(xlsx/pptx/docx/pdf/hwp) | 해당 파일 스킬 | 도메인 스킬과 **병행** |
-| 랜딩페이지 신규 / 개선 | `supanova-design-engine` / `supanova-redesign-engine` | `design-router` |
+| 랜딩페이지 신규 / 개선 | `taste-skill` / `redesign-skill` | `design-router` |
 | 형식 미정의 디자인·문서 산출물 | `design-router` | — |
 
 도메인 스킬(무엇을 계산·판단할지)과 파일 형식 스킬(어떻게 산출할지)은 함께 로드한다. 예: 연결정산표 엑셀 작업 → `techon-consolidated` + `xlsx`.

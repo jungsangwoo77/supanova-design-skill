@@ -111,16 +111,16 @@
       "suppresses": []
     },
     {
-      "skill": "supanova-design-engine",
+      "skill": "taste-skill",
       "priority": 45,
       "keywords": ["랜딩페이지", "랜딩 페이지", "landing page"],
       "suppresses": ["anthropic-skills:design-router"]
     },
     {
-      "skill": "supanova-redesign-engine",
+      "skill": "redesign-skill",
       "priority": 46,
       "keywords": ["리디자인", "redesign", "디자인 개선", "페이지 개선"],
-      "suppresses": ["supanova-design-engine", "anthropic-skills:design-router"]
+      "suppresses": ["taste-skill", "anthropic-skills:design-router"]
     },
     {
       "skill": "anthropic-skills:design-router",
