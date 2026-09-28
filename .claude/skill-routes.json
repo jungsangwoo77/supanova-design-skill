@@ -1,0 +1,138 @@
+{
+  "_comment": "UserPromptSubmit 훅(.claude/hooks/skill-router.py)이 읽는 스킬 자동 라우팅 규칙. priority가 높을수록 먼저 추천되며, suppresses에 나열된 스킬은 이 규칙이 매칭되면 추천에서 제외된다(더 구체적인 스킬 우선).",
+  "max_skills": 3,
+  "routes": [
+    {
+      "skill": "anthropic-skills:techon-consolidated",
+      "priority": 100,
+      "keywords": ["테크온", "tech-on", "techon", "연결정산", "분개시트 참조", "연결조정 완성", "연결조정분개명세"],
+      "suppresses": ["anthropic-skills:consolidated-fs"]
+    },
+    {
+      "skill": "anthropic-skills:vas-manufacturing-cost",
+      "priority": 95,
+      "keywords": ["제조원가명세서", "tk627", "vas 627", "당기제품제조원가", "타계정대체", "제조경비", "원가 차이분석"],
+      "suppresses": []
+    },
+    {
+      "skill": "anthropic-skills:vietnam-finance",
+      "priority": 90,
+      "keywords": ["베트남", "vn 법인", "vina", "vas", "thông tư", "thong tu", "tt99", "tt200", "cit", "fct", "이전가격", "profit remittance", "이익 송금"],
+      "suppresses": []
+    },
+    {
+      "skill": "anthropic-skills:consolidated-fs",
+      "priority": 85,
+      "keywords": ["연결재무", "연결 재무", "연결조정", "연결 조정", "연결결산", "지분법", "내부거래", "미실현손익", "비지배지분", "소수주주지분", "연결패키지", "consolidation", "지배력 판단"],
+      "suppresses": []
+    },
+    {
+      "skill": "anthropic-skills:cash-management",
+      "priority": 85,
+      "keywords": ["자금시제", "자금현황", "자금 현황", "자금수지", "자금계획", "계좌별 잔액", "마이너스 통장", "유동성", "현금잔액", "treasury", "입출금 내역"],
+      "suppresses": []
+    },
+    {
+      "skill": "anthropic-skills:fin-report-a4",
+      "priority": 80,
+      "keywords": ["재무보고서", "경영실적 보고", "실적보고", "실적 보고", "예산 대비", "결산보고", "결산 보고", "손익 보고", "p&l 리포트", "이사회 재무", "재무 원페이저"],
+      "suppresses": ["anthropic-skills:design-router", "anthropic-skills:a4-onepager"]
+    },
+    {
+      "skill": "anthropic-skills:weekly-meeting-deck",
+      "priority": 80,
+      "keywords": ["주간회의자료", "주간업무보고", "주간보고", "주간 회의 자료"],
+      "suppresses": ["anthropic-skills:design-router", "anthropic-skills:pptx"]
+    },
+    {
+      "skill": "anthropic-skills:nda-jda-rights-review",
+      "priority": 80,
+      "keywords": ["nda", "jda", "비밀유지계약", "기밀유지계약", "공동개발계약", "기술이전계약", "라이선스 조항", "background ip", "foreground ip", "독소조항", "영업비밀", "경업금지"],
+      "suppresses": []
+    },
+    {
+      "skill": "anthropic-skills:korean-finance-expert",
+      "priority": 70,
+      "keywords": ["k-ifrs", "kifrs", "k-gaap", "회계처리", "분개", "계정과목", "밸류에이션", "valuation", "dcf", "ev/ebitda", "per", "공모가", "ipo", "상장심사", "상장 준비", "rcps", "term sheet", "텀싯", "외감", "내부회계", "손상차손", "리스 회계", "ifrs 16", "수익인식", "1115", "1109", "법인세 회계", "재무비율", "재무제표 분석", "cvp", "재무실사"],
+      "suppresses": []
+    },
+    {
+      "skill": "anthropic-skills:k-dart",
+      "priority": 65,
+      "keywords": ["dart", "전자공시", "공시 검색", "공시검색", "사업보고서", "주요사항보고서", "기업개황"],
+      "suppresses": []
+    },
+    {
+      "skill": "anthropic-skills:korean-law-search",
+      "priority": 60,
+      "keywords": ["법령", "조문", "시행령", "자본시장법", "외감법", "상법", "법인세법", "판례"],
+      "suppresses": []
+    },
+    {
+      "skill": "anthropic-skills:a4-onepager",
+      "priority": 55,
+      "keywords": ["원페이저", "one-pager", "onepager", "한 장 요약", "한장 요약", "a4 한 장", "카드형 요약"],
+      "suppresses": ["anthropic-skills:design-router"]
+    },
+    {
+      "skill": "anthropic-skills:xlsx",
+      "priority": 50,
+      "keywords": [".xlsx", "엑셀", "excel", "스프레드시트", "정산표", ".csv"],
+      "suppresses": []
+    },
+    {
+      "skill": "anthropic-skills:pptx",
+      "priority": 50,
+      "keywords": [".pptx", "ppt", "파워포인트", "슬라이드", "발표자료", "덱 만들"],
+      "suppresses": ["anthropic-skills:design-router"]
+    },
+    {
+      "skill": "anthropic-skills:docx",
+      "priority": 50,
+      "keywords": [".docx", "워드 문서", "word 문서"],
+      "suppresses": []
+    },
+    {
+      "skill": "anthropic-skills:pdf",
+      "priority": 50,
+      "keywords": [".pdf", "pdf"],
+      "suppresses": []
+    },
+    {
+      "skill": "anthropic-skills:hwp",
+      "priority": 50,
+      "keywords": [".hwp", ".hwpx", "한글 파일", "한글문서", "hwp"],
+      "suppresses": []
+    },
+    {
+      "skill": "dataviz",
+      "priority": 45,
+      "keywords": ["차트", "그래프", "시각화", "대시보드", "chart", "dashboard"],
+      "suppresses": []
+    },
+    {
+      "skill": "taste-skill",
+      "priority": 45,
+      "keywords": ["랜딩페이지", "랜딩 페이지", "landing page"],
+      "suppresses": ["anthropic-skills:design-router"]
+    },
+    {
+      "skill": "redesign-skill",
+      "priority": 46,
+      "keywords": ["리디자인", "redesign", "디자인 개선", "페이지 개선"],
+      "suppresses": ["taste-skill", "anthropic-skills:design-router"]
+    },
+    {
+      "skill": "anthropic-skills:design-router",
+      "priority": 30,
+      "keywords": ["보고서 만들", "자료 만들", "디자인해", "예쁘게", "보기 좋게", "ir 자료", "제안서", "문서로 만들"],
+      "suppresses": []
+    },
+    {
+      "skill": "anthropic-skills:token-saver",
+      "priority": 20,
+      "keywords": ["이어서", "계속해", "다음 시트", "끊겼", "토큰이 부족", "이전 작업"],
+      "suppresses": []
+    }
+  ]
+}
