@@ -8,7 +8,15 @@ AI가 생성하는 랜딩페이지의 디자인 퀄리티를 극적으로 향상
 
 ## Skills
 
-4개의 스킬이 각각의 폴더에 `SKILL.md` 파일로 존재합니다.
+4개의 스킬이 `.claude/skills/<스킬명>/SKILL.md` 구조로 존재합니다. 이 저장소를 Claude Code로 열면 별도 설정 없이 프로젝트 스킬로 자동 인식됩니다.
+
+```
+.claude/skills/
+├── taste-skill/SKILL.md
+├── redesign-skill/SKILL.md
+├── soft-skill/SKILL.md
+└── output-skill/SKILL.md
+```
 
 ### 1. taste-skill (Supanova Design Engine)
 메인 디자인 스킬. AI가 처음부터 프리미엄 랜딩페이지를 생성하도록 가르칩니다. 레이아웃, 타이포그래피, 컬러, 모션, 한국어 콘텐츠 품질까지 포괄합니다.
@@ -34,10 +42,19 @@ AI의 출력 생략을 방지합니다. 플레이스홀더, 스켈레톤, 미완
 
 ## 사용법
 
+### Claude Code
+- **이 저장소에서 사용**: 저장소를 열면 `.claude/skills/`의 스킬이 자동 로드됩니다.
+- **다른 프로젝트에서 사용**: 스킬 폴더를 해당 프로젝트의 `.claude/skills/`에 복사합니다.
+- **모든 프로젝트에서 사용**: 스킬 폴더를 개인 스킬 경로에 복사합니다.
+  - macOS/Linux: `~/.claude/skills/<스킬명>/`
+  - Windows: `C:\Users\<사용자명>\.claude\skills\<스킬명>\`
+
+### claude.ai / Claude Desktop
+스킬 폴더를 ZIP으로 압축해 **설정 → 기능 → 스킬**에서 업로드합니다.
+
+### 기타 AI 에디터 (Cursor 등)
 1. 필요한 스킬의 `SKILL.md` 파일을 프로젝트에 복사합니다.
 2. AI 에디터에서 해당 파일을 참조하세요. (예: Cursor에서 `@SKILL.md`)
-
-끝입니다. AI가 파일을 읽고 규칙을 따릅니다.
 
 ### 추천 조합
 
